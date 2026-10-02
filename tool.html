@@ -115,24 +115,36 @@
       loadSheetData();
     });
 
-    async function loadSheetData() {
-      showLoading(true);
-      try {
-        const fetchUrl = `${GOOGLE_SHEET_API_URL}?sheet=${encodeURIComponent(sheetTarget)}`;
-        const response = await fetch(fetchUrl);
-        const data = await response.json();
-
-        if (data.error) throw new Error(data.error);
-        if (!Array.isArray(data) || data.length === 0) throw new Error(`Aucune donnée dans l'onglet '${sheetTarget}'`);
-
-        availableItems = data;
-        render();
-      } catch (err) {
-        showAlert(`Erreur : ${err.message}`);
-      } finally {
-        showLoading(false);
-      }
+async function loadSheetData() {
+  showLoading(true);
+  try {
+    const fetchUrl = `${GOOGLE_SHEET_API_URL}?sheet=${encodeURIComponent(sheetTarget)}`;
+    
+    // Ajout de redirect: "follow" pour gérer la redirection de Google
+    const response = await fetch(fetchUrl, { redirect: "follow" });
+    
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP : ${response.status}`);
     }
+
+    const data = await response.json();
+
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    if (!Array.isArray(data) || data.length === 0) {
+      throw new Error(`Aucune donnée dans l'onglet '${sheetTarget}'`);
+    }
+
+    availableItems = data;
+    render();
+  } catch (err) {
+    showAlert(`Erreur de connexion : ${err.message}`);
+  } finally {
+    showLoading(false);
+  }
+}
 
     async function saveToGoogleSheet() {
       if (selectedItems.length === 0) return showAlert("Sélectionnez au moins un sujet.");
