@@ -99,11 +99,10 @@
   </div>
 
   <script>
-    // COLLEZ VOTRE URL DE DÉPLOIEMENT APPS SCRIPT ICI :
-    const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzFS1xsDb5WHF-mYxytrlXS2h5D-xddzCQlCqhMCdhppp3gXp2fRP2YPOMtnNvaCNWesQ/exec";
+    const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbywlmeCOFT1nH-DNhXU5qMuut6J96vq0Kgijz-ehtBVpRRXjdxzzaFBqEiG_VdAc1nL/exec";
 
     const urlParams = new URLSearchParams(window.location.search);
-    const sheetTarget = urlParams.get('sheet') || "MagasinsU - BdD Intentions 2027";
+    const sheetTarget = urlParams.get('sheet') || "MagasinsU-BdDIntentions2027";
     const customTitle = urlParams.get('title') || "Feuille de Route";
 
     let availableItems = [];
@@ -119,11 +118,17 @@
     async function loadSheetData() {
       showLoading(true);
       try {
-        const response = await fetch(`${GOOGLE_SHEET_API_URL}?sheet=${encodeURIComponent(sheetTarget)}`);
-        availableItems = await response.json();
+        const fetchUrl = `${GOOGLE_SHEET_API_URL}?sheet=${encodeURIComponent(sheetTarget)}`;
+        const response = await fetch(fetchUrl);
+        const data = await response.json();
+
+        if (data.error) throw new Error(data.error);
+        if (!Array.isArray(data) || data.length === 0) throw new Error(`Aucune donnée dans l'onglet '${sheetTarget}'`);
+
+        availableItems = data;
         render();
       } catch (err) {
-        showAlert("Erreur de chargement de la liste depuis Google Sheet.");
+        showAlert(`Erreur : ${err.message}`);
       } finally {
         showLoading(false);
       }
@@ -157,7 +162,7 @@
           throw new Error(res.message);
         }
       } catch (e) {
-        alert("⚠️ Une erreur est survenue lors de l'enregistrement : " + e.message);
+        alert("⚠️ Erreur lors de l'enregistrement : " + e.message);
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5"></i> Enregistrer mon classement dans Google Sheet`;
