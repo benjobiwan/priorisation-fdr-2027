@@ -121,73 +121,79 @@
       loadSheetData();
     });
 
-    // CHARGEMENT DES DONNÉES
-    async function loadSheetData() {
+    // CHARGEMENT DES DONNÉES EN JSONP (Insensible aux erreurs CORS)
+function loadSheetData() {
   showLoading(true);
-  try {
-    const fetchUrl = `${GOOGLE_SHEET_API_URL}?sheet=${encodeURIComponent(sheetTarget)}`;
+  
+  // Nom unique pour la fonction callback
+  const callbackName = "jsonp_callback_" + Math.round(100000 * Math.random());
+  
+  // Création de la fonction globale temporaire
+  window[callbackName] = function(data) {
+    delete window[callbackName];
+    document.body.removeChild(script);
+    showLoading(false);
     
-    // Forcer le suivi de redirection Google (302)
-    const response = await fetch(fetchUrl, {
-      method: "GET",
-      redirect: "follow"
-    });
-
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP : ${response.status}`);
+    if (data.error) {
+      showAlert(`Erreur : ${data.error}`);
+      return;
     }
-
-    const data = await response.json();
-
-    if (data.error) throw new Error(data.error);
-    if (!Array.isArray(data) || data.length === 0) throw new Error(`Aucune donnée dans l'onglet '${sheetTarget}'`);
+    
+    if (!Array.isArray(data) || data.length === 0) {
+      showAlert(`Aucune donnée trouvée dans l'onglet '${sheetTarget}'`);
+      return;
+    }
 
     availableItems = data;
     render();
-  } catch (err) {
-    showAlert(`Erreur de connexion : ${err.message}`);
-  } finally {
+  };
+
+  // Injection dynamique de la balise <script>
+  const script = document.createElement('script');
+  script.src = `${GOOGLE_SHEET_API_URL}?sheet=${encodeURIComponent(sheetTarget)}&callback=${callbackName}`;
+  script.onerror = function() {
+    delete window[callbackName];
+    document.body.removeChild(script);
     showLoading(false);
+    showAlert("Impossible de charger les données (Erreur de script réseau).");
+  };
+  document.body.appendChild(script);
+}
+    
+ // SAUVEGARDE DU CLASSEMENT (Mode no-cors)
+async function saveToGoogleSheet() {
+  if (selectedItems.length === 0) return showAlert("Sélectionnez au moins un sujet avant d'enregistrer.");
+
+  const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
+  if (!userName || userName.trim() === "") return;
+
+  const submitBtn = document.getElementById("submit-btn");
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = "Enregistrement en cours...";
+
+  try {
+    await fetch(GOOGLE_SHEET_API_URL, {
+      method: "POST",
+      mode: "no-cors", // Ignore la vérification CORS du navigateur pour l'envoi
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify({
+        listName: customTitle,
+        userName: userName.trim(),
+        selectedItems: selectedItems
+      })
+    });
+
+    alert("✅ Votre classement a été envoyé avec succès !");
+    
+  } catch (e) {
+    alert("⚠️ Erreur lors de l'enregistrement : " + e.message);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5"></i> Enregistrer mon classement dans Google Sheet`;
+    lucide.createIcons();
   }
 }
     
-    // SAUVEGARDE DU CLASSEMENT
-    async function saveToGoogleSheet() {
-      if (selectedItems.length === 0) return showAlert("Sélectionnez au moins un sujet avant d'enregistrer.");
-
-      const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
-      if (!userName || userName.trim() === "") return;
-
-      const submitBtn = document.getElementById("submit-btn");
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = "Enregistrement en cours...";
-
-      try {
-        const response = await fetch(GOOGLE_SHEET_API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain" },
-          body: JSON.stringify({
-            listName: customTitle,
-            userName: userName.trim(),
-            selectedItems: selectedItems
-          })
-        });
-
-        const res = await response.json();
-        if (res.status === "SUCCESS") {
-          alert(`✅ Votre classement a été enregistré avec succès dans l'onglet '${res.sheetName}' !`);
-        } else {
-          throw new Error(res.message);
-        }
-      } catch (e) {
-        alert("⚠️ Erreur lors de l'enregistrement : " + e.message);
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5"></i> Enregistrer mon classement dans Google Sheet`;
-        lucide.createIcons();
-      }
-    }
-
     function getTotalSelectedScore() { return selectedItems.reduce((sum, item) => sum + item.score, 0); }
 
     function selectItem(id) {
