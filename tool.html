@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Outil de Priorisation</title>
+  <title>Outil de Priorisation - Feuille de Route 2027</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -33,6 +33,7 @@
         </div>
       </div>
 
+      <!-- JAUGE DE CONSOMMATION -->
       <div class="mt-4">
         <div class="flex justify-between items-center text-xs font-semibold mb-1.5">
           <span class="text-slate-600">Consommation du budget</span>
@@ -45,20 +46,22 @@
     </div>
   </header>
 
-  <!-- ALERTE DE DÉPASSEMENT -->
+  <!-- BANNIÈRE D'ALERTE -->
   <div id="alert-banner" class="hidden bg-amber-50 border-b border-amber-200 px-4 py-3">
     <div class="max-w-[1600px] mx-auto flex items-center justify-between gap-3">
       <div class="flex items-center gap-2 text-amber-800 text-sm font-medium">
         <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-600 shrink-0"></i>
         <span id="alert-message">Alerte</span>
       </div>
-      <button onclick="dismissAlert()" class="text-amber-600 hover:text-amber-800 p-1 rounded-md"><i data-lucide="x" class="w-4 h-4"></i></button>
+      <button onclick="dismissAlert()" class="text-amber-600 hover:text-amber-800 p-1 rounded-md">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
     </div>
   </div>
 
   <!-- CONTENU PRINCIPAL PLEINE LARGEUR -->
   <main class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 md:grid-cols-2 gap-8 min-h-0">
-    <!-- COLONNE GAUCHE : DISPONIBLES -->
+    <!-- COLONNE GAUCHE : SUJETS DISPONIBLES -->
     <section class="bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col min-h-[500px]">
       <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50 rounded-t-2xl">
         <div class="flex items-center gap-2">
@@ -70,7 +73,7 @@
       <div id="list-available" class="flex-1 p-4 overflow-y-auto space-y-3" ondragover="allowDrop(event)" ondrop="handleDrop(event, 'available')"></div>
     </section>
 
-    <!-- COLONNE DROITE : SÉLECTIONNÉS -->
+    <!-- COLONNE DROITE : SUJETS RETENUS -->
     <section class="bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col min-h-[500px]">
       <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-indigo-50/30 rounded-t-2xl">
         <div class="flex items-center gap-2">
@@ -91,18 +94,21 @@
     </section>
   </main>
 
+  <!-- OVERLAY DE CHARGEMENT -->
   <div id="loading-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex flex-col items-center justify-center text-white">
     <div class="bg-white p-6 rounded-2xl shadow-xl flex flex-col items-center gap-3 text-slate-800">
       <div class="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
-      <p class="font-semibold text-sm">Chargement de la liste...</p>
+      <p class="font-semibold text-sm">Chargement des données...</p>
     </div>
   </div>
 
   <script>
-    const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbywlmeCOFT1nH-DNhXU5qMuut6J96vq0Kgijz-ehtBVpRRXjdxzzaFBqEiG_VdAc1nL/exec";
+    // URL DE VOTRE APPS SCRIPT DÉPLOYÉ SUR LE COMPTE PERSO GMAIL
+    const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbyqm9tncbwm1IRYtAOcJoFC5rGe9gBGZR-TPX8U07wuFVplbgJgW23QzYVTOU0LYntJmg/exec";
 
+    // PARAMÈTRES D'URL (Onglet cible et Titre de page)
     const urlParams = new URLSearchParams(window.location.search);
-    const sheetTarget = urlParams.get('sheet') || "MagasinsU-BdDIntentions2027";
+    const sheetTarget = urlParams.get('sheet') || "MagasinsU";
     const customTitle = urlParams.get('title') || "Feuille de Route";
 
     let availableItems = [];
@@ -115,42 +121,37 @@
       loadSheetData();
     });
 
-async function loadSheetData() {
-  showLoading(true);
-  try {
-    const fetchUrl = `${GOOGLE_SHEET_API_URL}?sheet=${encodeURIComponent(sheetTarget)}`;
-    
-    // Ajout de redirect: "follow" pour gérer la redirection de Google
-    const response = await fetch(fetchUrl, { redirect: "follow" });
-    
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP : ${response.status}`);
+    // CHARGEMENT DES DONNÉES
+    async function loadSheetData() {
+      showLoading(true);
+      try {
+        const fetchUrl = `${GOOGLE_SHEET_API_URL}?sheet=${encodeURIComponent(sheetTarget)}`;
+        const response = await fetch(fetchUrl, { redirect: "follow" });
+
+        if (!response.ok) {
+          throw new Error(`Erreur HTTP : ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.error) throw new Error(data.error);
+        if (!Array.isArray(data) || data.length === 0) throw new Error(`Aucune donnée trouvée dans l'onglet '${sheetTarget}'`);
+
+        availableItems = data;
+        render();
+      } catch (err) {
+        showAlert(`Erreur de connexion : ${err.message}`);
+      } finally {
+        showLoading(false);
+      }
     }
 
-    const data = await response.json();
-
-    if (data.error) {
-      throw new Error(data.error);
-    }
-
-    if (!Array.isArray(data) || data.length === 0) {
-      throw new Error(`Aucune donnée dans l'onglet '${sheetTarget}'`);
-    }
-
-    availableItems = data;
-    render();
-  } catch (err) {
-    showAlert(`Erreur de connexion : ${err.message}`);
-  } finally {
-    showLoading(false);
-  }
-}
-
+    // SAUVEGARDE DU CLASSEMENT
     async function saveToGoogleSheet() {
-      if (selectedItems.length === 0) return showAlert("Sélectionnez au moins un sujet.");
+      if (selectedItems.length === 0) return showAlert("Sélectionnez au moins un sujet avant d'enregistrer.");
 
       const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
-      if (!userName) return;
+      if (!userName || userName.trim() === "") return;
 
       const submitBtn = document.getElementById("submit-btn");
       submitBtn.disabled = true;
@@ -162,14 +163,14 @@ async function loadSheetData() {
           headers: { "Content-Type": "text/plain" },
           body: JSON.stringify({
             listName: customTitle,
-            userName: userName,
+            userName: userName.trim(),
             selectedItems: selectedItems
           })
         });
 
         const res = await response.json();
         if (res.status === "SUCCESS") {
-          alert(`✅ Votre classement a été enregistré avec succès sous l'onglet '${res.sheetName}' !`);
+          alert(`✅ Votre classement a été enregistré avec succès dans l'onglet '${res.sheetName}' !`);
         } else {
           throw new Error(res.message);
         }
@@ -189,7 +190,7 @@ async function loadSheetData() {
       if (idx === -1) return;
       const item = availableItems[idx];
       if (getTotalSelectedScore() + item.score > maxScoreLimit) {
-        return showAlert(`Impossible d'ajouter "${item.title}". Poids (${item.score} pts) trop élevé.`);
+        return showAlert(`Impossible d'ajouter "${item.title}". Le poids (${item.score} pts) dépasse le budget restant.`);
       }
       availableItems.splice(idx, 1);
       selectedItems.push(item);
