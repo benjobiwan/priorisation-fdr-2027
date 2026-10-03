@@ -127,72 +127,72 @@
       loadSheetData();
     });
 
-    // CHARGEMENT DES DONNÉES EN JSONP (Insensible aux blocages CORS/réseau)
-    function loadSheetData() {
-      showLoading(true);
-      
-      const callbackName = "jsonp_callback_" + Math.round(100000 * Math.random());
-      
-      window[callbackName] = function(data) {
-        delete window[callbackName];
-        if (script.parentNode) script.parentNode.removeChild(script);
-        showLoading(false);
-        
-        if (data.error) {
-          showAlert(`Erreur : ${data.error}`);
-          return;
-        }
-        
-        if (!Array.isArray(data) || data.length === 0) {
-          showAlert(`Aucune donnée trouvée dans l'onglet '${sheetTarget}'`);
-          return;
-        }
+  function loadSheetData() {
+  showLoading(true);
 
-        availableItems = data;
-        render();
-      };
-
-      const script = document.createElement('script');
-      script.src = `${GOOGLE_SHEET_API_URL}?sheet=${encodeURIComponent(sheetTarget)}&callback=${callbackName}`;
-      script.onerror = function() {
-        delete window[callbackName];
-        if (script.parentNode) script.parentNode.removeChild(script);
-        showLoading(false);
-        showAlert("Impossible de charger les données (Erreur de script réseau).");
-      };
+  // Charger le fichier JSON hébergé directement sur GitHub Pages
+  fetch("data.json")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Impossible de charger le fichier data.json");
+      }
+      return response.json();
+    })
+    .then(data => {
+      showLoading(false);
       
-      document.body.appendChild(script);
-    }
+      // On récupère la liste correspondant à l'onglet sélectionné
+      const items = data[sheetTarget] || [];
+      
+      if (items.length === 0) {
+        showAlert(`Aucune donnée trouvée pour '${sheetTarget}'`);
+        return;
+      }
+
+      availableItems = items;
+      render();
+    })
+    .catch(err => {
+      showLoading(false);
+      showAlert("Erreur lors du chargement des données : " + err.message);
+    });
+}
 
  // SAUVEGARDE DU CLASSEMENT VIA JSONP (Garantit la création de l'onglet)
 function saveToGoogleSheet() {
   if (selectedItems.length === 0) {
-    return showAlert("Sélectionnez au moins un sujet avant d'enregistrer.");
+    return showAlert("Sélectionnez au moins un sujet avant de valider.");
   }
 
   const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
   if (!userName || userName.trim() === "") return;
 
-  const submitBtn = document.getElementById("submit-btn");
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = "Enregistrement en cours...";
+  // 1. Mise en forme du résultat au format Markdown
+  const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
+  
+  let mdBody = `### 📋 Classement Priorité 2027\n\n`;
+  mdBody += `* **Utilisateur :** ${userName.trim()}\n`;
+  mdBody += `* **Liste / Onglet :** ${sheetTarget}\n`;
+  mdBody += `* **Date :** ${dateStr}\n`;
+  mdBody += `* **Score Total Consommé :** ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
+  
+  mdBody += `| Rang | Thématique | Device | Sujet / Intention | Valeur Business | Poids (Pts) |\n`;
+  mdBody += `| :---: | :--- | :--- | :--- | :---: | :---: |\n`;
+  
+  selectedItems.forEach((item, index) => {
+    mdBody += `| **#${index + 1}** | ${item.category} | ${item.device} | ${item.title} | ${item.businessNote} | ${item.score} |\n`;
+  });
 
-  const callbackName = "jsonp_save_cb_" + Math.round(100000 * Math.random());
+  // 2. Formatage de l'URL GitHub Issues (remplace 'benjobiwan' et 'priorisation-fdr-2027' si besoin)
+  const repoOwner = "benjobiwan";
+  const repoName = "priorisation-fdr-2027";
+  const issueTitle = `[Classement] ${sheetTarget} - ${userName.trim()}`;
+  
+  const issueUrl = `https://github.com/${repoOwner}/${repoName}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(mdBody)}`;
 
-  window[callbackName] = function(res) {
-    delete window[callbackName];
-    if (script.parentNode) script.parentNode.removeChild(script);
-
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5"></i> Enregistrer mon classement dans Google Sheet`;
-    if (window.lucide) lucide.createIcons();
-
-    if (res.status === "SUCCESS") {
-      alert(`✅ Votre classement a été enregistré avec succès dans l'onglet '${res.sheetName}' !`);
-    } else {
-      alert("⚠️ Erreur : " + (res.error || res.message || "Erreur inconnue"));
-    }
-  };
+  // 3. Ouverture directe de la page de validation sur GitHub
+  window.open(issueUrl, "_blank");
+}
 
   const payloadItems = selectedItems.map(item => ({
     category: item.category,
