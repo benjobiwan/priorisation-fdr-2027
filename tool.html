@@ -156,32 +156,58 @@
     }
 
     // SOUMISSION AUTO VIA GOOGLE FORM PRÉ-REMPLI
-    function saveToGoogleSheet() {
-      if (selectedItems.length === 0) {
-        return showAlert("Sélectionnez au moins un sujet avant de valider.");
-      }
+   // ⚙️ CONFIGURATION POUR ENVOI SILENCIEUX GOOGLE FORM
+// Note : remplacer "/viewform" par "/formResponse" dans l'URL de base
+const FORM_RESPONSE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSerCU9huUOnaB9ERal9CKdgr6icw4ETHdYEWzSaD-ZF3_xtPQ/formResponse";
 
-      const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
-      if (!userName || userName.trim() === "") return;
+const ENTRY_NAME = "entry.123456789";    // ⚠️ Ton ID pour "Nom et Prénom"
+const ENTRY_SUMMARY = "entry.987654321"; // ⚠️ Ton ID pour "Classement"
 
-      const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
-      
-      let textSummary = `Utilisateur : ${userName.trim()}\n`;
-      textSummary += `Périmètre : ${customTitle} (${sheetTarget})\n`;
-      textSummary += `Date : ${dateStr}\n`;
-      textSummary += `Budget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
-      textSummary += `--- CLASSEMENT DES INTENTIONS ---\n`;
-      
-      selectedItems.forEach((item, index) => {
-        textSummary += `#${index + 1} | [${item.category}] ${item.title} (${item.score} pts - Val. Bus: ${item.businessNote})\n`;
-      });
+function saveToGoogleSheet() {
+  if (selectedItems.length === 0) {
+    return showAlert("Sélectionnez au moins un sujet avant de valider.");
+  }
 
-      // Génération de l'URL pré-remplie
-      const prefilledUrl = `${FORM_BASE_URL}?usp=pp_url&${ENTRY_NAME}=${encodeURIComponent(userName.trim())}&${ENTRY_SUMMARY}=${encodeURIComponent(textSummary)}`;
+  const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
+  if (!userName || userName.trim() === "") return;
 
-      // Ouverture directe du Google Form pré-rempli
-      window.open(prefilledUrl, "_blank");
-    }
+  showLoading(true);
+
+  const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
+  
+  let textSummary = `Utilisateur : ${userName.trim()}\n`;
+  textSummary += `Périmètre : ${customTitle} (${sheetTarget})\n`;
+  textSummary += `Date : ${dateStr}\n`;
+  textSummary += `Budget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
+  textSummary += `--- CLASSEMENT DES INTENTIONS ---\n`;
+  
+  selectedItems.forEach((item, index) => {
+    textSummary += `#${index + 1} | [${item.category}] ${item.title} (${item.score} pts - Val. Bus: ${item.businessNote})\n`;
+  });
+
+  // Construction du corps de la requête URL-encoded
+  const formData = new URLSearchParams();
+  formData.append(ENTRY_NAME, userName.trim());
+  formData.append(ENTRY_SUMMARY, textSummary);
+
+  // Envoi silencieux vers Google Forms
+  fetch(FORM_RESPONSE_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: formData.toString()
+  })
+  .then(() => {
+    showLoading(false);
+    alert("✅ Votre classement a été enregistré avec succès !");
+  })
+  .catch(err => {
+    showLoading(false);
+    showAlert("Erreur lors de l'enregistrement : " + err.message);
+  });
+}
 
     function getTotalSelectedScore() { return selectedItems.reduce((sum, item) => sum + item.score, 0); }
 
