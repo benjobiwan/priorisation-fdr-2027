@@ -1,0 +1,150 @@
+{
+  "MagasinsU": [
+    {
+      "id": "mag-1",
+      "category": "👋🏻Engagement client et acquisition",
+      "device": "🖥️ Web, 📱 Apps, 👨‍💻 ESC",
+      "title": "Lien produit Mes Offres vers CoursesU",
+      "description": "Dans l'espace offre, ajouter un CTA sur les offres enseignes et produit qui renvoi vers une URL CU (fiche produit ou sélection de prodouit)",
+      "businessNote": "8,55",
+      "score": 100
+    },
+    {
+      "id": "mag-2",
+      "category": "🔄️Convergence Off et On-Line",
+      "device": "🖥️️ Web, 📱 Apps",
+      "title": "File Story sur des promotions comme Carrefour",
+      "description": "File Story sur des promotions comme Carrefour. Enchaine de mini vidéo animé sur de la promotion Slide pour activer les offres et bon plan",
+      "businessNote": "7,50",
+      "score": 100
+    },
+    {
+      "id": "mag-3",
+      "category": "👋🏻Engagement client et acquisition",
+      "device": "🖥️ Web, 📱 Apps",
+      "title": "Optimiser la recherche de magasins avec Store Locator",
+      "description": "Optimiser l'indexation des magasins pour le SEO & GEO. Prendre en compte les recommandations Woosmap. Améliorer l'ergonomie et résoudre les principaux irritants clients.",
+      "businessNote": "7,35",
+      "score": 100
+    },
+    {
+      "id": "mag-4",
+      "category": "👋🏻Engagement client et acquisition",
+      "device": "👨‍💻 ESC",
+      "title": "Simplification du parcours inscription",
+      "description": "Valider un parcours avec le moins étape possible et le moins d'information possible qui pourra enrichie plus tard dans le parcours client (Recevoir le code OTP par SMS) Avec Gestion des consentements cibles (RCU) Compte digital avec carte U obligatoire / Demande d'optin décallée",
+      "businessNote": "10,90",
+      "score": 100
+    },
+    {
+      "id": "mag-5",
+      "category": "🎨Personnalisation et fidélisation",
+      "device": "🖥️️ Web, 📱 Apps",
+      "title": "Personnalisation de l'affichage pour des clients nouveaux ou non porteurs (MKT ou Transverse)",
+      "description": "Personnaliser l'affichage pour des clients peu acheteurs, nouveaux ou non porteurs de la Carte U en se basant sur des données de leur comportement digital afin d'enrichir l'outil interne U Perso afin de les exploiter dans le parcours client digtal et CRM (Emails)",
+      "businessNote": "5,10",
+      "score": 75
+    },
+    {
+      "id": "mag-6",
+      "category": "🎨Personnalisation et fidélisation",
+      "device": "👨‍💻 ESC",
+      "title": "Collecte d'informations déclaratives du client pour compléter son profil (CU et MU)",
+      "description": "- Collecter des informations d'appétences (0 party Data) déclaratives dans les formulaires de création de compte / lors du parcours du client en digital / en magasin / via 1 Quiz ou Jeu (Ex Menu Mon profil chez Lidl).\n- Intégrer les préférences thématiques que les clients ont déclaré au sein de l'ESC, dans nos ciblages et algorithmes, et personnaliser les offres des nouveaux clients en fonction de ces données",
+      "businessNote": "8,10",
+      "score": 75
+    },
+    {
+      "id": "mag-7",
+      "category": "👋🏻Engagement client et acquisition",
+      "device": "👨‍💻 ESC",
+      "title": "Stocker les codes promos dans l'ESC",
+      "description": "Afficher automatiquement les codes promos affectés à un client dans son compte. A récupérer de RXP ou SFSC.\nEn tant que client, je souhaite retrouver mes codes promo disponibles et éligibles dans mon espace client (ESC) afin de pouvoir facilement les utiliser lors du paiement de mes courses en ligne.",
+      "businessNote": "11,50",
+      "score": 75
+    },
+    {
+      "id": "mag-8",
+      "category": "😣Urgences, demandes annexes &Irritant",
+      "device": "🖥️ Web",
+      "title": "Refonte de la pré - home site",
+      "description": "Avoir la même préhome magasin U et Courses U\nRéorganiser les accés vers les tracts et vers courses U (en prio)\nHarmoniser des formats avec la nouvelle HP\nValider accessibilité",
+      "businessNote": "5,40",
+      "score": 100
+    },
+    {
+      "id": "mag-9",
+      "category": "🎨Personnalisation et fidélisation",
+      "device": "🖥️ Web, 📱 Apps",
+      "title": "Refonte de la page fidélité (niveau 2 de l'esc)",
+      "description": "Affichage différent si cagnotte est à 0 afin d'avoir des incitations\nCaroussel contribuable à la maille magasin\najout des produits de la sélection carte U\nAvoir une meilleure valorisation des offres et des défis",
+      "businessNote": "11,00",
+      "score": 50
+    },
+    {
+      "id": "mag-10",
+      "category": "👋🏻Engagement client et acquisition",
+      "device": "🖥️ Web, 📱 Apps",
+      "title": "Nouvelle tuile produit avec convergence MU et CU",
+      "description": "Nutriscore, compostion produit, etc comme courses U",
+      "businessNote": "13,85",
+      "score": 100
+    },
+    {
+      "id": "mag-11",
+      "category": "👋🏻Engagement client et acquisition",
+      "device": "📱 Apps",
+      "title": "Gamifications Lot 2",
+      "description": "Avoir des jeux en prenant en compte le parcours d'achat Courses U et Magasin\nAvoir des missions ESC (donner son optin en contre partie d'un bonus)\nSujet lié à lucky cart",
+      "businessNote": "11,00",
+      "score": 25
+    },
+    {
+      "id": "mag-12",
+      "category": "🔄️Convergence Off et On-Line",
+      "device": "🖥️ Web, 📱 Apps",
+      "title": "Liste de course du tract lot 3",
+      "description": "Ajout de toute la liste ou de certain produit au panier courses U\nAvoir une fiche produit au clic sur la tuile produit de la liste de course (A faire avec le sujet Fiche Produit)\nAjout à la Liste de Courses depuis le Catalogue Nanoterra",
+      "businessNote": "13,75",
+      "score": 100
+    },
+    {
+      "id": "mag-13",
+      "category": "😣Urgences, demandes annexes &Irritant",
+      "device": "🖥️ Web",
+      "title": "Refonte du header site",
+      "description": "Refonte mega menu\nRendre plus compact\nOn garde l'arche\nRevoir le contenu de chaque menu déroulant\nValider accessibilité",
+      "businessNote": "4,60",
+      "score": 100
+    },
+    {
+      "id": "mag-14",
+      "category": "🔄️Convergence Off et On-Line",
+      "device": "👨‍💻 ESC",
+      "title": "Carte Cadeau",
+      "description": "Pouvoir suivre son solde de carte cadeau",
+      "businessNote": "6,60",
+      "score": 75
+    },
+    {
+      "id": "mag-15",
+      "category": "🎨Personnalisation et fidélisation",
+      "device": "👨‍💻 ESC",
+      "title": "Travail UX sur l'application et dans l'esc pour des messages RSE",
+      "description": "Afficher le bilan carbone du ticket\nAfficher le bilan du nombre de produit 'Origine française'\nAffichier le bilan Nutriscore",
+      "businessNote": "4,10",
+      "score": 75
+    },
+    {
+      "id": "mag-16",
+      "category": "⚙️Technique",
+      "device": "🖥️ Web, 📱 Apps",
+      "title": "Mutualisation des forumaires de contacts et des FAQ.",
+      "description": "Trouver une solution commune MU/CU. Possibilité d'embarquer un agent LLM pour répondre aux clients avant d'accéder aux formulaires de contact. Objectifs; apporter une cohérence vis à vis du client et gagner en productivité (1 seule FAQ, 1 seul module de formulaire)",
+      "businessNote": "6,00",
+      "score": 75
+    }
+  ],
+  "CoursesU": [],
+  "MeP": []
+}
