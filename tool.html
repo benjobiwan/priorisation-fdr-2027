@@ -226,7 +226,7 @@ function saveToGoogleSheet() {
       if (idx === -1) return;
       const item = availableItems[idx];
       if (getTotalSelectedScore() + item.score > maxScoreLimit) {
-        return showAlert(`Impossible d'ajouter "${item.title}". Le score total (${item.score} pts) dépasse le seuil limite.`);
+        return showAlert(`Impossible d'ajouter cet élément. Le score total (${item.score} pts) dépasse le seuil limite.`);
       }
       availableItems.splice(idx, 1);
       selectedItems.push(item);
