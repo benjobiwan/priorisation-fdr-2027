@@ -24,7 +24,7 @@
 
         <div class="flex items-center gap-4 bg-slate-100 p-3 rounded-xl border border-slate-200">
           <div class="flex items-center gap-2">
-            <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider whitespace-nowrap">Plafond maximum:</label>
+            <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider whitespace-nowrap">Plafond max :</label>
             <div class="relative">
               <input type="number" id="max-score-input" value="1000" disabled class="w-24 pl-3 pr-8 py-1 text-sm font-bold bg-slate-200/70 border border-slate-300 rounded-lg text-slate-600 cursor-not-allowed outline-none">
               <span class="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-medium text-slate-400">pts</span>
@@ -36,7 +36,7 @@
       <!-- JAUGE DE CONSOMMATION -->
       <div class="mt-4">
         <div class="flex justify-between items-center text-xs font-semibold mb-1.5">
-          <span class="text-slate-600">Score des chantiers priorisés</span>
+          <span class="text-slate-600">Budget consommé</span>
           <span id="score-counter" class="font-bold text-slate-900">0 / 1000 pts</span>
         </div>
         <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden p-0.5 border border-slate-200">
@@ -65,7 +65,7 @@
       <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50 rounded-t-2xl">
         <div class="flex items-center gap-2">
           <span class="w-3 h-3 rounded-full bg-slate-400"></span>
-          <h2 class="font-bold text-slate-800">Sujets à prioriser</h2>
+          <h2 class="font-bold text-slate-800">Sujets disponibles</h2>
           <span id="count-available" class="px-2 py-0.5 text-xs font-semibold bg-slate-200 text-slate-700 rounded-full">0</span>
         </div>
       </div>
@@ -85,7 +85,7 @@
       <div class="p-4 border-t border-slate-100 bg-slate-50/50 rounded-b-2xl">
         <button id="submit-btn" onclick="saveToGoogleSheet()" class="w-full py-3.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
           <i data-lucide="check-circle" class="w-5 h-5"></i>
-          Envoyer mon classement
+          Enregistrer mon classement
         </button>
       </div>
     </section>
@@ -100,21 +100,17 @@
   </div>
 
   <script>
-    // ⚙️ PLAFONDS MAX PERSONNALISÉS PAR ONGLET
+    // ⚙️️ PLAFONDS MAX PERSONNALISÉS PAR ONGLET
     const LIST_LIMITS = {
       "MagasinsU": 750,
       "CoursesU": 1000,
       "MeP": 500
     };
 
-    // 🔗 URL DE L'APPLICATION WEB APPS SCRIPT
-    const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbyqm9tncbwm1IRYtAOcJoFC5rGe9gBGZR-TPX8U07wuFVplbgJgW23QzYVTOU0LYntJmg/exec";
-
     const urlParams = new URLSearchParams(window.location.search);
     const sheetTarget = urlParams.get('sheet') || "MagasinsU";
     const customTitle = urlParams.get('title') || "Feuille de Route";
 
-    // Application dynamique de la limite selon l'onglet courant
     const maxScoreLimit = LIST_LIMITS[sheetTarget] || 1000;
 
     let availableItems = [];
@@ -127,98 +123,66 @@
       loadSheetData();
     });
 
-  function loadSheetData() {
-  showLoading(true);
+    // 1. CHARGEMENT DEPUIS LE FICHIER DATA.JSON DE GITHUB
+    function loadSheetData() {
+      showLoading(true);
 
-  // Charger le fichier JSON hébergé directement sur GitHub Pages
-  fetch("data.json")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Impossible de charger le fichier data.json");
+      fetch("data.json")
+        .then(response => {
+          if (!response.ok) throw new Error("Impossible de lire data.json");
+          return response.json();
+        })
+        .then(data => {
+          showLoading(false);
+          const items = data[sheetTarget] || [];
+          
+          if (items.length === 0) {
+            showAlert(`Aucune donnée trouvée pour '${sheetTarget}'`);
+            return;
+          }
+
+          availableItems = items;
+          render();
+        })
+        .catch(err => {
+          showLoading(false);
+          showAlert("Erreur lors du chargement des données : " + err.message);
+        });
+    }
+
+    // 2. SOUMISSION VIA GITHUB ISSUES
+    function saveToGoogleSheet() {
+      if (selectedItems.length === 0) {
+        return showAlert("Sélectionnez au moins un sujet avant de valider.");
       }
-      return response.json();
-    })
-    .then(data => {
-      showLoading(false);
+
+      const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
+      if (!userName || userName.trim() === "") return;
+
+      const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
       
-      // On récupère la liste correspondant à l'onglet sélectionné
-      const items = data[sheetTarget] || [];
+      let mdBody = `### 📋 Classement Priorité 2027\n\n`;
+      mdBody += `* **Utilisateur :** ${userName.trim()}\n`;
+      mdBody += `* **Périmètre :** ${customTitle} (${sheetTarget})\n`;
+      mdBody += `* **Date :** ${dateStr}\n`;
+      mdBody += `* **Budget Consommé :** ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
       
-      if (items.length === 0) {
-        showAlert(`Aucune donnée trouvée pour '${sheetTarget}'`);
-        return;
-      }
+      mdBody += `| Rang | Thématique | Device / Chantier | Sujet / Intention | Valeur Business | Poids (Pts) |\n`;
+      mdBody += `| :---: | :--- | :--- | :--- | :---: | :---: |\n`;
+      
+      selectedItems.forEach((item, index) => {
+        mdBody += `| **#${index + 1}** | ${item.category} | ${item.device} | ${item.title} | ${item.businessNote} | ${item.score} |\n`;
+      });
 
-      availableItems = items;
-      render();
-    })
-    .catch(err => {
-      showLoading(false);
-      showAlert("Erreur lors du chargement des données : " + err.message);
-    });
-}
+      const repoOwner = "benjobiwan";
+      const repoName = "priorisation-fdr-2027";
+      const issueTitle = `[Classement] ${sheetTarget} - ${userName.trim()}`;
+      
+      const issueUrl = `https://github.com/${repoOwner}/${repoName}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(mdBody)}`;
 
- // SAUVEGARDE DU CLASSEMENT VIA JSONP (Garantit la création de l'onglet)
-function saveToGoogleSheet() {
-  if (selectedItems.length === 0) {
-    return showAlert("Sélectionnez au moins un sujet avant de valider.");
-  }
+      window.open(issueUrl, "_blank");
+    }
 
-  const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
-  if (!userName || userName.trim() === "") return;
-
-  // 1. Mise en forme du résultat au format Markdown
-  const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
-  
-  let mdBody = `### 📋 Classement Priorité 2027\n\n`;
-  mdBody += `* **Utilisateur :** ${userName.trim()}\n`;
-  mdBody += `* **Liste / Onglet :** ${sheetTarget}\n`;
-  mdBody += `* **Date :** ${dateStr}\n`;
-  mdBody += `* **Score Total Consommé :** ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
-  
-  mdBody += `| Rang | Thématique | Device | Sujet / Intention | Valeur Business | Poids (Pts) |\n`;
-  mdBody += `| :---: | :--- | :--- | :--- | :---: | :---: |\n`;
-  
-  selectedItems.forEach((item, index) => {
-    mdBody += `| **#${index + 1}** | ${item.category} | ${item.device} | ${item.title} | ${item.businessNote} | ${item.score} |\n`;
-  });
-
-  // 2. Formatage de l'URL GitHub Issues (remplace 'benjobiwan' et 'priorisation-fdr-2027' si besoin)
-  const repoOwner = "benjobiwan";
-  const repoName = "priorisation-fdr-2027";
-  const issueTitle = `[Classement] ${sheetTarget} - ${userName.trim()}`;
-  
-  const issueUrl = `https://github.com/${repoOwner}/${repoName}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(mdBody)}`;
-
-  // 3. Ouverture directe de la page de validation sur GitHub
-  window.open(issueUrl, "_blank");
-}
-
-  const payloadItems = selectedItems.map(item => ({
-    category: item.category,
-    device: item.device,
-    title: item.title,
-    description: item.description,
-    businessNote: item.businessNote,
-    score: item.score
-  }));
-
-  const saveUrl = `${GOOGLE_SHEET_API_URL}?action=save&listName=${encodeURIComponent(sheetTarget)}&userName=${encodeURIComponent(userName.trim())}&items=${encodeURIComponent(JSON.stringify(payloadItems))}&callback=${callbackName}`;
-
-  const script = document.createElement('script');
-  script.src = saveUrl;
-  script.onerror = function() {
-    delete window[callbackName];
-    if (script.parentNode) script.parentNode.removeChild(script);
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5"></i> Envoyer mon classement`;
-    if (window.lucide) lucide.createIcons();
-    alert("⚠️ Erreur réseau lors de l'enregistrement.");
-  };
-
-  document.body.appendChild(script);
-}
-    
     function getTotalSelectedScore() { return selectedItems.reduce((sum, item) => sum + item.score, 0); }
 
     function selectItem(id) {
@@ -226,7 +190,7 @@ function saveToGoogleSheet() {
       if (idx === -1) return;
       const item = availableItems[idx];
       if (getTotalSelectedScore() + item.score > maxScoreLimit) {
-        return showAlert(`Impossible d'ajouter cet élément. Le score total (${item.score} pts) dépasse le seuil limite.`);
+        return showAlert(`Impossible d'ajouter "${item.title}". Le poids (${item.score} pts) dépasse le budget.`);
       }
       availableItems.splice(idx, 1);
       selectedItems.push(item);
