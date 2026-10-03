@@ -12,7 +12,7 @@
     {
       "id": "mag-2",
       "category": "🔄️Convergence Off et On-Line",
-      "device": "🖥️️ Web, 📱 Apps",
+      "device": "🖥️ Web, 📱 Apps",
       "title": "File Story sur des promotions comme Carrefour",
       "description": "File Story sur des promotions comme Carrefour. Enchaine de mini vidéo animé sur de la promotion Slide pour activer les offres et bon plan",
       "businessNote": "7,50",
@@ -39,7 +39,7 @@
     {
       "id": "mag-5",
       "category": "🎨Personnalisation et fidélisation",
-      "device": "🖥️️ Web, 📱 Apps",
+      "device": "🖥️ Web, 📱 Apps",
       "title": "Personnalisation de l'affichage pour des clients nouveaux ou non porteurs (MKT ou Transverse)",
       "description": "Personnaliser l'affichage pour des clients peu acheteurs, nouveaux ou non porteurs de la Carte U en se basant sur des données de leur comportement digital afin d'enrichir l'outil interne U Perso afin de les exploiter dans le parcours client digtal et CRM (Emails)",
       "businessNote": "5,10",
@@ -120,7 +120,7 @@
     {
       "id": "mag-14",
       "category": "🔄️Convergence Off et On-Line",
-      "device": "👨‍💻 ESC",
+      "device": "👨‍‍💻 ESC",
       "title": "Carte Cadeau",
       "description": "Pouvoir suivre son solde de carte cadeau",
       "businessNote": "6,60",
@@ -145,6 +145,431 @@
       "score": 75
     }
   ],
-  "CoursesU": [],
-  "MeP": []
+  "CoursesU": [
+    {
+      "id": "cou-1",
+      "category": "Maintenance métier / produit",
+      "device": "Sujets légaux",
+      "title": "Se conformer aux exigences légales",
+      "description": "Fil rouge - Amélioration en continue",
+      "businessNote": "10/10",
+      "score": 100
+    },
+    {
+      "id": "cou-2",
+      "category": "Maintenance métier / produit",
+      "device": "Tracking Web et Apps",
+      "title": "Tracker la perf des fonctionnalités",
+      "description": "Fil rouge - Amélioration en continue",
+      "businessNote": "10/10",
+      "score": 100
+    },
+    {
+      "id": "cou-3",
+      "category": "Maintenance métier / produit",
+      "device": "SEO/GEO",
+      "title": "Augmenter le nombre de visite naturelle SEO/GEO",
+      "description": "Fil rouge - Amélioration en continue",
+      "businessNote": "10/10",
+      "score": 100
+    },
+    {
+      "id": "cou-4",
+      "category": "Maintenance métier / produit",
+      "device": "Améliorer l'accessibilité du site Web et des Apps",
+      "title": "Atteindre 80% de taux d'accessibilité (versus 50% en fin 2026)",
+      "description": "Fil rouge - Amélioration en continue",
+      "businessNote": "10/10",
+      "score": 100
+    },
+    {
+      "id": "cou-5",
+      "category": "Maintenance métier / produit",
+      "device": "Optimisations ergonomiques",
+      "title": "Optimisations ergonomiques du site web et des Apps",
+      "description": "Amélioration continue de l'ergonomie",
+      "businessNote": "8/10",
+      "score": 100
+    },
+    {
+      "id": "cou-6",
+      "category": "Maintenance métier / produit",
+      "device": "Résoudre les irritants clients",
+      "title": "Résoudre le maximum d'irritants remontés lors du VOCathon",
+      "description": "Remonter la note NPS de CoursesU\nFil rouge - Amélioration en continue",
+      "businessNote": "9/10",
+      "score": 100
+    },
+    {
+      "id": "cou-7",
+      "category": "Maintenance métier / produit",
+      "device": "Apps",
+      "title": "Uniformiser et revoir l’écran de recherche",
+      "description": "Uniformiser la zone de recherche et revoir l'écran pour offrir une meilleure visibilité produit.",
+      "businessNote": "7/10",
+      "score": 75
+    },
+    {
+      "id": "cou-8",
+      "category": "Maintenance métier / produit",
+      "device": "Web & Apps",
+      "title": "Deep link : Rediriger vers du contenu web depuis l’app",
+      "description": "Pouvoir consulter du contenu éditorial depuis l’app en restant sur le web.",
+      "businessNote": "6/10",
+      "score": 50
+    },
+    {
+      "id": "cou-9",
+      "category": "Maintenance métier / produit",
+      "device": "Arborescence Courses U",
+      "title": "Améliorer l’accès et la lisibilité des rayons",
+      "description": "Optimiser la lisibilité des rayons saisonniers vs socles vs images-prix.",
+      "businessNote": "8/10",
+      "score": 75
+    },
+    {
+      "id": "cou-10",
+      "category": "Maintenance métier / produit",
+      "device": "Navigation PLP",
+      "title": "Améliorer le header des pages rayons",
+      "description": "Améliorer la navigation sur les filtres et supprimer certaines bannières peu cliquées.",
+      "businessNote": "7/10",
+      "score": 50
+    },
+    {
+      "id": "cou-11",
+      "category": "Maintenance métier / produit",
+      "device": "Visuels Courses U",
+      "title": "Évolution des règles de gestion des visuels produits",
+      "description": "Améliorer les mises à jour, limiter les doublons, intégrer les visuels secondaires (dos/composition).",
+      "businessNote": "8.5/10",
+      "score": 75
+    },
+    {
+      "id": "cou-12",
+      "category": "Maintenance métier / produit",
+      "device": "Formulaire de contact",
+      "title": "Permettre d'inclure une image ou un document au contact",
+      "description": "Éviter les aller/retour par mail entre le client et le service client.",
+      "businessNote": "7/10",
+      "score": 50
+    },
+    {
+      "id": "cou-13",
+      "category": "Qualité des données et Efficience",
+      "device": "Automates & Data",
+      "title": "Automatisation des alternatives Nutriscore",
+      "description": "Flux data automatisé pour couvrir 95% du catalogue et guider vers une meilleure alimentation.",
+      "businessNote": "7.5/10",
+      "score": 50
+    },
+    {
+      "id": "cou-14",
+      "category": "Accompagnement du client",
+      "device": "Vidéo / Content",
+      "title": "Recettes en vidéo sur la Home et rubriques",
+      "description": "Source d'inspiration culinaire vidéo pour déclencher des achats d'impulsion.",
+      "businessNote": "6.2/10",
+      "score": 50
+    },
+    {
+      "id": "cou-15",
+      "category": "Accompagnement du client",
+      "device": "Mises en avant Promo",
+      "title": "Animer les mises en avant promo (Vidéos Jeudi +)",
+      "description": "Permettre l’affichage de courtes vidéos dans le slider 'Dans votre magasin'.",
+      "businessNote": "8.2/10",
+      "score": 75
+    },
+    {
+      "id": "cou-16",
+      "category": "Accompagnement du client",
+      "device": "Filtres & Régimes",
+      "title": "Faire ses courses selon son régime alimentaire",
+      "description": "Identifier et filtrer selon les allergènes, le sans gluten, sans lactose, etc.",
+      "businessNote": "9.1/10",
+      "score": 100
+    },
+    {
+      "id": "cou-17",
+      "category": "Commerce Agentique",
+      "device": "Voix & IA",
+      "title": "Cas d'usage #1 : Ajouter au panier par la voix",
+      "description": "Lancer une commande 'OK CoursesU' et ajouter un produit au panier ou dans une liste.",
+      "businessNote": "7.1/10",
+      "score": 100
+    },
+    {
+      "id": "cou-18",
+      "category": "Commerce Agentique",
+      "device": "Agent Conversationnel",
+      "title": "Cas d'usage #2 : Agent conversationnel recette & régimes",
+      "description": "Mettre au panier les produits d'une recette selon des critères particuliers.",
+      "businessNote": "7.7/10",
+      "score": 75
+    },
+    {
+      "id": "cou-19",
+      "category": "Accompagnement du client",
+      "device": "Home Page",
+      "title": "Refonte du parcours client pré-home / home page",
+      "description": "Fusionner les pages et ajouter des entrées directes vers les produits.",
+      "businessNote": "8/10",
+      "score": 100
+    },
+    {
+      "id": "cou-20",
+      "category": "Partenariats et QuickCommerce",
+      "device": "QuickCommerce",
+      "title": "Vente au poids des Fruits & Légumes sur UberEats",
+      "description": "Calcul du vrai poids des fruits & légumes au lieu d'une estimation.",
+      "businessNote": "7.5/10",
+      "score": 75
+    },
+    {
+      "id": "cou-21",
+      "category": "Partenariats et QuickCommerce",
+      "device": "BtoB",
+      "title": "Développement BtoB (Vente aux Assos et Pros)",
+      "description": "Évolutions et fonctionnalités dédiées aux professionnels et associations.",
+      "businessNote": "7.5/10",
+      "score": 75
+    },
+    {
+      "id": "cou-22",
+      "category": "Accompagnement du client",
+      "device": "Livraison",
+      "title": "Gestion des produits inéligibles à la LAD",
+      "description": "Informer sur l'inéligibilité en livraison à domicile (mobilier, pellets) et proposer un autre mode de retrait.",
+      "businessNote": "8.5/10",
+      "score": 100
+    },
+    {
+      "id": "cou-23",
+      "category": "Accompagnement du client",
+      "device": "Messaging / WhatsApp",
+      "title": "Informer des ruptures / substitutions via WhatsApp",
+      "description": "Message WhatsApp direct pour valider les alternatives de produits manquants.",
+      "businessNote": "8.1/10",
+      "score": 100
+    },
+    {
+      "id": "cou-24",
+      "category": "Animation Commerciale",
+      "device": "Panier",
+      "title": "Mécanique Produit Offert sous condition d'achat",
+      "description": "Programmateur de produits offerts (0€) lors de l'atteinte d'un palier panier.",
+      "businessNote": "8/10",
+      "score": 100
+    },
+    {
+      "id": "cou-25",
+      "category": "Accompagnement du client",
+      "device": "Fidélité / Panier",
+      "title": "Accompagnement à l'activation des 10%",
+      "description": "Affichage en temps réel du cagnottage au niveau du panier dès l'activation du coupon.",
+      "businessNote": "8.4/10",
+      "score": 100
+    }
+  ],
+  "MeP": [
+    {
+      "id": "mep-1",
+      "category": "Excellence opérationnelle",
+      "device": "Manquants",
+      "title": "Automatisation de l’export quotidien des manquants",
+      "description": "Livrables : Automatisation de l’export quotidien des manquants (data BO + ULIS) pour sécuriser la gestion des stocks",
+      "businessNote": "5/10",
+      "score": 75
+    },
+    {
+      "id": "mep-2",
+      "category": "Excellence opérationnelle",
+      "device": "Manquants",
+      "title": "Nouveau tableau de bord BO et fiche émulation CU",
+      "description": "Livrables : Pilotage des manquants par zone (surface de vente et réserve dédiée)",
+      "businessNote": "5/10",
+      "score": 75
+    },
+    {
+      "id": "mep-3",
+      "category": "Excellence opérationnelle",
+      "device": "Manquants",
+      "title": "Chaînage des articles",
+      "description": "Livrables : Fiabilisation des UC liés (conditionnements, promo)",
+      "businessNote": "5/10",
+      "score": 150
+    },
+    {
+      "id": "mep-4",
+      "category": "Excellence opérationnelle",
+      "device": "Productivité",
+      "title": "Gencodage des bacs en dur et adressage de la zone de stockage",
+      "description": "Livrables : Gagner du temps et sécuriser la remise au coffre",
+      "businessNote": "5/10",
+      "score": 75
+    },
+    {
+      "id": "mep-5",
+      "category": "Excellence opérationnelle",
+      "device": "Productivité",
+      "title": "Pilotage de la productivité par zone",
+      "description": "Livrables : Nouveau tableau de bord BO et Fiches émulation CU : pilotage par zone (surface de vente et réserve dédiée)",
+      "businessNote": "5/10",
+      "score": 50
+    },
+    {
+      "id": "mep-6",
+      "category": "Excellence opérationnelle",
+      "device": "Productivité",
+      "title": "Nouvelle solution de planification des ressources",
+      "description": "Livrables : Planification optimisée des équipes",
+      "businessNote": "5/10",
+      "score": 75
+    },
+    {
+      "id": "mep-7",
+      "category": "Excellence opérationnelle",
+      "device": "Productivité",
+      "title": "Verticalisation du stockage",
+      "description": "Livrables : Mise en place d'une solution de stockage vertical pour les commandes drives",
+      "businessNote": "5/10",
+      "score": 50
+    },
+    {
+      "id": "mep-8",
+      "category": "Excellence opérationnelle",
+      "device": "Remise au coffre",
+      "title": "Identification du client via app (et non via borne)",
+      "description": "Livrables : Nouvelle expérience utilisateur pour l'identification à la remise",
+      "businessNote": "5/10",
+      "score": 50
+    },
+    {
+      "id": "mep-9",
+      "category": "Excellence opérationnelle",
+      "device": "Remise au coffre",
+      "title": "Digitalisation de la remise au coffre",
+      "description": "Livrables : Impacts encaissement, gestion des stocks...",
+      "businessNote": "5/10",
+      "score": 100
+    },
+    {
+      "id": "mep-10",
+      "category": "Excellence opérationnelle",
+      "device": "Remise au coffre",
+      "title": "Géolocalisation du client à distance et anticipation",
+      "description": "Livrables : Géolocalisation via l'application pour anticiper l'arrivée du client au coffre",
+      "businessNote": "5/10",
+      "score": 50
+    },
+    {
+      "id": "mep-11",
+      "category": "Excellence opérationnelle",
+      "device": "F&L et DLC courtes",
+      "title": "Signalement problème de qualité FLEG sur Mobudrive",
+      "description": "Livrables : Signalement lors de la préparation pour information du client à la remise",
+      "businessNote": "5/10",
+      "score": 50
+    },
+    {
+      "id": "mep-12",
+      "category": "Excellence opérationnelle",
+      "device": "Assortiment et publication",
+      "title": "Nouvel outil de pilotage de la publication site Courses U",
+      "description": "Livrables : Pilotage des articles publiables, disponibles, préconisations et gestion des VMS",
+      "businessNote": "5/10",
+      "score": 100
+    },
+    {
+      "id": "mep-13",
+      "category": "Excellence opérationnelle",
+      "device": "Assortiment et publication",
+      "title": "Simplification de la publication et dépublication",
+      "description": "Livrables : Gestion simplifiée des produits locaux, poids/prix, et promos",
+      "businessNote": "5/10",
+      "score": 25
+    },
+    {
+      "id": "mep-14",
+      "category": "LAD",
+      "device": "Nouveaux services",
+      "title": "Drive Ambulant (simplification du parcours-client)",
+      "description": "Livrables : Définition d'un nouveau parcours client ambulant",
+      "businessNote": "5/10",
+      "score": 75
+    },
+    {
+      "id": "mep-15",
+      "category": "Proxi",
+      "device": "Nouvelles mécaniques promo",
+      "title": "Ciblage segments spécifiques et mécaniques LAD",
+      "description": "Livrables : Mécaniques dédiées à la LAD (seniors, PMR, abonnements, créneaux spécifiques)",
+      "businessNote": "5/10",
+      "score": 100
+    },
+    {
+      "id": "mep-16",
+      "category": "Proxi",
+      "device": "Nouveaux services",
+      "title": "Livraison express en moins d'une heure",
+      "description": "Livrables : Nouveau process de préparation et de livraison (alerting, préparation et livraison accélérées)",
+      "businessNote": "5/10",
+      "score": 100
+    },
+    {
+      "id": "mep-17",
+      "category": "Proxi",
+      "device": "Nouveaux services",
+      "title": "Lâcher caddie (simplification du parcours-client)",
+      "description": "Livrables : Définition d'un nouveau parcours client (passage en caisse et règlement à distance)",
+      "businessNote": "5/10",
+      "score": 50
+    },
+    {
+      "id": "mep-18",
+      "category": "Proxi",
+      "device": "Productivité",
+      "title": "Sectorisation et optimisation des tournées à la rue",
+      "description": "Livrables : Paramétrage des zones de livraison à l'échelle de la rue (au lieu des codes postaux)",
+      "businessNote": "5/10",
+      "score": 100
+    },
+    {
+      "id": "mep-19",
+      "category": "Proxi",
+      "device": "Productivité",
+      "title": "Développement d'un Back-Office Light",
+      "description": "Livrables : Nouveau BO Light pour la préparation et la gestion Proxi",
+      "businessNote": "5/10",
+      "score": 50
+    },
+    {
+      "id": "mep-20",
+      "category": "Excellence opérationnelle",
+      "device": "Productivité",
+      "title": "Mise en place d'un Design System",
+      "description": "Livrables : Ergonomie et expérience utilisateur unifiées",
+      "businessNote": "5/10",
+      "score": 100
+    },
+    {
+      "id": "mep-21",
+      "category": "Excellence opérationnelle",
+      "device": "Pilotage Business",
+      "title": "Fiabilisation Data et écarts indicateurs",
+      "description": "Livrables : Résolution des écarts d'indicateurs entre le BO et UPerf",
+      "businessNote": "5/10",
+      "score": 100
+    },
+    {
+      "id": "mep-22",
+      "category": "Excellence opérationnelle",
+      "device": "Productivité",
+      "title": "Distinction émetteurs TRD et suivi des paiements",
+      "description": "Livrables : Distinction des émetteurs TRD dans la vue Suivi des paiements et évolution de la vue",
+      "businessNote": "5/10",
+      "score": 50
+    }
+  ]
 }
