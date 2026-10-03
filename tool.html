@@ -9,6 +9,9 @@
 </head>
 <body class="h-full text-slate-800 antialiased flex flex-col font-sans">
 
+  <!-- IFRAME INVISIBLE POUR SOUMISSION SILENCIEUSE -->
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
   <!-- EN-TÊTE PRINCIPAL -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
     <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -92,18 +95,18 @@
   </main>
 
   <!-- OVERLAY DE CHARGEMENT -->
-  <div id="loading-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex flex-col items-center justify-center text-white">
+  <div id="loading-overlay" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex flex-col items-center justify-center text-white">
     <div class="bg-white p-6 rounded-2xl shadow-xl flex flex-col items-center gap-3 text-slate-800">
       <div class="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
-      <p class="font-semibold text-sm">Chargement des données...</p>
+      <p class="font-semibold text-sm">Enregistrement du classement en cours...</p>
     </div>
   </div>
 
   <script>
-    // ⚙️ CONFIGURATION DU GOOGLE FORM
-    const FORM_BASE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSerCU9huUOnaB9ERal9CKdgr6icw4ETHdYEWzSaD-ZF3_xtPQ/viewform";
-    const ENTRY_NAME = "entry.1556899417";    // ⚠️ À remplacer par ton ID pour "Nom et Prénom"
-    const ENTRY_SUMMARY = "entry.1336496038"; // ⚠️ À remplacer par ton ID pour "Classement"
+    // ⚙️ CONFIGURATION DU GOOGLE FORM (ENVOI SILENCIEUX)
+    const FORM_RESPONSE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSerCU9huUOnaB9ERal9CKdgr6icw4ETHdYEWzSaD-ZF3_xtPQ/formResponse";
+    const ENTRY_NAME = "entry.1556899417";    // Tes véritables identifiants Google Form
+    const ENTRY_SUMMARY = "entry.1336496038";
 
     // ⚙️ PLAFONDS MAX PERSONNALISÉS PAR ONGLET
     const LIST_LIMITS = {
@@ -128,7 +131,7 @@
       loadSheetData();
     });
 
-    // CHARGEMENT DEPUIS DATA.JSON (GITHUB PAGES)
+    // CHARGEMENT DEPUIS DATA.JSON
     function loadSheetData() {
       showLoading(true);
 
@@ -155,59 +158,57 @@
         });
     }
 
-    // SOUMISSION AUTO VIA GOOGLE FORM PRÉ-REMPLI
-   // ⚙️ CONFIGURATION POUR ENVOI SILENCIEUX GOOGLE FORM
-// Note : remplacer "/viewform" par "/formResponse" dans l'URL de base
-const FORM_RESPONSE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSerCU9huUOnaB9ERal9CKdgr6icw4ETHdYEWzSaD-ZF3_xtPQ/formResponse";
+    // SOUMISSION 100% AUTOMATIQUE ET SILENCIEUSE
+    function saveToGoogleSheet() {
+      if (selectedItems.length === 0) {
+        return showAlert("Sélectionnez au moins un sujet avant de valider.");
+      }
 
-const ENTRY_NAME = "entry.123456789";    // ⚠️ Ton ID pour "Nom et Prénom"
-const ENTRY_SUMMARY = "entry.987654321"; // ⚠️ Ton ID pour "Classement"
+      const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
+      if (!userName || userName.trim() === "") return;
 
-function saveToGoogleSheet() {
-  if (selectedItems.length === 0) {
-    return showAlert("Sélectionnez au moins un sujet avant de valider.");
-  }
+      showLoading(true);
 
-  const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
-  if (!userName || userName.trim() === "") return;
+      const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
+      
+      let textSummary = `Utilisateur : ${userName.trim()}\n`;
+      textSummary += `Périmètre : ${customTitle} (${sheetTarget})\n`;
+      textSummary += `Date : ${dateStr}\n`;
+      textSummary += `Budget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
+      textSummary += `--- CLASSEMENT DES INTENTIONS ---\n`;
+      
+      selectedItems.forEach((item, index) => {
+        textSummary += `#${index + 1} | [${item.category}] ${item.title} (${item.score} pts - Val. Bus: ${item.businessNote})\n`;
+      });
 
-  showLoading(true);
+      // Création dynamique d'un formulaire HTML fantôme ciblant l'iframe invisible
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = FORM_RESPONSE_URL;
+      form.target = "hidden_iframe";
 
-  const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
-  
-  let textSummary = `Utilisateur : ${userName.trim()}\n`;
-  textSummary += `Périmètre : ${customTitle} (${sheetTarget})\n`;
-  textSummary += `Date : ${dateStr}\n`;
-  textSummary += `Budget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
-  textSummary += `--- CLASSEMENT DES INTENTIONS ---\n`;
-  
-  selectedItems.forEach((item, index) => {
-    textSummary += `#${index + 1} | [${item.category}] ${item.title} (${item.score} pts - Val. Bus: ${item.businessNote})\n`;
-  });
+      const nameInput = document.createElement("input");
+      nameInput.type = "hidden";
+      nameInput.name = ENTRY_NAME;
+      nameInput.value = userName.trim();
+      form.appendChild(nameInput);
 
-  // Construction du corps de la requête URL-encoded
-  const formData = new URLSearchParams();
-  formData.append(ENTRY_NAME, userName.trim());
-  formData.append(ENTRY_SUMMARY, textSummary);
+      const summaryInput = document.createElement("input");
+      summaryInput.type = "hidden";
+      summaryInput.name = ENTRY_SUMMARY;
+      summaryInput.value = textSummary;
+      form.appendChild(summaryInput);
 
-  // Envoi silencieux vers Google Forms
-  fetch(FORM_RESPONSE_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: formData.toString()
-  })
-  .then(() => {
-    showLoading(false);
-    alert("✅ Votre classement a été enregistré avec succès !");
-  })
-  .catch(err => {
-    showLoading(false);
-    showAlert("Erreur lors de l'enregistrement : " + err.message);
-  });
-}
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
+
+      // Notification à l'utilisateur sans quitter la page
+      setTimeout(() => {
+        showLoading(false);
+        alert("✅ Votre classement a été enregistré avec succès !");
+      }, 1000);
+    }
 
     function getTotalSelectedScore() { return selectedItems.reduce((sum, item) => sum + item.score, 0); }
 
