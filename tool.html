@@ -164,39 +164,53 @@
       document.body.appendChild(script);
     }
 
-    // SAUVEGARDE DU CLASSEMENT (Mode no-cors)
-    async function saveToGoogleSheet() {
-      if (selectedItems.length === 0) return showAlert("Sélectionnez au moins un sujet avant d'enregistrer.");
+ async function saveToGoogleSheet() {
+  if (selectedItems.length === 0) {
+    return showAlert("Sélectionnez au moins un sujet avant d'enregistrer.");
+  }
 
-      const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
-      if (!userName || userName.trim() === "") return;
+  const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
+  if (!userName || userName.trim() === "") return;
 
-      const submitBtn = document.getElementById("submit-btn");
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = "Enregistrement en cours...";
+  const submitBtn = document.getElementById("submit-btn");
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = "Enregistrement en cours...";
 
-      try {
-        await fetch(GOOGLE_SHEET_API_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "text/plain" },
-          body: JSON.stringify({
-            listName: customTitle,
-            userName: userName.trim(),
-            selectedItems: selectedItems
-          })
-        });
+  try {
+    // Préparation des données légères
+    const payloadData = {
+      listName: sheetTarget,
+      userName: userName.trim(),
+      selectedItems: selectedItems.map(item => ({
+        category: item.category,
+        device: item.device,
+        title: item.title,
+        description: item.description,
+        businessNote: item.businessNote,
+        score: item.score
+      }))
+    };
 
-        alert("✅ Votre classement a été envoyé avec succès !");
-      } catch (e) {
-        alert("⚠️ Erreur lors de l'enregistrement : " + e.message);
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5"></i> Enregistrer mon classement dans Google Sheet`;
-        lucide.createIcons();
-      }
-    }
+    // Envoi via fetch no-cors
+    await fetch(GOOGLE_SHEET_API_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payloadData)
+    });
 
+    alert("✅ Votre classement a été envoyé avec succès ! Vérifiez votre Google Sheet d'ici quelques secondes.");
+  } catch (e) {
+    alert("⚠️ Erreur lors de l'envoi : " + e.message);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5"></i> Enregistrer mon classement dans Google Sheet`;
+    if (window.lucide) lucide.createIcons();
+  }
+}
+    
     function getTotalSelectedScore() { return selectedItems.reduce((sum, item) => sum + item.score, 0); }
 
     function selectItem(id) {
