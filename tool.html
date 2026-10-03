@@ -159,54 +159,56 @@
     }
 
     // SOUMISSION 100% AUTOMATIQUE ET SILENCIEUSE
-    function saveToGoogleSheet() {
-      if (selectedItems.length === 0) {
-        return showAlert("Sélectionnez au moins un sujet avant de valider.");
-      }
+   // SOUMISSION 100% AUTOMATIQUE ET SILENCIEUSE
+function saveToGoogleSheet() {
+  if (selectedItems.length === 0) {
+    return showAlert("Sélectionnez au moins un sujet avant de valider.");
+  }
 
-      const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
-      if (!userName || userName.trim() === "") return;
+  const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
+  if (!userName || userName.trim() === "") return;
 
-      showLoading(true);
+  showLoading(true);
 
-      const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
-      
-      let textSummary = `Utilisateur : ${userName.trim()}\n`;
-      textSummary += `Périmètre : ${customTitle} (${sheetTarget})\n`;
-      textSummary += `Date : ${dateStr}\n`;
-      textSummary += `Budget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
-      textSummary += `--- CLASSEMENT DES INTENTIONS ---\n`;
-      
-      selectedItems.forEach((item, index) => {
-        textSummary += `#${index + 1} | [${item.category}] ${item.title} (${item.score} pts - Val. Bus: ${item.businessNote})\n`;
-      });
+  const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
+  
+  let textSummary = `Utilisateur : ${userName.trim()}\n`;
+  textSummary += `Périmètre : ${customTitle} (${sheetTarget})\n`;
+  textSummary += `Date : ${dateStr}\n`;
+  textSummary += `Budget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
+  textSummary += `--- CLASSEMENT DES INTENTIONS ---\n`;
+  
+  // ➕ Ajout du champ ID dans la ligne de résumé
+  selectedItems.forEach((item, index) => {
+    textSummary += `#${index + 1} | [ID: ${item.id}] | [${item.category}] ${item.title} (${item.score} pts - Val. Bus: ${item.businessNote})\n`;
+  });
 
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = FORM_RESPONSE_URL;
-      form.target = "hidden_iframe";
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = FORM_RESPONSE_URL;
+  form.target = "hidden_iframe";
 
-      const nameInput = document.createElement("input");
-      nameInput.type = "hidden";
-      nameInput.name = ENTRY_NAME;
-      nameInput.value = userName.trim();
-      form.appendChild(nameInput);
+  const nameInput = document.createElement("input");
+  nameInput.type = "hidden";
+  nameInput.name = ENTRY_NAME;
+  nameInput.value = userName.trim();
+  form.appendChild(nameInput);
 
-      const summaryInput = document.createElement("input");
-      summaryInput.type = "hidden";
-      summaryInput.name = ENTRY_SUMMARY;
-      summaryInput.value = textSummary;
-      form.appendChild(summaryInput);
+  const summaryInput = document.createElement("input");
+  summaryInput.type = "hidden";
+  summaryInput.name = ENTRY_SUMMARY;
+  summaryInput.value = textSummary;
+  form.appendChild(summaryInput);
 
-      document.body.appendChild(form);
-      form.submit();
-      document.body.removeChild(form);
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
 
-      setTimeout(() => {
-        showLoading(false);
-        alert("✅ Votre classement a été enregistré avec succès !");
-      }, 1000);
-    }
+  setTimeout(() => {
+    showLoading(false);
+    alert("✅ Votre classement a été enregistré avec succès !");
+  }, 1000);
+}
 
     function getTotalSelectedScore() { return selectedItems.reduce((sum, item) => sum + item.score, 0); }
 
