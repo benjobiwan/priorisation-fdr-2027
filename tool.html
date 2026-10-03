@@ -100,7 +100,12 @@
   </div>
 
   <script>
-    // ⚙️️ PLAFONDS MAX PERSONNALISÉS PAR ONGLET
+    // ⚙️ CONFIGURATION DU GOOGLE FORM
+    const FORM_BASE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSerCU9huUOnaB9ERal9CKdgr6icw4ETHdYEWzSaD-ZF3_xtPQ/viewform";
+    const ENTRY_NAME = "entry.1556899417";    // ⚠️ À remplacer par ton ID pour "Nom et Prénom"
+    const ENTRY_SUMMARY = "entry.1336496038"; // ⚠️ À remplacer par ton ID pour "Classement"
+
+    // ⚙️ PLAFONDS MAX PERSONNALISÉS PAR ONGLET
     const LIST_LIMITS = {
       "MagasinsU": 750,
       "CoursesU": 1000,
@@ -123,7 +128,7 @@
       loadSheetData();
     });
 
-    // 1. CHARGEMENT DEPUIS LE FICHIER DATA.JSON DE GITHUB
+    // CHARGEMENT DEPUIS DATA.JSON (GITHUB PAGES)
     function loadSheetData() {
       showLoading(true);
 
@@ -150,7 +155,7 @@
         });
     }
 
-    // 2. SOUMISSION VIA GITHUB ISSUES
+    // SOUMISSION AUTO VIA GOOGLE FORM PRÉ-REMPLI
     function saveToGoogleSheet() {
       if (selectedItems.length === 0) {
         return showAlert("Sélectionnez au moins un sujet avant de valider.");
@@ -161,26 +166,21 @@
 
       const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
       
-      let mdBody = `### 📋 Classement Priorité 2027\n\n`;
-      mdBody += `* **Utilisateur :** ${userName.trim()}\n`;
-      mdBody += `* **Périmètre :** ${customTitle} (${sheetTarget})\n`;
-      mdBody += `* **Date :** ${dateStr}\n`;
-      mdBody += `* **Budget Consommé :** ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
-      
-      mdBody += `| Rang | Thématique | Device / Chantier | Sujet / Intention | Valeur Business | Poids (Pts) |\n`;
-      mdBody += `| :---: | :--- | :--- | :--- | :---: | :---: |\n`;
+      let textSummary = `Utilisateur : ${userName.trim()}\n`;
+      textSummary += `Périmètre : ${customTitle} (${sheetTarget})\n`;
+      textSummary += `Date : ${dateStr}\n`;
+      textSummary += `Budget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
+      textSummary += `--- CLASSEMENT DES INTENTIONS ---\n`;
       
       selectedItems.forEach((item, index) => {
-        mdBody += `| **#${index + 1}** | ${item.category} | ${item.device} | ${item.title} | ${item.businessNote} | ${item.score} |\n`;
+        textSummary += `#${index + 1} | [${item.category}] ${item.title} (${item.score} pts - Val. Bus: ${item.businessNote})\n`;
       });
 
-      const repoOwner = "benjobiwan";
-      const repoName = "priorisation-fdr-2027";
-      const issueTitle = `[Classement] ${sheetTarget} - ${userName.trim()}`;
-      
-      const issueUrl = `https://github.com/${repoOwner}/${repoName}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(mdBody)}`;
+      // Génération de l'URL pré-remplie
+      const prefilledUrl = `${FORM_BASE_URL}?usp=pp_url&${ENTRY_NAME}=${encodeURIComponent(userName.trim())}&${ENTRY_SUMMARY}=${encodeURIComponent(textSummary)}`;
 
-      window.open(issueUrl, "_blank");
+      // Ouverture directe du Google Form pré-rempli
+      window.open(prefilledUrl, "_blank");
     }
 
     function getTotalSelectedScore() { return selectedItems.reduce((sum, item) => sum + item.score, 0); }
