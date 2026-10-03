@@ -164,7 +164,8 @@
       document.body.appendChild(script);
     }
 
- async function saveToGoogleSheet() {
+ // SAUVEGARDE DU CLASSEMENT VIA JSONP (Garantit la création de l'onglet)
+function saveToGoogleSheet() {
   if (selectedItems.length === 0) {
     return showAlert("Sélectionnez au moins un sujet avant d'enregistrer.");
   }
@@ -176,39 +177,46 @@
   submitBtn.disabled = true;
   submitBtn.innerHTML = "Enregistrement en cours...";
 
-  try {
-    // Préparation des données légères
-    const payloadData = {
-      listName: sheetTarget,
-      userName: userName.trim(),
-      selectedItems: selectedItems.map(item => ({
-        category: item.category,
-        device: item.device,
-        title: item.title,
-        description: item.description,
-        businessNote: item.businessNote,
-        score: item.score
-      }))
-    };
+  const callbackName = "jsonp_save_cb_" + Math.round(100000 * Math.random());
 
-    // Envoi via fetch no-cors
-    await fetch(GOOGLE_SHEET_API_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
-      body: JSON.stringify(payloadData)
-    });
+  window[callbackName] = function(res) {
+    delete window[callbackName];
+    if (script.parentNode) script.parentNode.removeChild(script);
 
-    alert("✅ Votre classement a été envoyé avec succès ! Vérifiez votre Google Sheet d'ici quelques secondes.");
-  } catch (e) {
-    alert("⚠️ Erreur lors de l'envoi : " + e.message);
-  } finally {
     submitBtn.disabled = false;
     submitBtn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5"></i> Enregistrer mon classement dans Google Sheet`;
     if (window.lucide) lucide.createIcons();
-  }
+
+    if (res.status === "SUCCESS") {
+      alert(`✅ Votre classement a été enregistré avec succès dans l'onglet '${res.sheetName}' !`);
+    } else {
+      alert("⚠️ Erreur : " + (res.error || res.message || "Erreur inconnue"));
+    }
+  };
+
+  const payloadItems = selectedItems.map(item => ({
+    category: item.category,
+    device: item.device,
+    title: item.title,
+    description: item.description,
+    businessNote: item.businessNote,
+    score: item.score
+  }));
+
+  const saveUrl = `${GOOGLE_SHEET_API_URL}?action=save&listName=${encodeURIComponent(sheetTarget)}&userName=${encodeURIComponent(userName.trim())}&items=${encodeURIComponent(JSON.stringify(payloadItems))}&callback=${callbackName}`;
+
+  const script = document.createElement('script');
+  script.src = saveUrl;
+  script.onerror = function() {
+    delete window[callbackName];
+    if (script.parentNode) script.parentNode.removeChild(script);
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5"></i> Enregistrer mon classement dans Google Sheet`;
+    if (window.lucide) lucide.createIcons();
+    alert("⚠️ Erreur réseau lors de l'enregistrement.");
+  };
+
+  document.body.appendChild(script);
 }
     
     function getTotalSelectedScore() { return selectedItems.reduce((sum, item) => sum + item.score, 0); }
