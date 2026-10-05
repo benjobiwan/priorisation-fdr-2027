@@ -117,45 +117,44 @@
   </div>
 
   <script>
-    // ⚙️ CONFIGURATION DU GOOGLE FORM
-    const FORM_RESPONSE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSerCU9huUOnaB9ERal9CKdgr6icw4ETHdYEWzSaD-ZF3_xtPQ/formResponse";
-    const ENTRY_NAME = "entry.1556899417";
-    const ENTRY_SUMMARY = "entry.1336496038";
+// ⚙️ CONFIGURATION DU GOOGLE FORM
+const FORM_RESPONSE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSerCU9huUOnaB9ERal9CKdgr6icw4ETHdYEWzSaD-ZF3_xtPQ/formResponse";
+const ENTRY_NAME = "entry.1556899417";
+const ENTRY_SUMMARY = "entry.1336496038";
 
-    // ⚙️ PLAFONDS MAX PERSONNALISÉS PAR ONGLET
-    const LIST_LIMITS = {
-      "MagasinsU": 750,
-      "CoursesU": 1000,
-      "MeP": 500
-    };
+// ⚙️ PLAFONDS MAX PERSONNALISÉS PAR ONGLET
+const LIST_LIMITS = {
+  "MagasinsU": 750,
+  "CoursesU": 1000,
+  "MeP": 500
+};
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const rawSheetTarget = urlParams.get('sheet') || "MagasinsU";
-    
-    // Normalisation de la clé d'onglet pour éviter les erreurs de casse
-    const sheetTarget = Object.keys(LIST_LIMITS).find(
-      key => key.toLowerCase() === rawSheetTarget.toLowerCase()
-    ) || rawSheetTarget;
+const urlParams = new URLSearchParams(window.location.search);
+const rawSheetTarget = urlParams.get('sheet') || "MagasinsU";
+const customTitle = urlParams.get('title') || "Feuille de Route";
 
-    const customTitle = urlParams.get('title') || "Feuille de Route";
-    const maxScoreLimit = LIST_LIMITS[sheetTarget] || 1000;
+// Recherche de la clé insensible à la casse
+let sheetTarget = Object.keys(LIST_LIMITS).find(
+  key => key.toLowerCase() === rawSheetTarget.toLowerCase()
+) || rawSheetTarget;
 
-    let availableItems = [];
-    let selectedItems = [];
-    let draggedItemId = null;
-    let currentSort = "default";
+const maxScoreLimit = LIST_LIMITS[sheetTarget] || 1000;
 
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("page-title").textContent = `Priorisation FdR 2027 - ${customTitle}`;
-      document.getElementById("max-score-input").value = maxScoreLimit;
-      loadSheetData();
-    });
+let availableItems = [];
+let selectedItems = [];
+let draggedItemId = null;
+let currentSort = "default";
 
- // CHARGEMENT DEPUIS DATA.JSON SANS CACHE
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("page-title").textContent = `Priorisation FdR 2027 - ${customTitle}`;
+  document.getElementById("max-score-input").value = maxScoreLimit;
+  loadSheetData();
+});
+
+// CHARGEMENT DEPUIS DATA.JSON AVEC ANTI-CACHE ET RETRIEVAL SÉCURISÉ
 function loadSheetData() {
   showLoading(true);
 
-  // Ajout du paramètre Date.now() pour forcer le navigateur à relire le JSON à jour
   fetch(`data.json?v=${Date.now()}`)
     .then(response => {
       if (!response.ok) throw new Error("Impossible de lire data.json");
@@ -164,15 +163,15 @@ function loadSheetData() {
     .then(data => {
       showLoading(false);
       
-      // Recherche insensible à la casse pour sécuriser MeP / mep
+      // Recherche de la clé dans data.json insensible à la casse (ex: MeP / mep / MEP)
       const matchedKey = Object.keys(data).find(
-        k => k.toLowerCase() === sheetTarget.toLowerCase()
+        k => k.toLowerCase() === rawSheetTarget.toLowerCase()
       );
 
       const items = matchedKey ? data[matchedKey] : [];
       
       if (items.length === 0) {
-        showAlert(`Aucune donnée trouvée pour '${sheetTarget}'`);
+        showAlert(`Aucune donnée trouvée pour le périmètre '${rawSheetTarget}'`);
         return;
       }
 
@@ -186,137 +185,132 @@ function loadSheetData() {
     });
 }
 
-    // 🔀 GESTION DU TRI
-    function handleSortChange(sortValue) {
-      currentSort = sortValue;
-      sortAvailableItems();
-      render();
+// 🔀 GESTION DU TRI
+function handleSortChange(sortValue) {
+  currentSort = sortValue;
+  sortAvailableItems();
+  render();
+}
+
+function sortAvailableItems() {
+  if (currentSort === "default") return;
+
+  availableItems.sort((a, b) => {
+    const valBusA = parseFloat(String(a.businessNote || "0").replace(",", ".")) || 0;
+    const valBusB = parseFloat(String(b.businessNote || "0").replace(",", ".")) || 0;
+    
+    const scoreA = Number(a.score) || 0;
+    const scoreB = Number(b.score) || 0;
+
+    switch (currentSort) {
+      case "business-desc": return valBusB - valBusA;
+      case "business-asc": return valBusA - valBusB;
+      case "score-desc": return scoreB - scoreA;
+      case "score-asc": return scoreA - scoreB;
+      default: return 0;
     }
+  });
+}
 
-    function sortAvailableItems() {
-      if (currentSort === "default") return;
+// SOUMISSION SILENCIEUSE
+function saveToGoogleSheet() {
+  if (selectedItems.length === 0) {
+    return showAlert("Sélectionnez au moins un sujet avant de valider.");
+  }
 
-      availableItems.sort((a, b) => {
-        const valBusA = parseFloat(String(a.businessNote || "0").replace(",", ".")) || 0;
-        const valBusB = parseFloat(String(b.businessNote || "0").replace(",", ".")) || 0;
-        
-        const scoreA = Number(a.score) || 0;
-        const scoreB = Number(b.score) || 0;
+  const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
+  if (!userName || userName.trim() === "") return;
 
-        switch (currentSort) {
-          case "business-desc":
-            return valBusB - valBusA;
-          case "business-asc":
-            return valBusA - valBusB;
-          case "score-desc":
-            return scoreB - scoreA;
-          case "score-asc":
-            return scoreA - scoreB;
-          default:
-            return 0;
-        }
-      });
-    }
+  showLoading(true);
 
-    // SOUMISSION SILENCIEUSE
-    function saveToGoogleSheet() {
-      if (selectedItems.length === 0) {
-        return showAlert("Sélectionnez au moins un sujet avant de valider.");
-      }
+  const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
+  
+  let textSummary = `Utilisateur : ${userName.trim()}\n`;
+  textSummary += `Périmètre : ${customTitle} (${sheetTarget})\n`;
+  textSummary += `Date : ${dateStr}\n`;
+  textSummary += `Budget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
+  textSummary += `--- CLASSEMENT DES INTENTIONS ---\n`;
+  
+  selectedItems.forEach((item, index) => {
+    textSummary += `#${index + 1} | [ID: ${item.id}] | [${item.category}] ${item.title} (${item.score} pts - Val. Bus: ${item.businessNote})\n`;
+  });
 
-      const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
-      if (!userName || userName.trim() === "") return;
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = FORM_RESPONSE_URL;
+  form.target = "hidden_iframe";
 
-      showLoading(true);
+  const nameInput = document.createElement("input");
+  nameInput.type = "hidden";
+  nameInput.name = ENTRY_NAME;
+  nameInput.value = userName.trim();
+  form.appendChild(nameInput);
 
-      const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
-      
-      let textSummary = `Utilisateur : ${userName.trim()}\n`;
-      textSummary += `Périmètre : ${customTitle} (${sheetTarget})\n`;
-      textSummary += `Date : ${dateStr}\n`;
-      textSummary += `Budget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
-      textSummary += `--- CLASSEMENT DES INTENTIONS ---\n`;
-      
-      selectedItems.forEach((item, index) => {
-        textSummary += `#${index + 1} | [ID: ${item.id}] | [${item.category}] ${item.title} (${item.score} pts - Val. Bus: ${item.businessNote})\n`;
-      });
+  const summaryInput = document.createElement("input");
+  summaryInput.type = "hidden";
+  summaryInput.name = ENTRY_SUMMARY;
+  summaryInput.value = textSummary;
+  form.appendChild(summaryInput);
 
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = FORM_RESPONSE_URL;
-      form.target = "hidden_iframe";
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
 
-      const nameInput = document.createElement("input");
-      nameInput.type = "hidden";
-      nameInput.name = ENTRY_NAME;
-      nameInput.value = userName.trim();
-      form.appendChild(nameInput);
+  setTimeout(() => {
+    showLoading(false);
+    alert("✅ Votre classement a été enregistré avec succès !");
+  }, 1000);
+}
 
-      const summaryInput = document.createElement("input");
-      summaryInput.type = "hidden";
-      summaryInput.name = ENTRY_SUMMARY;
-      summaryInput.value = textSummary;
-      form.appendChild(summaryInput);
+function getTotalSelectedScore() { return selectedItems.reduce((sum, item) => sum + item.score, 0); }
 
-      document.body.appendChild(form);
-      form.submit();
-      document.body.removeChild(form);
+function selectItem(id) {
+  const idx = availableItems.findIndex(i => i.id === id);
+  if (idx === -1) return;
+  const item = availableItems[idx];
+  if (getTotalSelectedScore() + item.score > maxScoreLimit) {
+    return showAlert(`Impossible d'ajouter "${item.title}". Le poids (${item.score} pts) dépasse le budget.`);
+  }
+  availableItems.splice(idx, 1);
+  selectedItems.push(item);
+  dismissAlert(); render();
+}
 
-      setTimeout(() => {
-        showLoading(false);
-        alert("✅ Votre classement a été enregistré avec succès !");
-      }, 1000);
-    }
+function deselectItem(id) {
+  const idx = selectedItems.findIndex(i => i.id === id);
+  if (idx === -1) return;
+  availableItems.push(selectedItems.splice(idx, 1)[0]);
+  sortAvailableItems();
+  dismissAlert(); render();
+}
 
-    function getTotalSelectedScore() { return selectedItems.reduce((sum, item) => sum + item.score, 0); }
+function movePriority(id, dir) {
+  const idx = selectedItems.findIndex(i => i.id === id);
+  if (idx === -1 || idx + dir < 0 || idx + dir >= selectedItems.length) return;
+  const temp = selectedItems[idx];
+  selectedItems[idx] = selectedItems[idx + dir];
+  selectedItems[idx + dir] = temp;
+  render();
+}
 
-    function selectItem(id) {
-      const idx = availableItems.findIndex(i => i.id === id);
-      if (idx === -1) return;
-      const item = availableItems[idx];
-      if (getTotalSelectedScore() + item.score > maxScoreLimit) {
-        return showAlert(`Impossible d'ajouter "${item.title}". Le poids (${item.score} pts) dépasse le budget.`);
-      }
-      availableItems.splice(idx, 1);
-      selectedItems.push(item);
-      dismissAlert(); render();
-    }
+function handleDragStart(e, id) { draggedItemId = id; e.dataTransfer.setData("text/plain", id); }
+function allowDrop(e) { e.preventDefault(); }
+function handleDrop(e, target) {
+  e.preventDefault();
+  if (!draggedItemId) return;
+  const isSelected = selectedItems.some(i => i.id === draggedItemId);
+  if (target === "selected" && !isSelected) selectItem(draggedItemId);
+  if (target === "available" && isSelected) deselectItem(draggedItemId);
+}
 
-    function deselectItem(id) {
-      const idx = selectedItems.findIndex(i => i.id === id);
-      if (idx === -1) return;
-      availableItems.push(selectedItems.splice(idx, 1)[0]);
-      sortAvailableItems();
-      dismissAlert(); render();
-    }
+function render() {
+  renderList("list-available", availableItems, false);
+  renderList("list-selected", selectedItems, true);
+  updateGauge();
+  lucide.createIcons();
+}
 
-    function movePriority(id, dir) {
-      const idx = selectedItems.findIndex(i => i.id === id);
-      if (idx === -1 || idx + dir < 0 || idx + dir >= selectedItems.length) return;
-      const temp = selectedItems[idx];
-      selectedItems[idx] = selectedItems[idx + dir];
-      selectedItems[idx + dir] = temp;
-      render();
-    }
-
-    function handleDragStart(e, id) { draggedItemId = id; e.dataTransfer.setData("text/plain", id); }
-    function allowDrop(e) { e.preventDefault(); }
-    function handleDrop(e, target) {
-      e.preventDefault();
-      if (!draggedItemId) return;
-      const isSelected = selectedItems.some(i => i.id === draggedItemId);
-      if (target === "selected" && !isSelected) selectItem(draggedItemId);
-      if (target === "available" && isSelected) deselectItem(draggedItemId);
-    }
-
-    function render() {
-      renderList("list-available", availableItems, false);
-      renderList("list-selected", selectedItems, true);
-      updateGauge();
-      lucide.createIcons();
-    }
-
-   // RENDU DYNAMIQUE 100% CONFORME AUX STRUCTURES JSON (MagasinsU, CoursesU, MeP)
+// RENDU COMPATIBLE ET SÉCURISÉ POUR TOUS LES PÉRIMÈTRES
 function renderList(elemId, items, isSelected) {
   const container = document.getElementById(elemId);
   document.getElementById(elemId === "list-available" ? "count-available" : "count-selected").textContent = items.length;
@@ -326,20 +320,19 @@ function renderList(elemId, items, isSelected) {
     return;
   }
 
-  const isMeP = sheetTarget.toLowerCase() === "mep";
-  const isMagasins = sheetTarget.toLowerCase() === "magasinsu";
-  const isCourses = sheetTarget.toLowerCase() === "coursesu";
+  const targetLower = rawSheetTarget.toLowerCase();
+  const isMeP = targetLower === "mep";
+  const isMagasins = targetLower === "magasinsu";
+  const isCourses = targetLower === "coursesu";
 
   container.innerHTML = items.map((item, idx) => {
     let badgesHtml = `<span class="px-2 py-0.5 bg-slate-100 rounded font-semibold text-slate-600">${escapeHtml(item.category)}</span>`;
     let detailsHtml = "";
 
-    // PERIMETRE MAGASINS U
     if (isMagasins) {
       if (item.device) badgesHtml += `<span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded">${escapeHtml(item.device)}</span>`;
       if (item.chantier) badgesHtml += `<span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded">${escapeHtml(item.chantier)}</span>`;
     } 
-    // PERIMETRE COURSES U
     else if (isCourses) {
       if (item.chantier) badgesHtml += `<span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded">${escapeHtml(item.chantier)}</span>`;
       
@@ -350,12 +343,11 @@ function renderList(elemId, items, isSelected) {
         detailsHtml += `</div>`;
       }
     } 
-    // PERIMETRE MeP (Structure dédiée)
     else if (isMeP) {
       if (item.chantier) badgesHtml += `<span class="px-2 py-0.5 bg-amber-50 text-amber-700 font-semibold rounded">${escapeHtml(item.chantier)}</span>`;
       
       detailsHtml += `<div class="mt-2 pt-2 border-t border-slate-100 text-xs space-y-1">`;
-      if (item.levier) detailsHtml += `<p class="text-purple-700"><strong>Levier identifié :</strong> ${escapeHtml(item.levier)}</p>`;
+      if (item.levier) detailsHtml += `<p class="text-purple-700"><strong>Levier :</strong> ${escapeHtml(item.levier)}</p>`;
       if (item.livrables && item.livrables !== "Non spécifié") {
         detailsHtml += `<p class="text-slate-600"><strong>Livrables clés :</strong> ${escapeHtml(item.livrables)}</p>`;
       }
@@ -390,17 +382,18 @@ function renderList(elemId, items, isSelected) {
     `;
   }).join('');
 }
-    
-    function updateGauge() {
-      const score = getTotalSelectedScore();
-      document.getElementById("score-counter").textContent = `${score} / ${maxScoreLimit} pts`;
-      document.getElementById("progress-bar").style.width = `${Math.min(100, (score / maxScoreLimit) * 100)}%`;
-    }
 
-    function showAlert(msg) { document.getElementById("alert-message").textContent = msg; document.getElementById("alert-banner").classList.remove("hidden"); }
-    function dismissAlert() { document.getElementById("alert-banner").classList.add("hidden"); }
-    function showLoading(show) { document.getElementById("loading-overlay").className = show ? "fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex flex-col items-center justify-center text-white" : "hidden"; }
-    function escapeHtml(t) { return String(t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+function updateGauge() {
+  const score = getTotalSelectedScore();
+  document.getElementById("score-counter").textContent = `${score} / ${maxScoreLimit} pts`;
+  document.getElementById("progress-bar").style.width = `${Math.min(100, (score / maxScoreLimit) * 100)}%`;
+}
+
+function showAlert(msg) { document.getElementById("alert-message").textContent = msg; document.getElementById("alert-banner").classList.remove("hidden"); }
+function dismissAlert() { document.getElementById("alert-banner").classList.add("hidden"); }
+function showLoading(show) { document.getElementById("loading-overlay").className = show ? "fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex flex-col items-center justify-center text-white" : "hidden"; }
+function escapeHtml(t) { return String(t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace/>/g, "&gt;"); }
+
   </script>
 </body>
 </html>
