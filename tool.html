@@ -151,33 +151,40 @@
       loadSheetData();
     });
 
-    // CHARGEMENT DEPUIS DATA.JSON
-    function loadSheetData() {
-      showLoading(true);
+ // CHARGEMENT DEPUIS DATA.JSON SANS CACHE
+function loadSheetData() {
+  showLoading(true);
 
-      fetch("data.json")
-        .then(response => {
-          if (!response.ok) throw new Error("Impossible de lire data.json");
-          return response.json();
-        })
-        .then(data => {
-          showLoading(false);
-          const items = data[sheetTarget] || data[rawSheetTarget] || [];
-          
-          if (items.length === 0) {
-            showAlert(`Aucune donnée trouvée pour '${sheetTarget}'`);
-            return;
-          }
+  // Ajout du paramètre Date.now() pour forcer le navigateur à relire le JSON à jour
+  fetch(`data.json?v=${Date.now()}`)
+    .then(response => {
+      if (!response.ok) throw new Error("Impossible de lire data.json");
+      return response.json();
+    })
+    .then(data => {
+      showLoading(false);
+      
+      // Recherche insensible à la casse pour sécuriser MeP / mep
+      const matchedKey = Object.keys(data).find(
+        k => k.toLowerCase() === sheetTarget.toLowerCase()
+      );
 
-          availableItems = items;
-          sortAvailableItems();
-          render();
-        })
-        .catch(err => {
-          showLoading(false);
-          showAlert("Erreur lors du chargement des données : " + err.message);
-        });
-    }
+      const items = matchedKey ? data[matchedKey] : [];
+      
+      if (items.length === 0) {
+        showAlert(`Aucune donnée trouvée pour '${sheetTarget}'`);
+        return;
+      }
+
+      availableItems = items;
+      sortAvailableItems();
+      render();
+    })
+    .catch(err => {
+      showLoading(false);
+      showAlert("Erreur lors du chargement des données : " + err.message);
+    });
+}
 
     // 🔀 GESTION DU TRI
     function handleSortChange(sortValue) {
