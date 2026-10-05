@@ -257,7 +257,7 @@ function getCategoryColorStyle(text) {
       let textSummary = `Utilisateur : ${userName.trim()}\n`;
       textSummary += `Périmètre : ${customTitle} (${sheetTarget})\n`;
       textSummary += `Date : ${dateStr}\n`;
-      textSummary += `Budget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
+      textSummary += `Total score : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
       textSummary += `--- CLASSEMENT DES INTENTIONS ---\n`;
 
       selectedItems.forEach((item, index) => {
@@ -299,7 +299,7 @@ function getCategoryColorStyle(text) {
       if (idx === -1) return;
       const item = availableItems[idx];
       if (getTotalSelectedScore() + item.score > maxScoreLimit) {
-        return showAlert(`Impossible d'ajouter cet élément. Le poids (${item.score} pts) dépasse le budget.`);
+        return showAlert(`Impossible d'ajouter cet élément. Le poids (${item.score} pts) dépasse le plafond.`);
       }
       availableItems.splice(idx, 1);
       selectedItems.push(item);
