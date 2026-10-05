@@ -647,7 +647,7 @@
       "description": "Accélération du déploiement du triptyque (bornes MSU, Flashbac, 100% PEL)",
       "gains": "Gains de 1 min à 1,5 min sur temps de remise au coffre (satisfaction client et productivité)",
       "businessNote": "11",
-      "score": 2
+      "score": 5
     },
     {
       "id": "mep-17",
@@ -656,7 +656,7 @@
       "description": "Création d'un module de formation spécifique sur la préparation et la remise au coffre des F&L",
       "gains": "Gain de satisfaction perception client (Cf. étude Goodays)",
       "businessNote": "19",
-      "score": 2
+      "score": 5
     },
     {
       "id": "mep-18",
@@ -665,7 +665,7 @@
       "description": "Rappel des bonnes pratiques sur les conditions de stockage (ambiant, froid positif) des FLEGs",
       "gains": "Non quantifié",
       "businessNote": "6",
-      "score": 2
+      "score": 5
     },
     {
       "id": "mep-19",
@@ -683,7 +683,7 @@
       "description": "Pour la LAD et notamment la livraison collaborative, stickers thermodynamiques collés sur les sacs produits frais pour contrôler le respect des températures",
       "gains": "Coût de la pastille 0,10€ ht",
       "businessNote": "6",
-      "score": 2
+      "score": 5
     },
     {
       "id": "mep-21",
@@ -764,7 +764,7 @@
       "description": "Argumentaire sur la rentabilité du modèle écononmique LAD",
       "gains": "+10% de magasins avec LAD.\nDévelopper les magasins qui font le minimum volontairement",
       "businessNote": "35",
-      "score": 2
+      "score": 5
     },
     {
       "id": "mep-30",
@@ -773,7 +773,7 @@
       "description": "Création d'un module de formation Courses U LAD flotte collaborative et flotte interne (paramétrage, outils…)",
       "gains": "gain de productivité et gain QS liée à la réduction d'erreur",
       "businessNote": "14",
-      "score": 2
+      "score": 5
     },
     {
       "id": "mep-31",
@@ -782,7 +782,7 @@
       "description": "Définition de nouvelles recommandations sur les seuils de gratuité et seuil minimum de commande",
       "gains": "CA additionnel (prendre en compte les coûts liés à la livraison et dispositif de remboursement des frais de port en € carte U)",
       "businessNote": "0",
-      "score": 2
+      "score": 5
     },
     {
       "id": "mep-32",
@@ -791,7 +791,7 @@
       "description": "Définition de nouvelles recommandations sur les modes de livraison (flotte interne, collaborative ou mixte)",
       "gains": "Gains sur charges prestataires ou interne en fonction des volumes.\nGains QS supérieur en flotte interne",
       "businessNote": "29",
-      "score": 2
+      "score": 5
     },
     {
       "id": "mep-33",
@@ -800,7 +800,7 @@
       "description": "Référencement de nouveaux acteurs de la LAD (Uber Direct, Time To Liv...)",
       "gains": "Négo coûts de livraison des prestataires",
       "businessNote": "21",
-      "score": 2
+      "score": 5
     },
     {
       "id": "mep-34",
@@ -809,7 +809,7 @@
       "description": "Dispositif de communication client à 360° pour faire connaître le service LAD (recrutement)",
       "gains": "Gain de part de marché\nGain CA additionnel",
       "businessNote": "25",
-      "score": 2
+      "score": 5
     },
     {
       "id": "mep-35",
