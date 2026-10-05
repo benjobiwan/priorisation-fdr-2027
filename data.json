@@ -4,7 +4,6 @@
       "id": "mag-1",
       "category": "🔄️Convergence Off et On-Line",
       "device": "🖥️ Web, 📱 Apps",
-      "chantier": "Ajout de pièces jointes sur les formulaires de contact Magasins U",
       "title": "Ajout de pièces jointes sur les formulaires de contact Magasins U",
       "description": "Possibilité pour l'utilisateur de téléverser des justificatifs ou pièces jointes dès la soumission du formulaire de contact (traité dans Salesforce Service Cloud / SFFC). Réduit les échanges d'allers-retours pour le Service Client et supprime un irritant majeur pour l'utilisateur.",
       "businessNote": "4,55",
@@ -13,8 +12,7 @@
     {
       "id": "mag-2",
       "category": "🔄️Convergence Off et On-Line",
-      "device": "👨‍‍💻 ESC",
-      "chantier": "Suivi des demandes de contact dans l'Espace Client",
+      "device": "👨‍💻 ESC",
       "title": "Suivi des demandes de contact dans l'Espace Client",
       "description": "Tableau de bord de suivi en temps réel du traitement des demandes et réclamations dans l'Espace Client. Facilite l'intégration future d'un agent conversationnel IA pour l'automatisation des réponses par le Service Relation Client.",
       "businessNote": "4,55",
@@ -24,7 +22,6 @@
       "id": "mag-3",
       "category": "👋🏻Engagement client et acquisition",
       "device": "👨‍💻 ESC",
-      "chantier": "Espace Offres : Activation de toutes les offres en un clic",
       "title": "Espace Offres : Activation de toutes les offres en un clic",
       "description": "Ajout d'un bouton d'action globale permettant d'activer l'ensemble des offres enseigne et produits en un clic unique, simplifiant le parcours promotionnel et maximisant l'engagement client.",
       "businessNote": "4,15",
@@ -34,7 +31,6 @@
       "id": "mag-4",
       "category": "🔄️Convergence Off et On-Line",
       "device": "🖥️ Web",
-      "chantier": "Évolution et refonte du parcours Facture U (Web & App)",
       "title": "Évolution et refonte du parcours Facture U (Web & App)",
       "description": "Refonte globale du service Facture U :\n• Intégration complète dans l'application mobile (75% du trafic).\n• Possibilité de modification post-validation pour conformité juridique.\n• Prise en charge des clients et entreprises hors France (gestion des SIRET et formats d'adresses internationaux).",
       "businessNote": "9,45",
@@ -44,7 +40,6 @@
       "id": "mag-5",
       "category": "👋🏻Engagement client et acquisition",
       "device": "👨‍💻 ESC",
-      "chantier": "Espace Offres : Bouton d'achat direct « Acheter sur Courses U » sur les offres",
       "title": "Espace Offres : Bouton d'achat direct « Acheter sur Courses U » sur les offres",
       "description": "Intégration d'un lien direct de redirection vers la fiche produit ou le rayon dédié sur Courses U depuis les offres, favorisant la conversion et simplifiant le parcours d'achat en ligne.",
       "businessNote": "8,55",
@@ -54,7 +49,6 @@
       "id": "mag-6",
       "category": "🔄️Convergence Off et On-Line",
       "device": "📱 Apps",
-      "chantier": "Format Stories interactives (File Story) sur les promotions",
       "title": "Format Stories interactives (File Story) sur les promotions",
       "description": "Introduction d'un format dynamique de Stories (photos animées, vidéos courtes) pour valoriser les promotions. Modernisation de l'UX mobile avec navigation par balayage (swipe) pour activer rapidement les offres.",
       "businessNote": "7,50",
@@ -64,7 +58,6 @@
       "id": "mag-7",
       "category": "👋🏻Engagement client et acquisition",
       "device": "🗺️Store locator",
-      "chantier": "Refonte ergonomique et technique du Store Locator",
       "title": "Refonte ergonomique et technique du Store Locator",
       "description": "Étude et refonte de la solution de Store Locator pour optimiser le référencement local (SEO/GEO) et fluidifier l'orientation des clients, au bénéfice conjoint de Magasins U et Courses U.",
       "businessNote": "7,35",
@@ -74,7 +67,6 @@
       "id": "mag-8",
       "category": "👋🏻Engagement client et acquisition",
       "device": "👨‍💻 ESC",
-      "chantier": "Simplification et allègement du parcours d'inscription (profilage progressif)",
       "title": "Simplification et allègement du parcours d'inscription (profilage progressif)",
       "description": "Conception d'un tunnel d'inscription allégé réduisant au strict minimum les étapes et champs obligatoires, complété par un mécanisme de profilage progressif au fil des interactions de l'utilisateur.",
       "businessNote": "10,90",
@@ -84,7 +76,6 @@
       "id": "mag-9",
       "category": "🎨Personnalisation et fidélisation",
       "device": "👨‍💻 ESC",
-      "chantier": "Collecte de données déclaratives client (Zero-Party Data) pour le profil Courses U et Magasins U",
       "title": "Collecte de données déclaratives client (Zero-Party Data) pour le profil Courses U et Magasins U",
       "description": "Collecte et valorisation des données d'appétence déclaratives (Zero-Party Data) via le parcours digital, les formulaires, quiz ou jeux :\n• Intégration des préférences thématiques dans les algorithmes de ciblage CRM.\n• Personnalisation dynamique des offres et des recommandations pour les clients.",
       "businessNote": "8,10",
@@ -93,8 +84,7 @@
     {
       "id": "mag-10",
       "category": "👋🏻Engagement client et acquisition",
-      "device": "👨‍‍💻 ESC",
-      "chantier": "Centralisation et affichage des codes promo éligibles dans l'Espace Client",
+      "device": "👨‍💻 ESC",
       "title": "Centralisation et affichage des codes promo éligibles dans l'Espace Client",
       "description": "Synchronisation automatique (flux RXP / Salesforce) et affichage centralisé des codes promotionnels éligibles dans l'Espace Client, permettant leur application en un clic lors de la finalisation des commandes.",
       "businessNote": "11,50",
@@ -104,7 +94,6 @@
       "id": "mag-11",
       "category": "😣Urgences, demandes annexes &Irritant",
       "device": "🖥️ Web",
-      "chantier": "Refonte de la pré-home Magasins U et convergence de cette page avec Courses U",
       "title": "Refonte de la pré-home Magasins U et convergence de cette page avec Courses U",
       "description": "Convergence de la pré-home commune Magasins U et Courses U :\n• Fluidifier les parcours clients ;\n• Intégrer une cartographie interactive Store Locator ;\n• Hiérarchisation prioritaire des accès vers les tracts promotionnels et Courses U ;\n• Alignement graphique sur la nouvelle charte et conformité RGAA (acessibilité numérique) ;",
       "businessNote": "5,40",
@@ -114,7 +103,6 @@
       "id": "mag-12",
       "category": "🎨Personnalisation et fidélisation",
       "device": "👨‍💻 ESC",
-      "chantier": "Espace Client : Refonte de la page fidélité (Niveau 2 ESC)",
       "title": "Espace Client : Refonte de la page fidélité (Niveau 2 ESC)",
       "description": "Refonte de la page Fidélité au sein de l'ESC :\n• Affichage incitatif adapté selon le solde de la cagnotte Carte U (avoir un affichage différent si la cagnotte est à zéro) ;\n• Carrousel de produits ou d'offres administrable à la maille magasin ;\n• Mise en avant enrichie des défis fidélité et des remises exclusives de la sélection Carte U.",
       "businessNote": "11,00",
@@ -124,7 +112,6 @@
       "id": "mag-13",
       "category": "👋🏻Engagement client et acquisition",
       "device": "🖥️ Web, 📱 Apps",
-      "chantier": "Harmonisation des tuiles produit avec convergence MU et CU (Nutri-Score, origine France, infos produit...)",
       "title": "Harmonisation des tuiles produit avec convergence MU et CU (Nutri-Score, origine France, infos produit...)",
       "description": "Harmonisation des composants de tuiles produits entre Magasins U et Courses U : affichage normalisé du Nutri-Score, de la composition, de l'origine et des labels de qualité afin de permettre une meilleure expérience.",
       "businessNote": "13,85",
@@ -134,7 +121,6 @@
       "id": "mag-14",
       "category": "👋🏻Engagement client et acquisition",
       "device": "📱 Apps",
-      "chantier": "Gamification (Lot 2) : Missions ESC et mécaniques de jeu omnicanales",
       "title": "Gamification (Lot 2) : Missions ESC et mécaniques de jeu omnicanales",
       "description": "Déploiement du second volet de gamification :\n• mécaniques de jeu omnicanales valorisant les achats Web et Magasin, assorties de missions ESC récompensées (bonus fidélité contre opt-in).\n• Sujet lié avec la simplification du parcours d'inscription pour permettre de faire des missions pour compléter son profil de façon progressive",
       "businessNote": "11,00",
@@ -144,7 +130,6 @@
       "id": "mag-15",
       "category": "👋🏻Engagement client et acquisition",
       "device": "🖥️ Web, 📱 Apps, 👨‍💻 ESC",
-      "chantier": "Liste de courses issue du tract promotionnel (Lot 3)",
       "title": "Liste de courses issue du tract promotionnel (Lot 3)",
       "description": "Évolutions de la liste de courses issue des tracts :\n• Ajout direct des articles sélectionnés au panier Courses U.\n• Ouverture de la fiche produit détaillée au clic.\n• Synchronisation fluide depuis les catalogues digitaux Nanoterra.",
       "businessNote": "13,75",
@@ -154,7 +139,6 @@
       "id": "mag-16",
       "category": "😣Urgences, demandes annexes &Irritant",
       "device": "🖥️ Web",
-      "chantier": "Refonte du header et du méga-menu du site web",
       "title": "Refonte du header et du méga-menu du site web",
       "description": "Modernisation et rationalisation du méga-menu du site web :\n• format plus compact,\n• arborescence clarifiée et retravaillée,\n• conservation de l'arche identitaire U et mise en conformité avec les normes d'accessibilité numérique.",
       "businessNote": "4,60",
@@ -164,7 +148,6 @@
       "id": "mag-17",
       "category": "🔄️Convergence Off et On-Line",
       "device": "🖥️ Web",
-      "chantier": "Consultation et suivi du solde de carte cadeau en ligne",
       "title": "Consultation et suivi du solde de carte cadeau en ligne",
       "description": "Développement d'un module de consultation en temps réel du solde et de la date de validité des cartes cadeaux U pour les bénéficiaires.",
       "businessNote": "6,60",
@@ -174,7 +157,6 @@
       "id": "mag-18",
       "category": "🎨Personnalisation et fidélisation",
       "device": "👨‍💻 ESC",
-      "chantier": "Affichage des indicateurs RSE dans l'ESC et l'application (Carbone, Origine France, Nutri-Score)",
       "title": "Affichage des indicateurs RSE dans l'ESC et l'application (Carbone, Origine France, Nutri-Score)",
       "description": "Sensibilisation et valorisation RSE dans l'Espace Client et sur l'application : affichage pédagogique du bilan carbone du ticket de caisse, part des produits d'origine française et répartition Nutri-Score du panier.",
       "businessNote": "4,10",
@@ -183,8 +165,7 @@
     {
       "id": "mag-19",
       "category": "🎨Personnalisation et fidélisation",
-      "device": "🖥️ Web, 📱 Apps",
-      "chantier": "Personnalisation de l'affichage pour les nouveaux clients et non-porteurs de carte",
+      "device": "🖥️️ Web, 📱 Apps",
       "title": "Personnalisation de l'affichage pour les nouveaux clients et non-porteurs de carte",
       "description": "Personnalisation dynamique de l'expérience pour les nouveaux visiteurs et clients non-porteurs de carte : exploitation des signaux comportementaux via l'outil interne U Perso afin d'adapter les bannières web, les parcours de bienvenue et les ciblages CRM.",
       "businessNote": "5,10",
@@ -194,85 +175,7 @@
   "CoursesU": [
     {
       "id": "cou-1",
-      "category": "Soutenir la stratégie du Bien Manger",
-      "chantier": "Automatisation les alternatives Nustriscore",
-      "title": "Automatisation les alternatives Nustriscore",
-      "description": "Mise en place d’un flux data pour enrichir et mettre à jour les alternatives nutriscore de manière automatisée.\nPour nous permettre de mieux guider les clients vers une meilleure alimentatio.",
-      "gains": "Gain 0,25 ETP",
-      "resultats": "- Atteindre 95 % de couverture d'alternatives Nutri-Score automatisées sur l'ensemble du catalogue éligible\n- Augmenter de 20 % le taux de transformation depuis l'encart alternative nutriscore",
-      "businessNote": "7",
-      "score": 50
-    },
-    {
-      "id": "cou-2",
-      "category": "Soutenir la stratégie du Bien Manger",
-      "chantier": "Faire ses courses en fonction de critères liés à un régime alimentaire (allergènes, sans gluten, etc ...)",
-      "title": "Faire ses courses en fonction de critères liés à un régime alimentaire (allergènes, sans gluten, etc ...)",
-      "description": "Permettre au client d’identifier ses allergènes et/ou préférence alimentaires. Mettre en avant les allergênes, les produits sans gluten, sans lactose, etc ...",
-      "gains": "Hausse de la conversion\nHausse du panier moyen\nRétention client",
-      "resultats": "Hausses du taux de conversion\nUn client ayant des exigences précises (allergies, cœliaquie, véganisme) abandonne très vite son panier s'il a un doute. Lui offrir la certitude d'un produit adapté déclenche l'achat.\n\nAugmentation du panier moyen\nLes produits spécifiques (sans gluten, sans lactose, bio, etc.) ont généralement une valeur ajoutée supérieure. En réunissant toute leur offre en un seul endroit, vous incitez à la commande groupée.\n\nFidélisation forte (Life Time Value)\nLa recherche de produits alimentaires adaptés est laborieuse. Lorsqu'un client trouve une boutique fiable et simple à filtrer, il ne cherche plus ailleurs et devient récurrent.\n\n/!\\ forte adhérence avec PIM Akénéo",
-      "businessNote": "9",
-      "score": 100
-    },
-    {
-      "id": "cou-3",
-      "category": "Soutenir la stratégie du Bien Manger",
-      "chantier": "Valorisation des produits \"préparés sur place\"",
-      "title": "Valorisation des produits \"préparés sur place\"",
-      "description": "Permettre au client d’identifier les produits \"préparés sur place\" par le magasin et mettre en avant les produits \"fait sur place\".",
-      "gains": "Augmenter le CA du local",
-      "resultats": "Augmenter le CA des produits locaux",
-      "businessNote": "6",
-      "score": 75
-    },
-    {
-      "id": "cou-4",
-      "category": "Soutenir la stratégie du Bien Manger",
-      "chantier": "Ajouter des possibilités d'alternatives plus saines (et moins cheres)",
-      "title": "Ajouter des possibilités d'alternatives plus saines (et moins cheres)",
-      "description": "Faire évoluer le module d'alternative en ajoutant d’autres attributs (Bio, marque nat, non transformé etc)",
-      "gains": "+ 5% du taux de conversion sur les produits proposés",
-      "resultats": "Nombre d'alternative est acceptée par le client\nNombre de produit au panier",
-      "businessNote": "6",
-      "score": 100
-    },
-    {
-      "id": "cou-5",
       "category": "Qualité des données et Efficience",
-      "chantier": "Pouvoir modifier / adapter le nombre max unités produit au panier",
-      "title": "Pouvoir modifier / adapter le nombre max unités produit au panier",
-      "description": "Pouvoir augmenter ce nombre sur les produits unitaires notamment (ex. les produits de vaisselles)",
-      "gains": "CA des catégories concernée",
-      "resultats": "",
-      "businessNote": "4",
-      "score": 50
-    },
-    {
-      "id": "cou-6",
-      "category": "Qualité des données et Efficience",
-      "chantier": "Mutualiser les formulaires de contacts et les FAQ entre CoursesU et MagasinsU",
-      "title": "Mutualiser les formulaires de contacts et les FAQ entre CoursesU et MagasinsU",
-      "description": "Trouver une solution commune MU/CU pour ces formulaires de contact.\nCe module pourrait également embarquer un LLM pour répondre aux clients avant d'accéder aux formulaires de contact ...\nGain de productivité (interne)\net et amélioration de la cohérence client",
-      "gains": "A terme, 1 seul développements plutôt que 2 aujourd'hui (MU et CU), 1 seule mise à jour des FAQ (au lieu de 2 aujourd'hui).",
-      "resultats": "Des échanges plus efficaces entre le Service Relation Client et le client",
-      "businessNote": "6",
-      "score": 50
-    },
-    {
-      "id": "cou-7",
-      "category": "Qualité des données et Efficience",
-      "chantier": "Fiche produits Courses U",
-      "title": "Fiche produits Courses U",
-      "description": "Evolution des fiches produits pour accueillir les nouveaux champs et attributs, et développer le cross-sell (recettes, gammes, ...)",
-      "gains": "+ 15 à 30% de mise au panier depuis la fiche produit",
-      "resultats": "Taux de transformation à partir d'une fiche produit \"complète\", c'est à dire qui contient le plus d'informations produits\nAdhérence avec PIM Akénéo",
-      "businessNote": "7",
-      "score": 50
-    },
-    {
-      "id": "cou-8",
-      "category": "Qualité des données et Efficience",
-      "chantier": "Chainage des ean",
       "title": "Chainage des ean",
       "description": "Certains produits changent d’EAN lorsqu’ils ont un nouveau packaging ou un nouveau prix. Lorsque cela arrive, le produit disparaît de l’historique d’achat du client (= mes achats récents, mes favoris, reco/perso,…). Il s’agit d’informer le client du switch produit et conserver l’historique",
       "gains": "Aller chercher un GO exploratoire / cadrage pour 2027 afin de quantifier le nb de produits et le gain à aller chercher ?",
@@ -281,9 +184,8 @@
       "score": 150
     },
     {
-      "id": "cou-9",
+      "id": "cou-2",
       "category": "Qualité des données et Efficience",
-      "chantier": "Gestion et enrichissement des pictos / labels affichés sur Courses U",
       "title": "Gestion et enrichissement des pictos / labels affichés sur Courses U",
       "description": "mise à plat des règles et amélioration et automatisation de l'enrichissement\nCette action est possible ce jour mais elle demande des actions manuelles, nous souhaitons qu’elle soit automatisé sur le web et sur l’APP.",
       "gains": "-0,25% d'un ETP",
@@ -292,9 +194,8 @@
       "score": 50
     },
     {
-      "id": "cou-10",
+      "id": "cou-3",
       "category": "Qualité des données et Efficience",
-      "chantier": "Gérer les recettes U en interne et en autonomie",
       "title": "Gérer les recettes U en interne et en autonomie",
       "description": "Gérer des recettes en toute autonomie sur Courses U afin qu'elles puissent être achetables",
       "gains": "",
@@ -303,9 +204,8 @@
       "score": 100
     },
     {
-      "id": "cou-11",
+      "id": "cou-4",
       "category": "Développement de services additionnels",
-      "chantier": "QuickCommerce - Vente au poids des F&L sur UberEat",
       "title": "QuickCommerce - Vente au poids des F&L sur UberEat",
       "description": "Calcul du vrai poids des F&L et non plus sur une estimation",
       "gains": "+ 1,5 M€ / an",
@@ -314,9 +214,8 @@
       "score": 75
     },
     {
-      "id": "cou-12",
+      "id": "cou-5",
       "category": "Développement de services additionnels",
-      "chantier": "QuickCommerce - Intégrer Delivroo dans le quickCommerce",
       "title": "QuickCommerce - Intégrer Delivroo dans le quickCommerce",
       "description": "Dupliquer / adapter les flux d'alimentation vers Delivroo",
       "gains": "+ 8 M€ / an",
@@ -325,9 +224,8 @@
       "score": 75
     },
     {
-      "id": "cou-13",
+      "id": "cou-6",
       "category": "Améliorer notre image prix",
-      "chantier": "Animation commerciale - Developper la gamification sur Courses U",
       "title": "Animation commerciale - Developper la gamification sur Courses U",
       "description": "Partenaire Lucky cart (OP calendrier de l'avent / Chasse au trésors...)",
       "gains": "Augmentation des revenus",
@@ -336,9 +234,8 @@
       "score": 50
     },
     {
-      "id": "cou-14",
+      "id": "cou-7",
       "category": "Développement de services additionnels",
-      "chantier": "BtoB (vente aux Assos et Pros)",
       "title": "BtoB (vente aux Assos et Pros)",
       "description": "Evolutions identifiées :\n- Proposer le parcours B2B sur l'application Courses U\n- Proposer des créneaux supérieurs à 7 jours (par exemple Association voudrait pouvoir cder 1 mois à l'avance)\n- Pouvoir filtrer les commandes d'associations et les autres (collectivités, entreprises)\n- Au moment de payer les courses, afficher les méthodes de paiement proposés par le magasin (chèques, CB, paiement différé, etc)",
       "gains": "+ 2 M€ sur 1 an",
@@ -347,9 +244,8 @@
       "score": 75
     },
     {
-      "id": "cou-15",
+      "id": "cou-8",
       "category": "Commerce Agentique",
-      "chantier": "Cas d'usage #1 - Ajouter un produit au panier ou une liste par la voix",
       "title": "Cas d'usage #1 - Ajouter un produit au panier ou une liste par la voix",
       "description": "Lancer une commande par la voix.\n“OK CoursesU, ajoute moi des tomates dans mon panier\"\nNe pas perdre du terrain par rapport à la concurrence.\nExpérimenter de nouveaux parcours d'achat.",
       "gains": "Expérimenter de nouveaux parcours d'achat.",
@@ -358,9 +254,8 @@
       "score": 100
     },
     {
-      "id": "cou-16",
+      "id": "cou-9",
       "category": "Commerce Agentique",
-      "chantier": "Cas d'usage #2 - Agent conversationnel",
       "title": "Cas d'usage #2 - Agent conversationnel",
       "description": "Demander à l'agent de mettre au panier les produits d'une recette.\nDemander à l'agent des produits Bio, avec un nutriscore A ou B, de la maque U.\nSélectionner des produits suivant un régime particulier.",
       "gains": "Ne pas perdre du terrain par rapport à la concurrence.\nExpérimenter de nouveaux parcours d'achat.",
@@ -369,9 +264,8 @@
       "score": 75
     },
     {
-      "id": "cou-17",
+      "id": "cou-10",
       "category": "Commerce Agentique",
-      "chantier": "Cas d'usage #3 - Etre présent sur les principales IA du marché",
       "title": "Cas d'usage #3 - Etre présent sur les principales IA du marché",
       "description": "Ajouter un module CoursesU \"dans\" ChatGPT\nNe pas perdre du terrain par rapport à la concurrence.\nExpérimenter de nouveaux parcours d'achat.",
       "gains": "",
@@ -380,9 +274,8 @@
       "score": 75
     },
     {
-      "id": "cou-18",
+      "id": "cou-11",
       "category": "Améliorer notre image prix",
-      "chantier": "Offre de recrutement personnalisé uniquement aux clients qui n'ont jamais passé de commandes sur CU",
       "title": "Offre de recrutement personnalisé uniquement aux clients qui n'ont jamais passé de commandes sur CU",
       "description": "Ne pas afficher les offres 1ères commandes si un client a déjà passé commande sur Courses U,",
       "gains": "Recruter de nouvaux clients",
@@ -391,9 +284,8 @@
       "score": 50
     },
     {
-      "id": "cou-19",
+      "id": "cou-12",
       "category": "Améliorer notre image prix",
-      "chantier": "Produit offert",
       "title": "Produit offert",
       "description": "Avoir la possibilité de programmer un produit offert pour x € d'achat.\nLorsque le client l’ajoute au panier, le produit est affiché à 0€ - offert.",
       "gains": "Augmenter le panier moyen de +4€ à 7€",
@@ -402,9 +294,8 @@
       "score": 100
     },
     {
-      "id": "cou-20",
+      "id": "cou-13",
       "category": "Améliorer notre image prix",
-      "chantier": "Animer les offres Non Al",
       "title": "Animer les offres Non Al",
       "description": "Mise en avant HP\nCarrousels\nAnimations des rayons\nPages édito",
       "gains": "Augmenter le CA du Non Al",
@@ -413,9 +304,8 @@
       "score": 25
     },
     {
-      "id": "cou-21",
+      "id": "cou-14",
       "category": "Améliorer notre image prix",
-      "chantier": "Transformer l'application en source d'inspiration culinaire en vidéo",
       "title": "Transformer l'application en source d'inspiration culinaire en vidéo",
       "description": "Afficher des recettes en vidéo dès la home ou rubrique dédiée, nouveau module de mise en avant.",
       "gains": "Déclencher des achats d'impulsion.\nAugmenter le panier.",
@@ -424,9 +314,8 @@
       "score": 25
     },
     {
-      "id": "cou-22",
+      "id": "cou-15",
       "category": "Améliorer notre image prix",
-      "chantier": "Animer les mises en avant promo --> video promo jeudi +",
       "title": "Animer les mises en avant promo --> video promo jeudi +",
       "description": "Permettre l’affichage de courtes vidéos dans le slider “Dans votre magasin” ex : https://app.steeple.com/post/2941849",
       "gains": "+2% du taux de convertion",
@@ -435,9 +324,8 @@
       "score": 25
     },
     {
-      "id": "cou-23",
+      "id": "cou-16",
       "category": "Améliorer notre image prix",
-      "chantier": "Personnaliser l'emplacement des carrousels de la home selon le profil du client",
       "title": "Personnaliser l'emplacement des carrousels de la home selon le profil du client",
       "description": "- Suivant le profil utilisateur\nEx, si client orienté très promo, le positionner directement sur l’onglet Promos\n- Suivant le canal de provenance\nEx : si carrousel de recette mis en place sur la home, si provenance de tiktok, positionnement du carrousel en haut d'écran",
       "gains": "+ 20 % de convertion sur les emplacement personnalisés",
@@ -446,9 +334,8 @@
       "score": 100
     },
     {
-      "id": "cou-24",
+      "id": "cou-17",
       "category": "Améliorer notre image prix",
-      "chantier": "Affichage de bloc spécifique en fonction du profil du client (exemple : Reactivé les incactifs 10€ offerts dès 80€ d’achat sur la prochaine commande)",
       "title": "Affichage de bloc spécifique en fonction du profil du client (exemple : Reactivé les incactifs 10€ offerts dès 80€ d’achat sur la prochaine commande)",
       "description": "A’afficher ce bloc que si la personne n’a pas encore fait de commande\nPrévoir la réactivation si un client n’a pas acheté depuis 6 mois par exemple",
       "gains": "+ 20 % de convertion sur les emplacement personnalisés",
@@ -457,9 +344,8 @@
       "score": 50
     },
     {
-      "id": "cou-25",
+      "id": "cou-18",
       "category": "Améliorer notre image prix",
-      "chantier": "Diversifier les partenaires de jeu sur CoursesU",
       "title": "Diversifier les partenaires de jeu sur CoursesU",
       "description": "Le but est de pouvoir proposer d’autres types de jeux et de ne pas avoir un seul partenaire",
       "gains": "Réduire les coûts internes",
@@ -468,9 +354,8 @@
       "score": 50
     },
     {
-      "id": "cou-26",
+      "id": "cou-19",
       "category": "Améliorer notre image prix",
-      "chantier": "Les e-tract sur CoursesU - Cas d'usage 1 : accès aux catalogues sur Courses U",
       "title": "Les e-tract sur CoursesU - Cas d'usage 1 : accès aux catalogues sur Courses U",
       "description": "Permettre aux clients CoursesU d'accéder directement aux catalogues sur Courses U (parcours clients à définir)",
       "gains": "Développer notre image prix",
@@ -479,9 +364,8 @@
       "score": 75
     },
     {
-      "id": "cou-27",
+      "id": "cou-20",
       "category": "Améliorer notre image prix",
-      "chantier": "Les e-tract sur CoursesU - Cas d'usage 2 : mettre un produit du tract au panier depuis MagasinsU",
       "title": "Les e-tract sur CoursesU - Cas d'usage 2 : mettre un produit du tract au panier depuis MagasinsU",
       "description": "Depuis les eTracts sur Magasins U, permettre aux clients d'ajouter les produits dans leur panier CorusesU",
       "gains": "Développer notre image prix",
@@ -490,9 +374,8 @@
       "score": 150
     },
     {
-      "id": "cou-28",
+      "id": "cou-21",
       "category": "Améliorer notre image prix",
-      "chantier": "Dotation sur Créneau",
       "title": "Dotation sur Créneau",
       "description": "Offrir un produits (dotation) ou un avantages en € Carte U sur un ou plusieurs créneaux d'un mode de remise.",
       "gains": "Déssaturer certains créneaux",
@@ -501,9 +384,8 @@
       "score": 75
     },
     {
-      "id": "cou-29",
+      "id": "cou-22",
       "category": "Améliorer notre image prix",
-      "chantier": "Prendre en compte les mécaniques promo manquantes",
       "title": "Prendre en compte les mécaniques promo manquantes",
       "description": "Actuellement, 25 mécaniques promo ne sont pas jouables sur CoursesU",
       "gains": "Développer le CA",
@@ -512,9 +394,8 @@
       "score": 75
     },
     {
-      "id": "cou-30",
+      "id": "cou-23",
       "category": "Améliorer notre image prix",
-      "chantier": "Avoir la possibilité de personnaliser nos espaces animées en fonction de la typologies de nos clients",
       "title": "Avoir la possibilité de personnaliser nos espaces animées en fonction de la typologies de nos clients",
       "description": "Je suis appétent bébé, je souhaite voir les offres autour du bébé mais pas celle des animaux car je n’ai pas d’animal",
       "gains": "+ 20 % de convertion sur les emplacement personnalisés",
@@ -523,20 +404,18 @@
       "score": 100
     },
     {
-      "id": "cou-31",
+      "id": "cou-24",
       "category": "Améliorer notre image prix",
-      "chantier": "Accompagnement client pour les activation des offres de type 10 %",
       "title": "Accompagnement client pour les activation des offres de type 10 %",
       "description": "A l'activation du coupon des 10% sur une offre, il faut accompagner le client pour lui indiquer son cagnottage en réel au niveau du panier.",
-      "gains": "Développer notre image prix\nDiminuer le taux d'abandon",
+      "gains": "Développer notre image prix / Diminuer le taux d'abandon",
       "resultats": "Réduire de 30% la sollicitation du service client relatives à la bonne prise en compte du cagnottage.\nDiminuer le taux d'abandon au niveau du checkout de 2% sur les sessiosns avec coupon 10% activé",
       "businessNote": "4",
       "score": 150
     },
     {
-      "id": "cou-32",
+      "id": "cou-25",
       "category": "Faciliter la vie du client",
-      "chantier": "Faciliter et fluidifier la recherche de magasins ainsi que le changement de magasin sur les Apps.",
       "title": "Faciliter et fluidifier la recherche de magasins ainsi que le changement de magasin sur les Apps.",
       "description": "Le recherche de magasin doit être optimisée sur les Apps pour permettre aux clients de trouver facilement leur magasin, de pouvoir changer de magasin lorsque le client change de localisation.\nLe client doit savoir quels sont les magasins qui peuvent le livrer, quels magasins proposent des point de retrait proche de chez lui, etc ...",
       "gains": "Réduire le taux d'abandon",
@@ -545,20 +424,18 @@
       "score": 25
     },
     {
-      "id": "cou-33",
+      "id": "cou-26",
       "category": "Faciliter la vie du client",
-      "chantier": "Refonte du parcours client pré home / home page",
       "title": "Refonte du parcours client pré home / home page",
       "description": "Fusionner les pages\nAjouter des entrées produits",
-      "gains": "- 10 % du taux d'abandon à l'entrée\n-20 % de perte de panier/abandon lors du changement de magasin",
+      "gains": "- 10 % du taux d'abandon à l'entrée / -20 % de perte de panier/abandon lors du changement de magasin",
       "resultats": "- taux d'abandon à l'entrée\n- perte de panier/abandon lors du changement de magasin",
       "businessNote": "8",
       "score": 100
     },
     {
-      "id": "cou-34",
+      "id": "cou-27",
       "category": "Faciliter la vie du client",
-      "chantier": "Produits consignés",
       "title": "Produits consignés",
       "description": "Les produits consignés doivent pouvoir être achetés en ligne.\nAfficher un montant de consigne sur le drive à coté du prix du produit.\nIndiquer le montant de la consigne à payer par le client dans toutes les étapes de son parcours.\nLe montant de consigne doit bien être séparé du prix du produit sur le ticket de caisse (déjà effectif à date via un rattachement dans ULIS et quid des Utile)\nIdentifier les produits consignés sur courses-u (attribut, rayons)\nPossibilité de filtrer sur les produits consignés\nPossibilite de gerer des assets type visuels/pictos pour expliquer le circuit et identifier facilement les produits consignés\nExplicatif de la gestion de l’emballage consigné pour chaque fiche produit avec emballage consigné et sur la déconsignation produit\nDévelopper une page édito sur cette démarche de réemploi (magasins-u)\nPossibilité d’utiliser un bon de déconsignation lors des achats du clients en ligne\nInformer le client dans son espace des emballages consigné qu’il a en a sa possession et le montant qu’il a déconsigné",
       "gains": "Gain sur l'image eco responsable de l'enseigne",
@@ -567,31 +444,28 @@
       "score": 100
     },
     {
-      "id": "cou-35",
+      "id": "cou-28",
       "category": "Faciliter la vie du client",
-      "chantier": "Gestion de produits inéligibles à la LAD",
       "title": "Gestion de produits inéligibles à la LAD",
       "description": "Ajouter un message sur le produit ou dans le panier pour informer de l’inéligibiltié en LAD (pellets, mobilier de jardin…).\nPermettre de commander ces produits sur un autre mode de livraison.",
-      "gains": "Eviter la gestion des cas particulier par les équipes Drive\nClarifier les possibilités du service vis à vis du client",
+      "gains": "Eviter la gestion des cas particulier par les équipes Drive / Clarifier les possibilités du service vis à vis du client",
       "resultats": "Dissocier le panier peut permettre de développer le poids de la LAD.\nLe client peut se faire livrer ses courses alimentaires le jour J, et aller retirer ses produits volumineux un autre jour.\n1ère brique vers un panier multiple pouvant, à terme, accueillir d’autres produits / services U\n\nPré requis = définir les produit inéligibles à la LàD",
       "businessNote": "8",
       "score": 100
     },
     {
-      "id": "cou-36",
+      "id": "cou-29",
       "category": "Faciliter la vie du client",
-      "chantier": "Recommander les variation des produits",
       "title": "Recommander les variation des produits",
       "description": "Proposer les différentes variations d’un même produit (format, saveurs,…) pour développer le cross-sell (exemple : au sein des PDP ; ou via la tuile produit ?)\nIntégrer un sélecteur intelligent de déclinaisons (formats/saveurs) sur tout le catalogue pour maximiser la valeur du panier et la découverte produit.",
-      "gains": "+ 2% sur le panier moyen\n+ 15% de clics sur ce module",
+      "gains": "+ 2% sur le panier moyen / + 15% de clics sur ce module",
       "resultats": "- Augmenter la valeur moyenne du panier de +2 % à +4 % via le basculement vers des formats supérieurs (up-sell)\n- Atteindre 15 % de clics/interactions sur le module de variations",
       "businessNote": "6",
       "score": 50
     },
     {
-      "id": "cou-37",
+      "id": "cou-30",
       "category": "Faciliter la vie du client",
-      "chantier": "Informer le client des Rupture / substitution via WhatsApps",
       "title": "Informer le client des Rupture / substitution via WhatsApps",
       "description": "Envoyer un message via Whats App au client pour l'informer des ruptures ou substitutions, et lui permettre de valider sa substitution (dans un délai de X min)",
       "gains": "Améliorer le service des produits en rupture et minimiser les pertes de CA",
@@ -600,9 +474,8 @@
       "score": 150
     },
     {
-      "id": "cou-38",
+      "id": "cou-31",
       "category": "Faciliter la vie du client",
-      "chantier": "Optimiser la Recherche ultra-rapide et la déployer sur les Apps",
       "title": "Optimiser la Recherche ultra-rapide et la déployer sur les Apps",
       "description": "Améliorer l’accès et la navigation de la fonctionnalité.\nDéployer sur l’app",
       "gains": "Diviser par 2 le temps d'accès au produit",
@@ -611,9 +484,8 @@
       "score": 100
     },
     {
-      "id": "cou-39",
+      "id": "cou-32",
       "category": "Faciliter la vie du client",
-      "chantier": "Etendre les TRDs sur les autres modes de remise: point retrait et LàD",
       "title": "Etendre les TRDs sur les autres modes de remise: point retrait et LàD",
       "description": "Actuellement les TRDs sont acceptés uniquement pour les retraits Drive.\nLe fonctionnement est épprouvé bon pour être déployé sur les autres modes de remise",
       "gains": "",
@@ -622,9 +494,8 @@
       "score": 25
     },
     {
-      "id": "cou-40",
+      "id": "cou-33",
       "category": "Faciliter la vie du client",
-      "chantier": "Afficher une notif Apps pour annoncer que la commande CU est prête",
       "title": "Afficher une notif Apps pour annoncer que la commande CU est prête",
       "description": "Une notif, 10min avant le créneau de retrait, rappellant au client le créneau de retrait du sa commande",
       "gains": "",
@@ -637,15 +508,17 @@
     {
       "id": "mep-1",
       "category": "Modèles d'exploitation - Réserve dédiée",
-      "description": "Accélération de la bascule vers le modèle de réserve dédiée : plan de bascule (pilote, communication, mise en oeuvre)",
-      "gains": "Non spécifié",
+      "title": "Accélération de la bascule vers le modèle de réserve dédiée",
+      "description": "Plan de bascule vers le modèle de réserve dédiée (pilote, communication, mise en oeuvre)",
+      "gains": "",
       "businessNote": "4",
       "score": 42
     },
     {
       "id": "mep-2",
       "category": "Modèles d'exploitation - Réserve dédiée",
-      "description": "Optimisation du stock en réserve dédiée : outil de pilotage du stock (gain de productivité, réduction des manquants, baisse de la casse...)",
+      "title": "Optimisation du stock en réserve dédiée",
+      "description": "Outil de pilotage du stock en réserve dédiée (gain de productivité, réduction des manquants, baisse de la casse...)",
       "gains": "Gain de productivité",
       "businessNote": "13",
       "score": 10
@@ -653,15 +526,17 @@
     {
       "id": "mep-3",
       "category": "Excellence opérationnelle - Manquants",
-      "description": "Seuils de dépublication Ulis (permanent, promo) : définition de nouveaux seuils pour diminuer les manquants (enjeu: 1 - 1,5 pts)",
-      "gains": "Non spécifié",
+      "title": "Seuils de déplubication Ulis (permanent, promo)",
+      "description": "Définition de nouveaux seuils de dépublication pour diminuer les manquants (enjeu: 1 - 1,5 pts)",
+      "gains": "",
       "businessNote": "11",
       "score": 22
     },
     {
       "id": "mep-4",
       "category": "Excellence opérationnelle - Manquants",
-      "description": "Pilotage des manquants : automatisation de l'export quotidien des manquants (data BO + ULIS) pour sécuriser la gestion des stocks",
+      "title": "Pilotage des manquants",
+      "description": "Automatisation de l’export quotidien des manquants (data BO + ULIS) pour sécuriser la gestion des stocks",
       "gains": "Gain de 1% sur 4% de manquant, soit 0,0435",
       "businessNote": "5",
       "score": 50
@@ -669,7 +544,8 @@
     {
       "id": "mep-5",
       "category": "Excellence opérationnelle - Manquants",
-      "description": "Pilotage des manquants : nouveau tableau de bord BO et fiche émulation CU (pilotage des manquants par zone : surface de vente et réserve dédiée)",
+      "title": "Pilotage des manquants",
+      "description": "Nouveau tableau de bord BO et fiche émulation CU : pilotage des manquants par zone (surface de vente et réserve dédiée)",
       "gains": "Gain de 1% sur 4% de manquant, soit 0,0434",
       "businessNote": "5",
       "score": 50
@@ -677,7 +553,8 @@
     {
       "id": "mep-6",
       "category": "Excellence opérationnelle - Manquants",
-      "description": "Bonnes pratiques et formation : diffusion des bonnes pratiques sur le portail BPM (Bonnes Pratiques Magasins)",
+      "title": "Bonnes pratiques et formation",
+      "description": "Diffusion des bonnes pratiques sur le portail BPM (Bonnes Pratiques Magasins)",
       "gains": "Gain de 1% sur 4% de manquant, soit 0,0412",
       "businessNote": "5",
       "score": 12
@@ -685,7 +562,8 @@
     {
       "id": "mep-7",
       "category": "Excellence opérationnelle - Manquants",
-      "description": "Chaînage des articles : fiabilisation des UC liés (conditionnements, promo). Aujourd'hui une partie des manquants s'explique par le fait que 2 unités de besoin ne sont pas liées.",
+      "title": "Chaînage des articles",
+      "description": "Fiabilisation des UC liés (conditionnements, promo)\nAujourd'hui une partie des manquants s'explique par le fait que 2 unités de besoin ne sont pas liés.",
       "gains": "5 à 10% de réduction du taux de manquant",
       "businessNote": "50",
       "score": 100
@@ -693,31 +571,35 @@
     {
       "id": "mep-8",
       "category": "Excellence opérationnelle - Productivité",
-      "description": "Facilitation de la consolidation : gencodage des bacs en dur et adressage de la zone de stockage pour gagner du temps et sécuriser la remise au coffre",
-      "gains": "Gain de 30s du temps de remise au coffre / Gain de productivité de 30s.",
+      "title": "Facilitation de la consolidation",
+      "description": "Gencodage des bacs en dur et adressage de la zone de stockage pour gagner du temps et sécuriser la remise au coffre",
+      "gains": "Gain de 30s du temps de remise au coffre\nGain de productivité de 30s.",
       "businessNote": "36",
       "score": 50
     },
     {
       "id": "mep-9",
       "category": "Excellence opérationnelle - Productivité",
-      "description": "Pilotage de la productivité par zone : nouveau tableau de bord BO et Fiches émulation CU (surface de vente et réserve dédiée)",
-      "gains": "Le pilotage de la productivité apporte un gain de 1% sur les heures travaillées",
+      "title": "Pilotage de la productivité",
+      "description": "Nouveau tableau de bord BO et Fiches émulation CU : pilotage de la productivité par zone (surface de vente et réserve dédiée)",
+      "gains": "Par , le pilotage de la productivité apporte un gain de 1% sur les heures travaillées",
       "businessNote": "23",
       "score": 75
     },
     {
       "id": "mep-10",
       "category": "Excellence opérationnelle - Productivité",
-      "description": "Planification : nouvelle solution de planification des ressources. Résolution des erreurs d'estimation du nombre de commandes et adéquation charge/ressources",
-      "gains": "Optimisation du dimensionnement des équipes et adéquation charge/ressources",
+      "title": "Planification",
+      "description": "Nouvelle solution de planification des ressources.\nProblème à résoudre : en l'absence d'un outil de planification, une mauvaise estimation du nombre de commande prévisionnel (marge erreur + ou - 10%), mauvaise estimation de la charge de travail liée au nombre de commande (dépend du mixe ramasse globale, mono, multi et productivité cible) et mauvaise adéquation entre la charge et les ressources",
+      "gains": "",
       "businessNote": "27",
       "score": 100
     },
     {
       "id": "mep-11",
       "category": "Excellence opérationnelle - Productivité",
-      "description": "Bonnes pratiques et formation : édition du book 2027 des meilleures pratiques de préparation",
+      "title": "Bonnes pratiques et formation",
+      "description": "Edition du book 2027 des meilleures pratiques de préparation",
       "gains": "Gain de 5 à 10 pts sur le productivité globale",
       "businessNote": "21",
       "score": 12
@@ -725,23 +607,26 @@
     {
       "id": "mep-12",
       "category": "Excellence opérationnelle - Productivité",
-      "description": "Verticalisation du stockage : mise en place d'une solution de stockage vertical pour les commandes drives pour répondre aux contraintes de saturation de surface",
-      "gains": "Gain de temps de 10% sur productivité et gain de 10% sur temps de remise au coffre (>600 cmd/semaine)",
+      "title": "Verticalisation du stockage",
+      "description": "Mise en place d'une solution de stockage vertical pour les commandes drives pour répondre aux contraintes de saturation de surface",
+      "gains": "Gain de temps de 10% sur productivité.\nGain de 10% sur temps de remise au coffre\n(pour les magasins de > 600 commandes hébdo sans réserve dédié (100% store picking))",
       "businessNote": "32",
       "score": 25
     },
     {
       "id": "mep-13",
       "category": "Excellence opérationnelle - Remise au coffre",
-      "description": "Expérience-utilisateur : identification du client via app (et non pas via borne). Évite le passage à la borne pour les ~650 magasins non équipés.",
-      "gains": "Gains de productivité, gain de temps de remise de 2 à 3 min.",
+      "title": "Expérience-utilisateur",
+      "description": "Identification du client via app (et non pas via borne)\nA ce jour, les clients s'identifient à la borne, hors ~650 magasins ne sont pas équipés. Par ailleurs, les concurrents (Leclerc, Carefour) ont développé cette solution avec retours positifs.",
+      "gains": "Gains de productivité,\nGain de temps de remise (expérience client) de 2 à 3 min.",
       "businessNote": "25",
       "score": 25
     },
     {
       "id": "mep-14",
       "category": "Excellence opérationnelle - Remise au coffre",
-      "description": "Process de remise : digitalisation de la remise au coffre (simplification de l'encaissement, industrialisation des refus et gestion des consignes sacherie)",
+      "title": "Process de remise",
+      "description": "Digitalisation de la remise au coffre (simplification de l'encaissement, industrialisation des refus et gestion des consignes sacherie)",
       "gains": "Non quantifié",
       "businessNote": "26",
       "score": 100
@@ -749,7 +634,8 @@
     {
       "id": "mep-15",
       "category": "Excellence opérationnelle - Remise au coffre",
-      "description": "Anticipation de l'arrivée client : géolocalisation du client à distance via l'application et anticipation de l'arrivée du client",
+      "title": "Anticipation de l’arrivée client",
+      "description": "Géolocalisation du client à distance via l'application et anticipation de l'arrivée du client (cf. Mcdonald)",
       "gains": "Non quantifié",
       "businessNote": "20",
       "score": 50
@@ -757,7 +643,8 @@
     {
       "id": "mep-16",
       "category": "Excellence opérationnelle - Remise au coffre",
-      "description": "Déploiement des solutions : accélération du déploiement du triptyque (bornes MSU, Flashbac, 100% PEL)",
+      "title": "Déploiement des solutions",
+      "description": "Accélération du déploiement du triptyque (bornes MSU, Flashbac, 100% PEL)",
       "gains": "Gains de 1 min à 1,5 min sur temps de remise au coffre (satisfaction client et productivité)",
       "businessNote": "11",
       "score": 2
@@ -765,7 +652,8 @@
     {
       "id": "mep-17",
       "category": "Excellence opérationnelle - F&L et DLC courtes",
-      "description": "Spécialisation des équipes F&L : création d'un module de formation spécifique sur la préparation et la remise au coffre des F&L",
+      "title": "Spécialisation des équipes F&L",
+      "description": "Création d'un module de formation spécifique sur la préparation et la remise au coffre des F&L",
       "gains": "Gain de satisfaction perception client (Cf. étude Goodays)",
       "businessNote": "19",
       "score": 2
@@ -773,7 +661,8 @@
     {
       "id": "mep-18",
       "category": "Excellence opérationnelle - F&L et DLC courtes",
-      "description": "Homogénéisation des conditions de stockage : rappel des bonnes pratiques sur les conditions de stockage (ambiant, froid positif) des FLEGs",
+      "title": "Homogénéisation des conditions de stockage",
+      "description": "Rappel des bonnes pratiques sur les conditions de stockage (ambiant, froid positif) des FLEGs",
       "gains": "Non quantifié",
       "businessNote": "6",
       "score": 2
@@ -781,7 +670,8 @@
     {
       "id": "mep-19",
       "category": "Excellence opérationnelle - F&L et DLC courtes",
-      "description": "Qualité des F&L : signalement d'un problème de qualité FLEG sur le Mobudrive lors de la préparation (pour information du client à la remise)",
+      "title": "Qualité des F&L",
+      "description": "Signalement d'un problème de qualité FLEG sur le Mobudrive lors la préparation (pour information du client à la remise)",
       "gains": "Non quantifié",
       "businessNote": "13",
       "score": 25
@@ -789,7 +679,8 @@
     {
       "id": "mep-20",
       "category": "Excellence opérationnelle - F&L et DLC courtes",
-      "description": "Qualité des F&L : stickers thermodynamiques collés sur les sacs produits frais pour contrôler le respect des températures (LAD collaborative)",
+      "title": "Qualité des F&L",
+      "description": "Pour la LAD et notamment la livraison collaborative, stickers thermodynamiques collés sur les sacs produits frais pour contrôler le respect des températures",
       "gains": "Coût de la pastille 0,10€ ht",
       "businessNote": "-6",
       "score": 2
@@ -797,23 +688,26 @@
     {
       "id": "mep-21",
       "category": "Excellence opérationnelle - 5- Assortiment et publication",
-      "description": "Pilotage de la publication : nouvel outil permettant de piloter la publication sur le site Courses U (articles publiables, disponibles, préconisations d'assortiment, ventes Drive, casse)",
-      "gains": "CA additionnel / Baisse des manquants",
+      "title": "Pilotage de la publication",
+      "description": "Nouvel outil permettant de piloter la publication sur le site Courses U (liste des articles publiables et publiés, disponibles et bientôt disponibles, préconisations d'assortiment, ventes Drive, casse) et possibilité d’ajouter ou de supprimer des produits sur la base du référentiel ou des VMS.\n- Nombre de produits indisponibles pour lesquels j'ai du stock en magasin. Enjeu CA additionnel\n- Nombre de produits disponibles pour lesquels je n'ai pas de stock en magasin. Enjeu baisse des manquants\n- Augmentation du nombre de produits publiés (produits locaux, frais métiers...). Enjeu CA additinnel",
+      "gains": "CA additionnel\nBaisse des manquants\nCA additinnel",
       "businessNote": "134",
       "score": 100
     },
     {
       "id": "mep-22",
       "category": "Excellence opérationnelle - 5- Assortiment et publication",
-      "description": "Process de publication : quick wins ULIS pour simplifier la publication de certains produits (locaux, poids / prix, promo)",
-      "gains": "Augmentation du nombre de produits publiés (produits locaux, frais métiers...). Enjeu CA additionnel",
+      "title": "Process de publication",
+      "description": "Quick wins ULIS, pour simplifier la publication de certains produits (locaux, poids / prix, promo)",
+      "gains": "Augmentation du nombre de produits publiés (produits locaux, frais métiers...). Enjeu CA additinnel",
       "businessNote": "34",
       "score": 25
     },
     {
       "id": "mep-23",
       "category": "Excellence opérationnelle - Productivité",
-      "description": "Pilotage de la productivité : mise en place d'un Design System du BO (Ergonomie et expérience utilisateur)",
+      "title": "Pilotage de la productivité",
+      "description": "Mise en place d'un design System du BO (Ergonomie et expérience utilisateur)",
       "gains": "Gains de productivité et réactivité",
       "businessNote": "9",
       "score": 100
@@ -821,7 +715,8 @@
     {
       "id": "mep-24",
       "category": "Excellence opérationnelle - Productivité",
-      "description": "Pilotage de la productivité : distinction des émetteurs TRD dans la vue Suivi des paiements + évolution de la vue 'suivi de paiement'",
+      "title": "Pilotage de la productivité",
+      "description": "Distinction des émetteurs TRD dans la vue Suivi des paiement + Evolution vue \"suivi de paiement\"",
       "gains": "Gain de productivité",
       "businessNote": "9",
       "score": 25
@@ -829,7 +724,8 @@
     {
       "id": "mep-25",
       "category": "Excellence opérationnelle - Remise au coffre",
-      "description": "Expérience-utilisateur : mise en place d'une régie publicitaire sur les écrans des bornes MSU (Retail média, Communication nationale et locale)",
+      "title": "Expérience-utilisateur",
+      "description": "Mise en place d'une régie publicitaire sur les écrans des bornes MSU (Retail média, Communication nationale et locale)",
       "gains": "Augmentation rétention et CA",
       "businessNote": "10",
       "score": 150
@@ -837,7 +733,8 @@
     {
       "id": "mep-26",
       "category": "Excellence opérationnelle - Productivité",
-      "description": "Collecte : intégration des adresses secondaires dans les itinéraires de collecte (MobUdrive)",
+      "title": "Collecte",
+      "description": "Intégration des adresses secondaires dans les itinéraires de collecte (MobUdrive)",
       "gains": "Gain de productivité et réduction des manquants",
       "businessNote": "22",
       "score": 25
@@ -845,7 +742,8 @@
     {
       "id": "mep-27",
       "category": "Excellence opérationnelle - Productivité",
-      "description": "Collecte : alignement des codes produits métiers (PLU), Front et BO pour fluidifier la préparation",
+      "title": "Collecte",
+      "description": "Alignement des codes produits métiers (PLU), Front et BO pour fluidifier la préparation",
       "gains": "Gain de productivité et réduction des manquants",
       "businessNote": "27",
       "score": 25
@@ -853,7 +751,8 @@
     {
       "id": "mep-28",
       "category": "Excellence opérationnelle - Productivité",
-      "description": "Pilotage de la productivité : définition d'un tableau de bord pour piloter l'activité commerciale des Points Relais",
+      "title": "Pilotage de la productivité",
+      "description": "Définition d'un tableau de bord pour piloter l'activité commerciale des Points Relais",
       "gains": "Meilleur pilotage de l'activité point relais",
       "businessNote": "5",
       "score": 10
@@ -861,71 +760,80 @@
     {
       "id": "mep-29",
       "category": "Livraison à domicile - Accélération de la LAD",
-      "description": "Activation du service LAD dans les 10% du parc restant (argumentaire sur la rentabilité du modèle économique LAD)",
-      "gains": "+10% de magasins avec LAD / Développer les magasins qui font le minimum volontairement",
+      "title": "Activation du service dans les 10% du parc restant",
+      "description": "Argumentaire sur la rentabilité du modèle écononmique LAD",
+      "gains": "+10% de magasins avec LAD.\nDévelopper les magasins qui font le minimum volontairement",
       "businessNote": "35",
       "score": 2
     },
     {
       "id": "mep-30",
       "category": "Livraison à domicile - Accélération de la LAD",
-      "description": "Formation des équipes Courses UC : création d'un module de formation Courses U LAD flotte collaborative et flotte interne (paramétrage, outils…)",
-      "gains": "Gain de productivité et gain QS liée à la réduction d'erreur",
+      "title": "Formation des équipes Courses U",
+      "description": "Création d'un module de formation Courses U LAD flotte collaborative et flotte interne (paramétrage, outils…)",
+      "gains": "gain de productivité et gain QS liée à la réduction d'erreur",
       "businessNote": "14",
       "score": 2
     },
     {
       "id": "mep-31",
       "category": "Livraison à domicile - Accélération de la LAD",
-      "description": "Livraison gratuite à partir d'un seuil (50% du parc) : définition de nouvelles recommandations sur les seuils de gratuité et seuil minimum de commande",
-      "gains": "CA additionnel (dispositif de remboursement des frais de port en € carte U)",
+      "title": "Livraison gratuite à partir d'un seuil (50% du parc)",
+      "description": "Définition de nouvelles recommandations sur les seuils de gratuité et seuil minimum de commande",
+      "gains": "CA additionnel (prendre en compte les coûts liés à la livraison et dispositif de remboursement des frais de port en € carte U)",
       "businessNote": "0",
       "score": 2
     },
     {
       "id": "mep-32",
       "category": "Livraison à domicile - Accélération de la LAD",
-      "description": "Qualité de service : définition de nouvelles recommandations sur les modes de livraison (flotte interne, collaborative ou mixte)",
-      "gains": "Gains sur charges prestataires ou interne en fonction des volumes / Gains QS supérieur en flotte interne",
+      "title": "Qualité de service",
+      "description": "Définition de nouvelles recommandations sur les modes de livraison (flotte interne, collaborative ou mixte)",
+      "gains": "Gains sur charges prestataires ou interne en fonction des volumes.\nGains QS supérieur en flotte interne",
       "businessNote": "29",
       "score": 2
     },
     {
       "id": "mep-33",
       "category": "Livraison à domicile - Accélération de la LAD",
-      "description": "Élargissement de l'offre de livraison : référencement de nouveaux acteurs de la LAD (Uber Direct, Time To Liv...)",
-      "gains": "Négociation des coûts de livraison des prestataires",
+      "title": "Elargissement de l'offre de livraison",
+      "description": "Référencement de nouveaux acteurs de la LAD (Uber Direct, Time To Liv...)",
+      "gains": "Négo coûts de livraison des prestataires",
       "businessNote": "21",
       "score": 2
     },
     {
       "id": "mep-34",
       "category": "Livraison à domicile - Accélération de la LAD",
-      "description": "Communication : dispositif de communication client à 360° pour faire connaître le service LAD (recrutement)",
-      "gains": "Gain de part de marché / Gain CA additionnel",
+      "title": "Communication",
+      "description": "Dispositif de communication client à 360° pour faire connaître le service LAD (recrutement)",
+      "gains": "Gain de part de marché\nGain CA additionnel",
       "businessNote": "25",
       "score": 2
     },
     {
       "id": "mep-35",
       "category": "Livraison à domicile - Nouveaux services",
-      "description": "Drive Ambulant : définition d'un nouveau parcours client Drive ambulant pour simplifier l'expérience client",
-      "gains": "Gain de part de marché / Gain CA additionnel",
+      "title": "Drive Ambulant (simplification du parcours-client)",
+      "description": "Définition d'un nouveau parcours client Drive ambulant",
+      "gains": "Gain de part de marché\nGain CA additionnel",
       "businessNote": "13",
       "score": 50
     },
     {
       "id": "mep-36",
       "category": "Proximité - Nouvelles mécaniques promo",
-      "description": "Ciblage segments spécifiques (seniors, PMR...) : nouvelles offres client spécifiques LAD (abonnements, créneaux spécifiques, sénior, personnes à mobilité réduite)",
-      "gains": "Gains de rétention, hausse du panier moyen et du CA",
+      "title": "Ciblage segments spécifiques (seniors, PMR...)",
+      "description": "Nouvelles offres client spécifiques LAD (abonnements, créneaux spécifiques, sénior, personnes à mobilité réduite)",
+      "gains": "Gains de rétention, hausse du PM/CA",
       "businessNote": "13",
       "score": 100
     },
     {
       "id": "mep-37",
       "category": "Proximité - Nouveaux services",
-      "description": "Livraison express : mise en place d'une offre de livraison en moins d'une heure (via BO Digital)",
+      "title": "Livraison express : livraison en moins d'une heure.",
+      "description": "Mise en place d'une offre de livraison en moins d'une heure (via BO Digital)",
       "gains": "Optimisation des coûts / charges liés au service de livraison",
       "businessNote": "61",
       "score": 100
@@ -933,23 +841,26 @@
     {
       "id": "mep-38",
       "category": "Proximité - Nouveaux services",
-      "description": "Lâcher caddie : définition d'un nouveau parcours client de lâcher caddie",
-      "gains": "Gain de productivité sur les magasins pratiquants et adoption par de nouveaux magasins",
+      "title": "Lacher caddie",
+      "description": "Définition d'un nouveau parcours client de lacher caddie",
+      "gains": "Gain de productivité sur les magasins qui pratiquent et adoption de nouveaux magasins",
       "businessNote": "16",
       "score": 25
     },
     {
       "id": "mep-39",
       "category": "Proximité - Productivité",
-      "description": "Sectorisation (optimisation des tournées) : paramétrage des zones de livraison à l'échelle de la rue (codes postaux aujourd'hui)",
-      "gains": "Optimisation des coûts/charges de livraison et ciblage de nouvelles zones blanches (hausse PDM & CA)",
+      "title": "Sectorisation (optimisation des tournées)",
+      "description": "Paramétrage des zones de livraison à l'échelle de la rue (codes postaux aujourd'hui)",
+      "gains": "Optimisation des couts / charges de livraison et ciblage de nouvelles zones blanche avec augmentation PDM et CA additionnel",
       "businessNote": "74",
       "score": 100
     },
     {
       "id": "mep-40",
       "category": "Proximité - Productivité",
-      "description": "Process de préparation : développement d'un BO Light pour l'activité quickcommerce et petits volumes",
+      "title": "Process de préparation",
+      "description": "Développement d'un BO Light pour l'activité quickcommerce et petits volumes",
       "gains": "Gains de productivité et réactivité",
       "businessNote": "7",
       "score": 25
