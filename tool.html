@@ -39,7 +39,7 @@
       <!-- JAUGE DE CONSOMMATION -->
       <div class="mt-4">
         <div class="flex justify-between items-center text-xs font-semibold mb-1.5">
-          <span class="text-slate-600">Score de votre priorisation</span>
+          <span class="text-slate-600">Budget consommé</span>
           <span id="score-counter" class="font-bold text-slate-900">0 / 1000 pts</span>
         </div>
         <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden p-0.5 border border-slate-200">
@@ -64,17 +64,31 @@
 
   <!-- CONTENU PRINCIPAL -->
   <main class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 md:grid-cols-2 gap-8 min-h-0">
+    <!-- COLONNE GAUCHE : SUJETS DISPONIBLES -->
     <section class="bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col min-h-[500px]">
-      <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50 rounded-t-2xl">
+      <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50 rounded-t-2xl gap-2 flex-wrap">
         <div class="flex items-center gap-2">
           <span class="w-3 h-3 rounded-full bg-slate-400"></span>
           <h2 class="font-bold text-slate-800">Sujets disponibles</h2>
           <span id="count-available" class="px-2 py-0.5 text-xs font-semibold bg-slate-200 text-slate-700 rounded-full">0</span>
         </div>
+
+        <!-- MENU DE TRI DYNAMIQUE -->
+        <div class="flex items-center gap-1.5">
+          <label for="sort-select" class="text-xs text-slate-500 font-medium whitespace-nowrap">Trier par :</label>
+          <select id="sort-select" onchange="handleSortChange(this.value)" class="text-xs bg-white border border-slate-200 rounded-lg px-2 py-1 font-semibold text-slate-700 outline-none focus:border-indigo-500 cursor-pointer">
+            <option value="default">Par défaut</option>
+            <option value="business-desc">Valeur Business (↓ Décroissant)</option>
+            <option value="business-asc">Valeur Business (↑ Croissant)</option>
+            <option value="score-desc">Poids (↓ Décroissant)</option>
+            <option value="score-asc">Poids (↑ Croissant)</option>
+          </select>
+        </div>
       </div>
       <div id="list-available" class="flex-1 p-4 overflow-y-auto space-y-3" ondragover="allowDrop(event)" ondrop="handleDrop(event, 'available')"></div>
     </section>
 
+    <!-- COLONNE DROITE : SUJETS RETENUS -->
     <section class="bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col min-h-[500px]">
       <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-indigo-50/30 rounded-t-2xl">
         <div class="flex items-center gap-2">
@@ -124,9 +138,10 @@
     let availableItems = [];
     let selectedItems = [];
     let draggedItemId = null;
+    let currentSort = "default";
 
     document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("page-title").textContent = `Priorisation Feuille de Route 2027 - ${customTitle}`;
+      document.getElementById("page-title").textContent = `Priorisation FdR 2027 - ${customTitle}`;
       document.getElementById("max-score-input").value = maxScoreLimit;
       loadSheetData();
     });
@@ -150,6 +165,7 @@
           }
 
           availableItems = items;
+          sortAvailableItems();
           render();
         })
         .catch(err => {
@@ -158,57 +174,87 @@
         });
     }
 
-    // SOUMISSION 100% AUTOMATIQUE ET SILENCIEUSE
-   // SOUMISSION 100% AUTOMATIQUE ET SILENCIEUSE
-function saveToGoogleSheet() {
-  if (selectedItems.length === 0) {
-    return showAlert("Sélectionnez au moins un sujet avant de valider.");
-  }
+    // 🔀 GESTION ET LOGIQUE DU TRI DES SUJETS DISPONIBLES
+    function handleSortChange(sortValue) {
+      currentSort = sortValue;
+      sortAvailableItems();
+      render();
+    }
 
-  const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
-  if (!userName || userName.trim() === "") return;
+    function sortAvailableItems() {
+      if (currentSort === "default") return;
 
-  showLoading(true);
+      availableItems.sort((a, b) => {
+        const valBusA = parseFloat(String(a.businessNote || "0").replace(",", ".")) || 0;
+        const valBusB = parseFloat(String(b.businessNote || "0").replace(",", ".")) || 0;
+        
+        const scoreA = Number(a.score) || 0;
+        const scoreB = Number(b.score) || 0;
 
-  const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
-  
-  let textSummary = `Utilisateur : ${userName.trim()}\n`;
-  textSummary += `Périmètre : ${customTitle} (${sheetTarget})\n`;
-  textSummary += `Date : ${dateStr}\n`;
-  textSummary += `Budget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
-  textSummary += `--- CLASSEMENT DES INTENTIONS ---\n`;
-  
-  // ➕ Ajout du champ ID dans la ligne de résumé
-  selectedItems.forEach((item, index) => {
-    textSummary += `#${index + 1} | [ID: ${item.id}] | [${item.category}] ${item.title} (${item.score} pts - Val. Bus: ${item.businessNote})\n`;
-  });
+        switch (currentSort) {
+          case "business-desc":
+            return valBusB - valBusA;
+          case "business-asc":
+            return valBusA - valBusB;
+          case "score-desc":
+            return scoreB - scoreA;
+          case "score-asc":
+            return scoreA - scoreB;
+          default:
+            return 0;
+        }
+      });
+    }
 
-  const form = document.createElement("form");
-  form.method = "POST";
-  form.action = FORM_RESPONSE_URL;
-  form.target = "hidden_iframe";
+    // SOUMISSION AUTOMATIQUE ET SILENCIEUSE
+    function saveToGoogleSheet() {
+      if (selectedItems.length === 0) {
+        return showAlert("Sélectionnez au moins un sujet avant de valider.");
+      }
 
-  const nameInput = document.createElement("input");
-  nameInput.type = "hidden";
-  nameInput.name = ENTRY_NAME;
-  nameInput.value = userName.trim();
-  form.appendChild(nameInput);
+      const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
+      if (!userName || userName.trim() === "") return;
 
-  const summaryInput = document.createElement("input");
-  summaryInput.type = "hidden";
-  summaryInput.name = ENTRY_SUMMARY;
-  summaryInput.value = textSummary;
-  form.appendChild(summaryInput);
+      showLoading(true);
 
-  document.body.appendChild(form);
-  form.submit();
-  document.body.removeChild(form);
+      const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
+      
+      let textSummary = `Utilisateur : ${userName.trim()}\n`;
+      textSummary += `Périmètre : ${customTitle} (${sheetTarget})\n`;
+      textSummary += `Date : ${dateStr}\n`;
+      textSummary += `Budget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
+      textSummary += `--- CLASSEMENT DES INTENTIONS ---\n`;
+      
+      selectedItems.forEach((item, index) => {
+        textSummary += `#${index + 1} | [ID: ${item.id}] | [${item.category}] ${item.title} (${item.score} pts - Val. Bus: ${item.businessNote})\n`;
+      });
 
-  setTimeout(() => {
-    showLoading(false);
-    alert("✅ Votre classement a été enregistré avec succès !");
-  }, 1000);
-}
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = FORM_RESPONSE_URL;
+      form.target = "hidden_iframe";
+
+      const nameInput = document.createElement("input");
+      nameInput.type = "hidden";
+      nameInput.name = ENTRY_NAME;
+      nameInput.value = userName.trim();
+      form.appendChild(nameInput);
+
+      const summaryInput = document.createElement("input");
+      summaryInput.type = "hidden";
+      summaryInput.name = ENTRY_SUMMARY;
+      summaryInput.value = textSummary;
+      form.appendChild(summaryInput);
+
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
+
+      setTimeout(() => {
+        showLoading(false);
+        alert("✅ Votre classement a été enregistré avec succès !");
+      }, 1000);
+    }
 
     function getTotalSelectedScore() { return selectedItems.reduce((sum, item) => sum + item.score, 0); }
 
@@ -228,6 +274,7 @@ function saveToGoogleSheet() {
       const idx = selectedItems.findIndex(i => i.id === id);
       if (idx === -1) return;
       availableItems.push(selectedItems.splice(idx, 1)[0]);
+      sortAvailableItems();
       dismissAlert(); render();
     }
 
@@ -257,7 +304,7 @@ function saveToGoogleSheet() {
       lucide.createIcons();
     }
 
-    // 🏷️ RENDU DYNAMIQUE ADAPTÉ À LA STRUCTURE DE CHAQUE ONGLET
+    // RENDU DYNAMIQUE ADAPTÉ À CHAQUE ONGLET
     function renderList(elemId, items, isSelected) {
       const container = document.getElementById(elemId);
       document.getElementById(elemId === "list-available" ? "count-available" : "count-selected").textContent = items.length;
@@ -271,12 +318,10 @@ function saveToGoogleSheet() {
         let badgesHtml = `<span class="px-2 py-0.5 bg-slate-100 rounded font-semibold text-slate-600">${escapeHtml(item.category)}</span>`;
         let detailsHtml = "";
 
-        // Structure MagasinsU: Thématique / Device / Chantier / Descriptif / Valeur Business / Poids
         if (sheetTarget === "MagasinsU") {
           if (item.device) badgesHtml += `<span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded">${escapeHtml(item.device)}</span>`;
           if (item.chantier) badgesHtml += `<span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded">${escapeHtml(item.chantier)}</span>`;
         } 
-        // Structure CoursesU: Thématique / Chantier / Descriptif / Gain(s) attendu(s) / Résultats clés / Valeur Business / Poids
         else if (sheetTarget === "CoursesU") {
           if (item.chantier) badgesHtml += `<span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded">${escapeHtml(item.chantier)}</span>`;
           
@@ -287,7 +332,6 @@ function saveToGoogleSheet() {
             detailsHtml += `</div>`;
           }
         } 
-        // Structure MeP: Thématique / Chantier / Levier identifié / Livrables clés / Valeur Business / Poids
         else if (sheetTarget === "MeP") {
           if (item.chantier) badgesHtml += `<span class="px-2 py-0.5 bg-amber-50 text-amber-700 rounded">${escapeHtml(item.chantier)}</span>`;
           if (item.levier) badgesHtml += `<span class="px-2 py-0.5 bg-purple-50 text-purple-700 rounded">${escapeHtml(item.levier)}</span>`;
