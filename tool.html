@@ -39,7 +39,7 @@
       <!-- JAUGE DE CONSOMMATION -->
       <div class="mt-4">
         <div class="flex justify-between items-center text-xs font-semibold mb-1.5">
-          <span class="text-slate-600">Score de votre priorisation</span>
+          <span class="text-slate-600">Budget consommé</span>
           <span id="score-counter" class="font-bold text-slate-900">0 / 1000 pts</span>
         </div>
         <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden p-0.5 border border-slate-200">
@@ -117,7 +117,7 @@
   </div>
 
   <script>
-    // ⚙️ CONFIGURATION DU GOOGLE FORM (ENVOI SILENCIEUX)
+    // ⚙️ CONFIGURATION DU GOOGLE FORM
     const FORM_RESPONSE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSerCU9huUOnaB9ERal9CKdgr6icw4ETHdYEWzSaD-ZF3_xtPQ/formResponse";
     const ENTRY_NAME = "entry.1556899417";
     const ENTRY_SUMMARY = "entry.1336496038";
@@ -130,9 +130,14 @@
     };
 
     const urlParams = new URLSearchParams(window.location.search);
-    const sheetTarget = urlParams.get('sheet') || "MagasinsU";
-    const customTitle = urlParams.get('title') || "Feuille de Route";
+    const rawSheetTarget = urlParams.get('sheet') || "MagasinsU";
+    
+    // Normalisation de la clé d'onglet pour éviter les erreurs de casse
+    const sheetTarget = Object.keys(LIST_LIMITS).find(
+      key => key.toLowerCase() === rawSheetTarget.toLowerCase()
+    ) || rawSheetTarget;
 
+    const customTitle = urlParams.get('title') || "Feuille de Route";
     const maxScoreLimit = LIST_LIMITS[sheetTarget] || 1000;
 
     let availableItems = [];
@@ -157,7 +162,7 @@
         })
         .then(data => {
           showLoading(false);
-          const items = data[sheetTarget] || [];
+          const items = data[sheetTarget] || data[rawSheetTarget] || [];
           
           if (items.length === 0) {
             showAlert(`Aucune donnée trouvée pour '${sheetTarget}'`);
@@ -174,7 +179,7 @@
         });
     }
 
-    // 🔀 GESTION ET LOGIQUE DU TRI DES SUJETS DISPONIBLES
+    // 🔀 GESTION DU TRI
     function handleSortChange(sortValue) {
       currentSort = sortValue;
       sortAvailableItems();
@@ -206,7 +211,7 @@
       });
     }
 
-    // SOUMISSION AUTOMATIQUE ET SILENCIEUSE
+    // SOUMISSION SILENCIEUSE
     function saveToGoogleSheet() {
       if (selectedItems.length === 0) {
         return showAlert("Sélectionnez au moins un sujet avant de valider.");
@@ -304,7 +309,7 @@
       lucide.createIcons();
     }
 
-    // RENDU DYNAMIQUE ADAPTÉ À CHAQUE ONGLET
+    // RENDU DYNAMIQUE CORRIGÉ POUR MEP
     function renderList(elemId, items, isSelected) {
       const container = document.getElementById(elemId);
       document.getElementById(elemId === "list-available" ? "count-available" : "count-selected").textContent = items.length;
@@ -314,15 +319,19 @@
         return;
       }
 
+      const isMeP = sheetTarget.toLowerCase() === "mep";
+      const isMagasins = sheetTarget.toLowerCase() === "magasinsu";
+      const isCourses = sheetTarget.toLowerCase() === "coursesu";
+
       container.innerHTML = items.map((item, idx) => {
         let badgesHtml = `<span class="px-2 py-0.5 bg-slate-100 rounded font-semibold text-slate-600">${escapeHtml(item.category)}</span>`;
         let detailsHtml = "";
 
-        if (sheetTarget === "MagasinsU") {
+        if (isMagasins) {
           if (item.device) badgesHtml += `<span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded">${escapeHtml(item.device)}</span>`;
           if (item.chantier) badgesHtml += `<span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded">${escapeHtml(item.chantier)}</span>`;
         } 
-        else if (sheetTarget === "CoursesU") {
+        else if (isCourses) {
           if (item.chantier) badgesHtml += `<span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded">${escapeHtml(item.chantier)}</span>`;
           
           if (item.gains || item.resultats) {
@@ -332,11 +341,11 @@
             detailsHtml += `</div>`;
           }
         } 
-        else if (sheetTarget === "MeP") {
+        else if (isMeP) {
           if (item.chantier) badgesHtml += `<span class="px-2 py-0.5 bg-amber-50 text-amber-700 rounded">${escapeHtml(item.chantier)}</span>`;
-          if (item.levier) badgesHtml += `<span class="px-2 py-0.5 bg-purple-50 text-purple-700 rounded">${escapeHtml(item.levier)}</span>`;
+          if (item.levier) detailsHtml += `<p class="mt-1 text-xs text-purple-700"><strong>Levier :</strong> ${escapeHtml(item.levier)}</p>`;
           
-          if (item.livrables) {
+          if (item.livrables && item.livrables !== "Non spécifié") {
             detailsHtml += `<div class="mt-2 pt-2 border-t border-slate-100 text-xs">`;
             detailsHtml += `<p class="text-slate-500"><strong>Livrables clés :</strong> ${escapeHtml(item.livrables)}</p>`;
             detailsHtml += `</div>`;
