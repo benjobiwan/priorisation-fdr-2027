@@ -1,176 +1,194 @@
 {
   "MagasinsU": [
-    {
-      "id": "mag-1",
-      "category": "🔄️Convergence Off et On-Line",
-      "device": "🖥️ Web, 📱 Apps",
-      "title": "Ajout de pièces jointes sur les formulaires de contact Magasins U",
-      "description": "Possibilité pour l'utilisateur de téléverser des justificatifs ou pièces jointes dès la soumission du formulaire de contact (traité dans Salesforce Service Cloud / SFFC). Réduit les échanges d'allers-retours pour le Service Client et supprime un irritant majeur pour l'utilisateur.",
-      "businessNote": "4,55",
-      "score": 75
-    },
-    {
-      "id": "mag-2",
-      "category": "🔄️Convergence Off et On-Line",
-      "device": "👨‍💻 ESC",
-      "title": "Suivi des demandes de contact dans l'Espace Client",
-      "description": "Tableau de bord de suivi en temps réel du traitement des demandes et réclamations dans l'Espace Client. Facilite l'intégration future d'un agent conversationnel IA pour l'automatisation des réponses par le Service Relation Client.",
-      "businessNote": "4,55",
-      "score": 75
-    },
-    {
-      "id": "mag-3",
-      "category": "👋🏻Engagement client et acquisition",
-      "device": "👨‍💻 ESC",
-      "title": "Espace Offres : Activation de toutes les offres en un clic",
-      "description": "Ajout d'un bouton d'action globale permettant d'activer l'ensemble des offres enseigne et produits en un clic unique, simplifiant le parcours promotionnel et maximisant l'engagement client.",
-      "businessNote": "4,15",
-      "score": 50
-    },
-    {
-      "id": "mag-4",
-      "category": "🔄️Convergence Off et On-Line",
-      "device": "🖥️ Web",
-      "title": "Évolution et refonte du parcours Facture U (Web & App)",
-      "description": "Refonte globale du service Facture U :\n• Intégration complète dans l'application mobile (75% du trafic).\n• Possibilité de modification post-validation pour conformité juridique.\n• Prise en charge des clients et entreprises hors France (gestion des SIRET et formats d'adresses internationaux).",
-      "businessNote": "9,45",
-      "score": 100
-    },
-    {
-      "id": "mag-5",
-      "category": "👋🏻Engagement client et acquisition",
-      "device": "👨‍💻 ESC",
-      "title": "Espace Offres : Bouton d'achat direct « Acheter sur Courses U » sur les offres",
-      "description": "Intégration d'un lien direct de redirection vers la fiche produit ou le rayon dédié sur Courses U depuis les offres, favorisant la conversion et simplifiant le parcours d'achat en ligne.",
-      "businessNote": "8,55",
-      "score": 100
-    },
-    {
-      "id": "mag-6",
-      "category": "🔄️Convergence Off et On-Line",
-      "device": "📱 Apps",
-      "title": "Format Stories interactives (File Story) sur les promotions",
-      "description": "Introduction d'un format dynamique de Stories (photos animées, vidéos courtes) pour valoriser les promotions. Modernisation de l'UX mobile avec navigation par balayage (swipe) pour activer rapidement les offres.",
-      "businessNote": "7,50",
-      "score": 100
-    },
-    {
-      "id": "mag-7",
-      "category": "👋🏻Engagement client et acquisition",
-      "device": "🗺️Store locator",
-      "title": "Refonte ergonomique et technique du Store Locator",
-      "description": "Étude et refonte de la solution de Store Locator pour optimiser le référencement local (SEO/GEO) et fluidifier l'orientation des clients, au bénéfice conjoint de Magasins U et Courses U.",
-      "businessNote": "7,35",
-      "score": 100
-    },
-    {
-      "id": "mag-8",
-      "category": "👋🏻Engagement client et acquisition",
-      "device": "👨‍💻 ESC",
-      "title": "Simplification et allègement du parcours d'inscription (profilage progressif)",
-      "description": "Conception d'un tunnel d'inscription allégé réduisant au strict minimum les étapes et champs obligatoires, complété par un mécanisme de profilage progressif au fil des interactions de l'utilisateur.",
-      "businessNote": "10,90",
-      "score": 100
-    },
-    {
-      "id": "mag-9",
-      "category": "🎨Personnalisation et fidélisation",
-      "device": "👨‍💻 ESC",
-      "title": "Collecte de données déclaratives client (Zero-Party Data) pour le profil Courses U et Magasins U",
-      "description": "Collecte et valorisation des données d'appétence déclaratives (Zero-Party Data) via le parcours digital, les formulaires, quiz ou jeux :\n• Intégration des préférences thématiques dans les algorithmes de ciblage CRM.\n• Personnalisation dynamique des offres et des recommandations pour les clients.",
-      "businessNote": "8,10",
-      "score": 75
-    },
-    {
-      "id": "mag-10",
-      "category": "👋🏻Engagement client et acquisition",
-      "device": "👨‍💻 ESC",
-      "title": "Centralisation et affichage des codes promo éligibles dans l'Espace Client",
-      "description": "Synchronisation automatique (flux RXP / Salesforce) et affichage centralisé des codes promotionnels éligibles dans l'Espace Client, permettant leur application en un clic lors de la finalisation des commandes.",
-      "businessNote": "11,50",
-      "score": 75
-    },
-    {
-      "id": "mag-11",
-      "category": "😣Urgences, demandes annexes &Irritant",
-      "device": "🖥️ Web",
-      "title": "Refonte de la pré-home Magasins U et convergence de cette page avec Courses U",
-      "description": "Convergence de la pré-home commune Magasins U et Courses U :\n• Fluidifier les parcours clients ;\n• Intégrer une cartographie interactive Store Locator ;\n• Hiérarchisation prioritaire des accès vers les tracts promotionnels et Courses U ;\n• Alignement graphique sur la nouvelle charte et conformité RGAA (acessibilité numérique) ;",
-      "businessNote": "5,40",
-      "score": 100
-    },
-    {
-      "id": "mag-12",
-      "category": "🎨Personnalisation et fidélisation",
-      "device": "👨‍💻 ESC",
-      "title": "Espace Client : Refonte de la page fidélité (Niveau 2 ESC)",
-      "description": "Refonte de la page Fidélité au sein de l'ESC :\n• Affichage incitatif adapté selon le solde de la cagnotte Carte U (avoir un affichage différent si la cagnotte est à zéro) ;\n• Carrousel de produits ou d'offres administrable à la maille magasin ;\n• Mise en avant enrichie des défis fidélité et des remises exclusives de la sélection Carte U.",
-      "businessNote": "11,00",
-      "score": 50
-    },
-    {
-      "id": "mag-13",
-      "category": "👋🏻Engagement client et acquisition",
-      "device": "🖥️ Web, 📱 Apps",
-      "title": "Harmonisation des tuiles produit avec convergence MU et CU (Nutri-Score, origine France, infos produit...)",
-      "description": "Harmonisation des composants de tuiles produits entre Magasins U et Courses U : affichage normalisé du Nutri-Score, de la composition, de l'origine et des labels de qualité afin de permettre une meilleure expérience.",
-      "businessNote": "13,85",
-      "score": 100
-    },
-    {
-      "id": "mag-14",
-      "category": "👋🏻Engagement client et acquisition",
-      "device": "📱 Apps",
-      "title": "Gamification (Lot 2) : Missions ESC et mécaniques de jeu omnicanales",
-      "description": "Déploiement du second volet de gamification :\n• mécaniques de jeu omnicanales valorisant les achats Web et Magasin, assorties de missions ESC récompensées (bonus fidélité contre opt-in).\n• Sujet lié avec la simplification du parcours d'inscription pour permettre de faire des missions pour compléter son profil de façon progressive",
-      "businessNote": "11,00",
-      "score": 25
-    },
-    {
-      "id": "mag-15",
-      "category": "👋🏻Engagement client et acquisition",
-      "device": "🖥️ Web, 📱 Apps, 👨‍💻 ESC",
-      "title": "Liste de courses issue du tract promotionnel (Lot 3)",
-      "description": "Évolutions de la liste de courses issue des tracts :\n• Ajout direct des articles sélectionnés au panier Courses U.\n• Ouverture de la fiche produit détaillée au clic.\n• Synchronisation fluide depuis les catalogues digitaux Nanoterra.",
-      "businessNote": "13,75",
-      "score": 100
-    },
-    {
-      "id": "mag-16",
-      "category": "😣Urgences, demandes annexes &Irritant",
-      "device": "🖥️ Web",
-      "title": "Refonte du header et du méga-menu du site web",
-      "description": "Modernisation et rationalisation du méga-menu du site web :\n• format plus compact,\n• arborescence clarifiée et retravaillée,\n• conservation de l'arche identitaire U et mise en conformité avec les normes d'accessibilité numérique.",
-      "businessNote": "4,60",
-      "score": 100
-    },
-    {
-      "id": "mag-17",
-      "category": "🔄️Convergence Off et On-Line",
-      "device": "🖥️ Web",
-      "title": "Consultation et suivi du solde de carte cadeau en ligne",
-      "description": "Développement d'un module de consultation en temps réel du solde et de la date de validité des cartes cadeaux U pour les bénéficiaires.",
-      "businessNote": "6,60",
-      "score": 75
-    },
-    {
-      "id": "mag-18",
-      "category": "🎨Personnalisation et fidélisation",
-      "device": "👨‍💻 ESC",
-      "title": "Affichage des indicateurs RSE dans l'ESC et l'application (Carbone, Origine France, Nutri-Score)",
-      "description": "Sensibilisation et valorisation RSE dans l'Espace Client et sur l'application : affichage pédagogique du bilan carbone du ticket de caisse, part des produits d'origine française et répartition Nutri-Score du panier.",
-      "businessNote": "4,10",
-      "score": 75
-    },
-    {
-      "id": "mag-19",
-      "category": "🎨Personnalisation et fidélisation",
-      "device": "🖥️️ Web, 📱 Apps",
-      "title": "Personnalisation de l'affichage pour les nouveaux clients et non-porteurs de carte",
-      "description": "Personnalisation dynamique de l'expérience pour les nouveaux visiteurs et clients non-porteurs de carte : exploitation des signaux comportementaux via l'outil interne U Perso afin d'adapter les bannières web, les parcours de bienvenue et les ciblages CRM.",
-      "businessNote": "5,10",
-      "score": 75
-    }
+  {
+    "id": "mag-1",
+    "category": "🔄️Convergence Off et On-Line",
+    "device": "🖥️ Web, 📱 Apps",
+    "title": "Ajout de pièces jointes sur les formulaires de contact Magasins U",
+    "description": "Possibilité pour l'utilisateur de téléverser des justificatifs ou pièces jointes dès la soumission du formulaire de contact (traité dans Salesforce Service Cloud / SFFC). Réduit les échanges d'allers-retours pour le Service Client et supprime un irritant majeur pour l'utilisateur.",
+    "businessNote": "4,55",
+    "score": 75
+  },
+  {
+    "id": "mag-2",
+    "category": "🔄️Convergence Off et On-Line",
+    "device": "👨‍💻 ESC",
+    "title": "Suivi des demandes de contact dans l'Espace Client",
+    "description": "Tableau de bord de suivi en temps réel du traitement des demandes et réclamations dans l'Espace Client. Facilite l'intégration future d'un agent conversationnel IA pour l'automatisation des réponses par le Service Relation Client.",
+    "businessNote": "4,55",
+    "score": 75
+  },
+  {
+    "id": "mag-3",
+    "category": "👋🏻Engagement client et acquisition",
+    "device": "👨‍💻 ESC",
+    "title": "Espace Offres : Activation de toutes les offres en un clic",
+    "description": "Ajout d'un bouton d'action globale permettant d'activer l'ensemble des offres enseigne et produits en un clic unique, simplifiant le parcours promotionnel et maximisant l'engagement client.",
+    "businessNote": "4,15",
+    "score": 50
+  },
+  {
+    "id": "mag-4",
+    "category": "🔄️Convergence Off et On-Line",
+    "device": "🖥️ Web",
+    "title": "Évolution et refonte du parcours Facture U (Web & App)",
+    "description": "Refonte globale du service Facture U :\n• Intégration complète dans l'application mobile (75% du trafic).\n• Possibilité de modification post-validation pour conformité juridique.\n• Prise en charge des clients et entreprises hors France (gestion des SIRET et formats d'adresses internationaux).",
+    "businessNote": "9,45",
+    "score": 100
+  },
+  {
+    "id": "mag-5",
+    "category": "👋🏻Engagement client et acquisition",
+    "device": "👨‍💻 ESC",
+    "title": "Espace Offres : Bouton d'achat direct « Acheter sur Courses U » sur les offres",
+    "description": "Intégration d'un lien direct de redirection vers la fiche produit ou le rayon dédié sur Courses U depuis les offres, favorisant la conversion et simplifiant le parcours d'achat en ligne.",
+    "businessNote": "8,55",
+    "score": 100
+  },
+  {
+    "id": "mag-6",
+    "category": "🔄️Convergence Off et On-Line",
+    "device": "📱 Apps",
+    "title": "Format Stories interactives (File Story) sur les promotions",
+    "description": "Introduction d'un format dynamique de Stories (photos animées, vidéos courtes) pour valoriser les promotions. Modernisation de l'UX mobile avec navigation par balayage (swipe) pour activer rapidement les offres.",
+    "businessNote": "7,50",
+    "score": 100
+  },
+  {
+    "id": "mag-7",
+    "category": "👋🏻Engagement client et acquisition",
+    "device": "🗺️Store locator",
+    "title": "Refonte ergonomique et technique du Store Locator",
+    "description": "Étude et refonte de la solution de Store Locator pour optimiser le référencement local (SEO/GEO) et fluidifier l'orientation des clients, au bénéfice conjoint de Magasins U et Courses U.",
+    "businessNote": "7,35",
+    "score": 100
+  },
+  {
+    "id": "mag-8",
+    "category": "👋🏻Engagement client et acquisition",
+    "device": "👨‍💻 ESC",
+    "title": "Simplification et allègement du parcours d'inscription (profilage progressif)",
+    "description": "Conception d'un tunnel d'inscription allégé réduisant au strict minimum les étapes et champs obligatoires, complété par un mécanisme de profilage progressif au fil des interactions de l'utilisateur.",
+    "businessNote": "10,90",
+    "score": 100
+  },
+  {
+    "id": "mag-9",
+    "category": "🎨Personnalisation et fidélisation",
+    "device": "👨‍💻 ESC",
+    "title": "Collecte de données déclaratives client (Zero-Party Data) pour le profil Courses U et Magasins U",
+    "description": "Collecte et valorisation des données d'appétence déclaratives (Zero-Party Data) via le parcours digital, les formulaires, quiz ou jeux :\n• Intégration des préférences thématiques dans les algorithmes de ciblage CRM.\n• Personnalisation dynamique des offres et des recommandations pour les clients.",
+    "businessNote": "8,10",
+    "score": 75
+  },
+  {
+    "id": "mag-10",
+    "category": "👋🏻Engagement client et acquisition",
+    "device": "👨‍💻 ESC",
+    "title": "Centralisation et affichage des codes promo éligibles dans l'Espace Client",
+    "description": "Synchronisation automatique (flux RXP / Salesforce) et affichage centralisé des codes promotionnels éligibles dans l'Espace Client, permettant leur application en un clic lors de la finalisation des commandes.",
+    "businessNote": "11,50",
+    "score": 75
+  },
+  {
+    "id": "mag-11",
+    "category": "😣Urgences, demandes annexes &Irritant",
+    "device": "🖥️ Web",
+    "title": "Refonte de la pré-home Magasins U et convergence de cette page avec Courses U",
+    "description": "Convergence de la pré-home commune Magasins U et Courses U :\n• Fluidifier les parcours clients ;\n• Intégrer une cartographie interactive Store Locator ;\n• Hiérarchisation prioritaire des accès vers les tracts promotionnels et Courses U ;\n• Alignement graphique sur la nouvelle charte et conformité RGAA (acessibilité numérique) ;",
+    "businessNote": "5,40",
+    "score": 100
+  },
+  {
+    "id": "mag-12",
+    "category": "🎨Personnalisation et fidélisation",
+    "device": "👨‍💻 ESC",
+    "title": "Espace Client : Refonte de la page fidélité (Niveau 2 ESC)",
+    "description": "Refonte de la page Fidélité au sein de l'ESC :\n• Affichage incitatif adapté selon le solde de la cagnotte Carte U (avoir un affichage différent si la cagnotte est à zéro) ;\n• Carrousel de produits ou d'offres administrable à la maille magasin ;\n• Mise en avant enrichie des défis fidélité et des remises exclusives de la sélection Carte U.",
+    "businessNote": "11,00",
+    "score": 50
+  },
+  {
+    "id": "mag-13",
+    "category": "👋🏻Engagement client et acquisition",
+    "device": "🖥️ Web, 📱 Apps",
+    "title": "Harmonisation des tuiles produit avec convergence MU et CU (Nutri-Score, origine France, infos produit...)",
+    "description": "Harmonisation des composants de tuiles produits entre Magasins U et Courses U : affichage normalisé du Nutri-Score, de la composition, de l'origine et des labels de qualité afin de permettre une meilleure expérience.",
+    "businessNote": "13,85",
+    "score": 100
+  },
+  {
+    "id": "mag-14",
+    "category": "👋🏻Engagement client et acquisition",
+    "device": "📱 Apps",
+    "title": "Gamification (Lot 2) : Missions ESC et mécaniques de jeu omnicanales",
+    "description": "Déploiement du second volet de gamification :\n• mécaniques de jeu omnicanales valorisant les achats Web et Magasin, assorties de missions ESC récompensées (bonus fidélité contre opt-in).\n• Sujet lié avec la simplification du parcours d'inscription pour permettre de faire des missions pour compléter son profil de façon progressive",
+    "businessNote": "11,00",
+    "score": 25
+  },
+  {
+    "id": "mag-15",
+    "category": "👋🏻Engagement client et acquisition",
+    "device": "🖥️ Web, 📱 Apps, 👨‍💻 ESC",
+    "title": "Liste de courses issue du tract promotionnel (Lot 3)",
+    "description": "Évolutions de la liste de courses issue des tracts :\n• Ajout direct des articles sélectionnés au panier Courses U.\n• Ouverture de la fiche produit détaillée au clic.\n• Synchronisation fluide depuis les catalogues digitaux Nanoterra.",
+    "businessNote": "13,75",
+    "score": 100
+  },
+  {
+    "id": "mag-16",
+    "category": "😣Urgences, demandes annexes &Irritant",
+    "device": "🖥️ Web",
+    "title": "Refonte du header et du méga-menu du site web",
+    "description": "Modernisation et rationalisation du méga-menu du site web :\n• format plus compact,\n• arborescence clarifiée et retravaillée,\n• conservation de l'arche identitaire U et mise en conformité avec les normes d'accessibilité numérique.",
+    "businessNote": "4,60",
+    "score": 100
+  },
+  {
+    "id": "mag-17",
+    "category": "🔄️Convergence Off et On-Line",
+    "device": "🖥️ Web",
+    "title": "Consultation et suivi du solde de carte cadeau en ligne",
+    "description": "Développement d'un module de consultation en temps réel du solde et de la date de validité des cartes cadeaux U pour les bénéficiaires.",
+    "businessNote": "6,60",
+    "score": 75
+  },
+  {
+    "id": "mag-18",
+    "category": "🎨Personnalisation et fidélisation",
+    "device": "👨‍💻 ESC",
+    "title": "Affichage des indicateurs RSE dans l'ESC et l'application (Carbone, Origine France, Nutri-Score)",
+    "description": "Sensibilisation et valorisation RSE dans l'Espace Client et sur l'application : affichage pédagogique du bilan carbone du ticket de caisse, part des produits d'origine française et répartition Nutri-Score du panier.",
+    "businessNote": "4,10",
+    "score": 75
+  },
+  {
+    "id": "mag-19",
+    "category": "🎨Personnalisation et fidélisation",
+    "device": "🖥️ Web, 📱 Apps",
+    "title": "Personnalisation de l'affichage pour les nouveaux clients et non-porteurs de carte",
+    "description": "Personnalisation dynamique de l'expérience pour les nouveaux visiteurs et clients non-porteurs de carte : exploitation des signaux comportementaux via l'outil interne U Perso afin d'adapter les bannières web, les parcours de bienvenue et les ciblages CRM.",
+    "businessNote": "5,10",
+    "score": 75
+  },
+  {
+    "id": "mag-20",
+    "category": "🔄️Convergence Off et On-Line",
+    "device": "👨‍💻 ESC",
+    "title": "Digitalisation complète du parcours vignettes et collecteurs dématérialisés",
+    "description": "Digitalisation omnicanale intégrale des opérations de vignettes promotionnelles :\n• Automatisation : crédit automatique des vignettes virtuelles sur le compte Carte U en caisse physique et lors des commandes e-commerce.\n• Visibilité : tableau de bord de suivi du solde de vignettes en temps réel sur l'application et le site web.\n• Transformation : sélection et réservation directe du produit récompense en ligne.",
+    "businessNote": "11,00",
+    "score": 100
+  },
+  {
+    "id": "mag-21",
+    "category": "🔄️Convergence Off et On-Line",
+    "device": "👨‍💻 ESC",
+    "title": "Dématérialisation des codes de participation aux jeux promotionnels",
+    "description": "Dématérialisation et saisie facilitée des codes de participation aux jeux concours promotionnels, avec rattachement direct au compte fidélité pour simplifier l'expérience client.",
+    "businessNote": "11,00",
+    "score": 75
+  }
   ],
   "CoursesU": [
     {
