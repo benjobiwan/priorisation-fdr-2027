@@ -370,7 +370,7 @@
       "description": "Proposer des produits complémentaires dans le mini panier et au moment de valider la commande.",
       "gains": "Bénéfice client : ne rien oublier.\nBénéfice magasin : hausse du panier moyen.",
       "businessNote": "51,6",
-      "score": 0
+      "score": 50
     },
     {
       "id": "cou-17",
