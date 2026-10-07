@@ -39,7 +39,7 @@
       <!-- JAUGE DE CONSOMMATION -->
       <div class="mt-4">
         <div class="flex justify-between items-center text-xs font-semibold mb-1.5">
-          <span class="text-slate-600">Total de vos priorisations</span>
+          <span class="text-slate-600">Budget consommé</span>
           <span id="score-counter" class="font-bold text-slate-900">0 / 1000 pts</span>
         </div>
         <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden p-0.5 border border-slate-200">
@@ -117,41 +117,10 @@
   </div>
 
   <script>
-// 🎨 Génère une paire de couleurs (fond + texte) de manière déterministe selon le texte
-function getCategoryColorStyle(text) {
-  if (!text) return 'bg-slate-100 text-slate-700';
-
-  // Palette de combinaisons de couleurs pastel avec texte assorti (Tailwind)
-  const colorPalette = [
-    { bg: '#e0f2fe', text: '#0369a1', border: '#bae6fd' }, // Bleu ciel
-    { bg: '#fef3c7', text: '#b45309', border: '#fde68a' }, // Amber / Jaune
-    { bg: '#dcfce7', text: '#15803d', border: '#bbf7d0' }, // Émeraude / Vert
-    { bg: '#f3e8ff', text: '#6b21a8', border: '#e9d5ff' }, // Violet
-    { bg: '#ffe4e6', text: '#be123c', border: '#fecdd3' }, // Rose
-    { bg: '#ccfbf1', text: '#0f766e', border: '#99f6e4' }, // Teal / Cyan
-    { bg: '#ffedd5', text: '#c2410c', border: '#fed7aa' }, // Orange
-    { bg: '#f1f5f9', text: '#334155', border: '#e2e8f0' }, // Ardoise
-  ];
-
-  // Calcul du hash à partir de la chaîne de caractères
-  let hash = 0;
-  for (let i = 0; i < text.length; i++) {
-    hash = text.charCodeAt(i) + ((hash << 5) - hash);
-  }
-
-  // Sélection de l'index dans la palette
-  const index = Math.abs(hash) % colorPalette.length;
-  const color = colorPalette[index];
-
-  return `background-color: ${color.bg}; color: ${color.text}; border: 1px solid ${color.border};`;
-}
-    
-    // ⚙️ CONFIGURATION DU GOOGLE FORM
     const FORM_RESPONSE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSerCU9huUOnaB9ERal9CKdgr6icw4ETHdYEWzSaD-ZF3_xtPQ/formResponse";
     const ENTRY_NAME = "entry.1556899417";
     const ENTRY_SUMMARY = "entry.1336496038";
 
-    // ⚙️ PLAFONDS MAX PERSONNALISÉS PAR ONGLET
     const LIST_LIMITS = {
       "MagasinsU": 750,
       "CoursesU": 1000,
@@ -186,10 +155,8 @@ function getCategoryColorStyle(text) {
       loadSheetData();
     });
 
-    // CHARGEMENT DEPUIS DATA.JSON AVEC ANTI-CACHE
     function loadSheetData() {
       showLoading(true);
-
       fetch(`data.json?v=${Date.now()}`)
         .then(response => {
           if (!response.ok) throw new Error("Impossible de lire data.json");
@@ -198,12 +165,10 @@ function getCategoryColorStyle(text) {
         .then(data => {
           showLoading(false);
           const items = data[sheetTarget] || [];
-
           if (items.length === 0) {
             showAlert(`Aucune donnée trouvée pour le périmètre '${sheetTarget}'`);
             return;
           }
-
           availableItems = items;
           sortAvailableItems();
           render();
@@ -214,7 +179,6 @@ function getCategoryColorStyle(text) {
         });
     }
 
-    // 🔀 GESTION DU TRI
     function handleSortChange(sortValue) {
       currentSort = sortValue;
       sortAvailableItems();
@@ -223,11 +187,9 @@ function getCategoryColorStyle(text) {
 
     function sortAvailableItems() {
       if (currentSort === "default") return;
-
       availableItems.sort((a, b) => {
         const valBusA = parseFloat(String(a.businessNote || "0").replace(",", ".")) || 0;
         const valBusB = parseFloat(String(b.businessNote || "0").replace(",", ".")) || 0;
-
         const scoreA = Number(a.score) || 0;
         const scoreB = Number(b.score) || 0;
 
@@ -241,28 +203,96 @@ function getCategoryColorStyle(text) {
       });
     }
 
-    // SOUMISSION SILENCIEUSE
-    function saveToGoogleSheet() {
-      if (selectedItems.length === 0) {
-        return showAlert("Sélectionnez au moins un sujet avant de valider.");
+    // GENERATION DE COULEURS DETERMINISTES POUR LES BADGES ( offset pour varier la palette des sous-thèmes )
+    function getBadgeStyle(text, offset = 0) {
+      if (!text) return 'background-color: #f1f5f9; color: #334155; border: 1px solid #e2e8f0;';
+      const colorPalette = [
+        { bg: '#e0f2fe', text: '#0369a1', border: '#bae6fd' }, // Bleu
+        { bg: '#fef3c7', text: '#b45309', border: '#fde68a' }, // Amber
+        { bg: '#dcfce7', text: '#15803d', border: '#bbf7d0' }, // Vert
+        { bg: '#f3e8ff', text: '#6b21a8', border: '#e9d5ff' }, // Violet
+        { bg: '#ffe4e6', text: '#be123c', border: '#fecdd3' }, // Rose
+        { bg: '#ccfbf1', text: '#0f766e', border: '#99f6e4' }, // Teal
+        { bg: '#ffedd5', text: '#c2410c', border: '#fed7aa' }, // Orange
+        { bg: '#f1f5f9', text: '#334155', border: '#e2e8f0' }  // Slate
+      ];
+      let hash = 0;
+      for (let i = 0; i < text.length; i++) hash = text.charCodeAt(i) + ((hash << 5) - hash);
+      const index = Math.abs(hash + offset) % colorPalette.length;
+      const color = colorPalette[index];
+      return `background-color: ${color.bg}; color: ${color.text}; border: 1px solid ${color.border};`;
+    }
+
+    function renderList(elemId, items, isSelected) {
+      const container = document.getElementById(elemId);
+      document.getElementById(elemId === "list-available" ? "count-available" : "count-selected").textContent = items.length;
+
+      if (items.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-slate-400 text-sm">Aucun sujet ici.</div>`;
+        return;
       }
 
+      container.innerHTML = items.map((item, idx) => {
+        // BADGE 1 : Thématique Business (Col A)
+        const catStyle = getBadgeStyle(item.category, 0);
+        let badgesHtml = `<span style="${catStyle}" class="px-2.5 py-0.5 rounded-md font-semibold text-xs">${escapeHtml(item.category)}</span>`;
+
+        // BADGE 2 : Sous-thématique (Col B pour MeP/CoursesU) ou Device (MagasinsU)
+        const subTag = item.subCategory || item.device;
+        if (subTag && subTag.trim() !== "") {
+          const subStyle = getBadgeStyle(subTag, 3); // Decalage offset = 3 pour une couleur distincte
+          badgesHtml += `<span style="${subStyle}" class="px-2.5 py-0.5 rounded-md font-semibold text-xs">${escapeHtml(subTag)}</span>`;
+        }
+
+        // GAINS / BÉNÉFICES ATTENDUS (Col E)
+        let detailsHtml = "";
+        if (item.gains && item.gains.trim() !== "") {
+          detailsHtml = `
+            <div class="mt-2 pt-2 border-t border-slate-100 text-xs text-emerald-700">
+              <strong>Gains / Bénéfices :</strong> ${escapeHtml(item.gains)}
+            </div>`;
+        }
+
+        return `
+          <div draggable="true" ondragstart="handleDragStart(event, '${item.id}')" onclick="${!isSelected ? `selectItem('${item.id}')` : ''}" class="p-4 bg-white border border-slate-200 rounded-xl flex items-start justify-between gap-3 shadow-xs hover:shadow-md cursor-pointer">
+            <div class="flex items-start gap-3 min-w-0 flex-1">
+              ${isSelected ? `<span class="w-6 h-6 rounded-md bg-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0">#${idx+1}</span>` : ''}
+              <div class="space-y-1 min-w-0 flex-1">
+                <div class="flex gap-1.5 flex-wrap text-xs mb-1">
+                  ${badgesHtml}
+                </div>
+                <h3 class="font-bold text-slate-900 text-sm mb-1">${escapeHtml(item.title)}</h3>
+                <p class="text-xs text-slate-600 whitespace-pre-line">${escapeHtml(item.description)}</p>
+                ${detailsHtml}
+              </div>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              ${isSelected ? `
+                <div class="flex flex-col gap-0.5">
+                  <button onclick="event.stopPropagation(); movePriority('${item.id}', -1)" class="p-1 hover:bg-slate-100 rounded"><i data-lucide="chevron-up" class="w-3.5 h-3.5"></i></button>
+                  <button onclick="event.stopPropagation(); movePriority('${item.id}', 1)" class="p-1 hover:bg-slate-100 rounded"><i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></button>
+                </div>
+              ` : ''}
+              <span class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 text-emerald-700 rounded-lg">Val. Bus: ${escapeHtml(item.businessNote)}</span>
+              <span class="px-2.5 py-1 text-xs font-black bg-indigo-50 text-indigo-700 rounded-lg">${item.score} pts</span>
+              ${isSelected ? `<button onclick="deselectItem('${item.id}')" class="text-slate-400 hover:text-red-500"><i data-lucide="minus-circle" class="w-5 h-5"></i></button>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function saveToGoogleSheet() {
+      if (selectedItems.length === 0) return showAlert("Sélectionnez au moins un sujet avant de valider.");
       const userName = prompt("Entrez votre Prénom et Nom pour valider la soumission :", "");
       if (!userName || userName.trim() === "") return;
 
       showLoading(true);
-
       const dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
-
-      let textSummary = `Utilisateur : ${userName.trim()}\n`;
-      textSummary += `Périmètre : ${customTitle} (${sheetTarget})\n`;
-      textSummary += `Date : ${dateStr}\n`;
-      textSummary += `Total score : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n`;
-      textSummary += `--- CLASSEMENT DES INTENTIONS ---\n`;
+      let textSummary = `Utilisateur : ${userName.trim()}\nPérimètre : ${customTitle} (${sheetTarget})\nDate : ${dateStr}\nBudget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n--- CLASSEMENT ---\n`;
 
       selectedItems.forEach((item, index) => {
-        const itemLabel = item.title || item.category;
-        textSummary += `#${index + 1} | [ID: ${item.id}] | [${item.category}] ${itemLabel} (${item.score} pts - Valeur Business: ${item.businessNote})\n`;
+        textSummary += `#${index + 1} | [ID: ${item.id}] | [${item.category}] ${item.title} (${item.score} pts - Val. Bus: ${item.businessNote})\n`;
       });
 
       const form = document.createElement("form");
@@ -271,15 +301,11 @@ function getCategoryColorStyle(text) {
       form.target = "hidden_iframe";
 
       const nameInput = document.createElement("input");
-      nameInput.type = "hidden";
-      nameInput.name = ENTRY_NAME;
-      nameInput.value = userName.trim();
+      nameInput.type = "hidden"; nameInput.name = ENTRY_NAME; nameInput.value = userName.trim();
       form.appendChild(nameInput);
 
       const summaryInput = document.createElement("input");
-      summaryInput.type = "hidden";
-      summaryInput.name = ENTRY_SUMMARY;
-      summaryInput.value = textSummary;
+      summaryInput.type = "hidden"; summaryInput.name = ENTRY_SUMMARY; summaryInput.value = textSummary;
       form.appendChild(summaryInput);
 
       document.body.appendChild(form);
@@ -292,20 +318,18 @@ function getCategoryColorStyle(text) {
       }, 1000);
     }
 
-    function getTotalSelectedScore() { return selectedItems.reduce((sum, item) => sum + item.score, 0); }
-
+    function getTotalSelectedScore() { return selectedItems.reduce((sum, item) => sum + Number(item.score || 0), 0); }
     function selectItem(id) {
       const idx = availableItems.findIndex(i => i.id === id);
       if (idx === -1) return;
       const item = availableItems[idx];
-      if (getTotalSelectedScore() + item.score > maxScoreLimit) {
-        return showAlert(`Impossible d'ajouter cet élément. Le poids (${item.score} pts) dépasse le plafond.`);
+      if (getTotalSelectedScore() + Number(item.score || 0) > maxScoreLimit) {
+        return showAlert(`Impossible d'ajouter cet élément. Le poids (${item.score} pts) dépasse le budget.`);
       }
       availableItems.splice(idx, 1);
       selectedItems.push(item);
       dismissAlert(); render();
     }
-
     function deselectItem(id) {
       const idx = selectedItems.findIndex(i => i.id === id);
       if (idx === -1) return;
@@ -313,7 +337,6 @@ function getCategoryColorStyle(text) {
       sortAvailableItems();
       dismissAlert(); render();
     }
-
     function movePriority(id, dir) {
       const idx = selectedItems.findIndex(i => i.id === id);
       if (idx === -1 || idx + dir < 0 || idx + dir >= selectedItems.length) return;
@@ -322,7 +345,6 @@ function getCategoryColorStyle(text) {
       selectedItems[idx + dir] = temp;
       render();
     }
-
     function handleDragStart(e, id) { draggedItemId = id; e.dataTransfer.setData("text/plain", id); }
     function allowDrop(e) { e.preventDefault(); }
     function handleDrop(e, target) {
@@ -332,88 +354,17 @@ function getCategoryColorStyle(text) {
       if (target === "selected" && !isSelected) selectItem(draggedItemId);
       if (target === "available" && isSelected) deselectItem(draggedItemId);
     }
-
     function render() {
       renderList("list-available", availableItems, false);
       renderList("list-selected", selectedItems, true);
       updateGauge();
       lucide.createIcons();
     }
-
-   function renderList(elemId, items, isSelected) {
-  const container = document.getElementById(elemId);
-  document.getElementById(elemId === "list-available" ? "count-available" : "count-selected").textContent = items.length;
-
-  if (items.length === 0) {
-    container.innerHTML = `<div class="p-8 text-center text-slate-400 text-sm">Aucun sujet ici.</div>`;
-    return;
-  }
-
-  const isMeP = sheetTarget === "MeP";
-  const isMagasins = sheetTarget === "MagasinsU";
-  const isCourses = sheetTarget === "CoursesU";
-
-  container.innerHTML = items.map((item, idx) => {
-    // 🏷️ Thématique Business (Étiquette au-dessus du titre)
-    const categoryStyle = getCategoryColorStyle(item.category);
-    let badgesHtml = `<span style="${categoryStyle}" class="px-2.5 py-0.5 rounded-md font-semibold text-xs transition-colors">${escapeHtml(item.category)}</span>`;
-    let detailsHtml = "";
-
-    // Device (MagasinsU uniquement)
-    if (isMagasins && item.device) {
-      badgesHtml += `<span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded">${escapeHtml(item.device)}</span>`;
-    }
-
-    // Gains & Résultats (CoursesU / MeP)
-    if (item.gains && item.gains.trim() !== "") {
-      detailsHtml += `
-        <div class="mt-2 pt-2 border-t border-slate-100 text-xs">
-          <p class="text-emerald-700"><strong>Gain(s) attendu(s) :</strong> ${escapeHtml(item.gains)}</p>
-        </div>`;
-    }
-
-    if (isCourses && item.resultats && item.resultats.trim() !== "") {
-      detailsHtml += `
-        <div class="mt-1 text-xs">
-          <p class="text-slate-500"><strong>Résultats clés :</strong> ${escapeHtml(item.resultats)}</p>
-        </div>`;
-    }
-
-    return `
-      <div draggable="true" ondragstart="handleDragStart(event, '${item.id}')" onclick="${!isSelected ? `selectItem('${item.id}')` : ''}" class="p-4 bg-white border border-slate-200 rounded-xl flex items-start justify-between gap-3 shadow-xs hover:shadow-md cursor-pointer">
-        <div class="flex items-start gap-3 min-w-0 flex-1">
-          ${isSelected ? `<span class="w-6 h-6 rounded-md bg-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0">#${idx+1}</span>` : ''}
-          <div class="space-y-1 min-w-0 flex-1">
-            <div class="flex gap-1.5 flex-wrap text-xs mb-1">
-              ${badgesHtml}
-            </div>
-            <h3 class="font-bold text-slate-900 text-sm mb-1">${escapeHtml(item.title)}</h3>
-            <p class="text-xs text-slate-600 whitespace-pre-line">${escapeHtml(item.description)}</p>
-            ${detailsHtml}
-          </div>
-        </div>
-        <div class="flex items-center gap-2 shrink-0">
-          ${isSelected ? `
-            <div class="flex flex-col gap-0.5">
-              <button onclick="event.stopPropagation(); movePriority('${item.id}', -1)" class="p-1 hover:bg-slate-100 rounded"><i data-lucide="chevron-up" class="w-3.5 h-3.5"></i></button>
-              <button onclick="event.stopPropagation(); movePriority('${item.id}', 1)" class="p-1 hover:bg-slate-100 rounded"><i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></button>
-            </div>
-          ` : ''}
-          <span class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 text-emerald-700 rounded-lg">Valeur Business: ${escapeHtml(item.businessNote)}</span>
-          <span class="px-2.5 py-1 text-xs font-black bg-indigo-50 text-indigo-700 rounded-lg">${item.score} pts</span>
-          ${isSelected ? `<button onclick="deselectItem('${item.id}')" class="text-slate-400 hover:text-red-500"><i data-lucide="minus-circle" class="w-5 h-5"></i></button>` : ''}
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
     function updateGauge() {
       const score = getTotalSelectedScore();
       document.getElementById("score-counter").textContent = `${score} / ${maxScoreLimit} pts`;
       document.getElementById("progress-bar").style.width = `${Math.min(100, (score / maxScoreLimit) * 100)}%`;
     }
-
     function showAlert(msg) { document.getElementById("alert-message").textContent = msg; document.getElementById("alert-banner").classList.remove("hidden"); }
     function dismissAlert() { document.getElementById("alert-banner").classList.add("hidden"); }
     function showLoading(show) { document.getElementById("loading-overlay").className = show ? "fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex flex-col items-center justify-center text-white" : "hidden"; }
