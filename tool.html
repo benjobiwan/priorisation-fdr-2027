@@ -273,7 +273,7 @@
                   <button onclick="event.stopPropagation(); movePriority('${item.id}', 1)" class="p-1 hover:bg-slate-100 rounded"><i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></button>
                 </div>
               ` : ''}
-              <span class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 text-emerald-700 rounded-lg">Val. Bus: ${escapeHtml(item.businessNote)}</span>
+              <span class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 text-emerald-700 rounded-lg">Valeur Business: ${escapeHtml(item.businessNote)}</span>
               <span class="px-2.5 py-1 text-xs font-black bg-indigo-50 text-indigo-700 rounded-lg">${item.score} pts</span>
               ${isSelected ? `<button onclick="deselectItem('${item.id}')" class="text-slate-400 hover:text-red-500"><i data-lucide="minus-circle" class="w-5 h-5"></i></button>` : ''}
             </div>
@@ -292,7 +292,7 @@
       let textSummary = `Utilisateur : ${userName.trim()}\nPérimètre : ${customTitle} (${sheetTarget})\nDate : ${dateStr}\nBudget consommé : ${getTotalSelectedScore()} / ${maxScoreLimit} pts\n\n--- CLASSEMENT ---\n`;
 
       selectedItems.forEach((item, index) => {
-        textSummary += `#${index + 1} | [ID: ${item.id}] | [${item.category}] ${item.title} (${item.score} pts - Val. Bus: ${item.businessNote})\n`;
+        textSummary += `#${index + 1} | [ID: ${item.id}] | [${item.category}] ${item.title} (${item.score} pts - Valeur Business: ${item.businessNote})\n`;
       });
 
       const form = document.createElement("form");
