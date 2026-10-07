@@ -46,13 +46,10 @@
 
   <!-- CONTENU PRINCIPAL - UNE SEULE COLONNE -->
   <main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div id="cards-list" class="space-y-4">
-      <!-- Les cartes de l'onglet actif s'affichent ici -->
-    </div>
+    <div id="cards-list" class="space-y-4"></div>
   </main>
 
   <script>
-    // DONNÉES DE SPREADSHEET (MAPPING DES RESULTATS DES VOTES)
     const pollResults = {
       "MagasinsU": [
         { id: "mag-13", title: "Refonte du header site", votes: 30, top1: 0, score: 55 },
@@ -95,7 +92,6 @@
     let jsonData = {};
     let activePerimeter = "MagasinsU";
 
-    // CHARGEMENT DU FICHIER DATA.JSON
     document.addEventListener("DOMContentLoaded", () => {
       fetch(`data.json?v=${Date.now()}`)
         .then(res => res.json())
@@ -105,29 +101,23 @@
         })
         .catch(err => {
           console.error("Erreur de chargement data.json :", err);
-          renderList(); // Affiche avec repli si data.json échoue
+          renderList();
         });
     });
 
-    // BASCULE ENTRE LES PÉRIMÈTRES (3 CTA)
     function switchPerimeter(perimeter) {
       activePerimeter = perimeter;
-
-      // Mise à jour visuelle des boutons CTA
       document.querySelectorAll(".tab-btn").forEach(btn => {
         btn.className = "tab-btn px-4 py-2 text-sm font-bold rounded-xl border transition-all flex items-center gap-2 whitespace-nowrap bg-white text-slate-600 border-slate-200 hover:bg-slate-100";
       });
-
       const activeBtn = document.getElementById(`cta-${perimeter}`);
       if (activeBtn) {
         activeBtn.className = "tab-btn px-4 py-2 text-sm font-bold rounded-xl border transition-all flex items-center gap-2 whitespace-nowrap bg-indigo-600 text-white border-indigo-600 shadow-xs";
       }
-
       renderList();
     }
 
-    // COULEURS DYNAMIQUES PAR DÉTERMINISME HASH
-    function getCategoryColorStyle(text) {
+    function getBadgeStyle(text, offset = 0) {
       if (!text) return 'background-color: #f1f5f9; color: #334155; border: 1px solid #e2e8f0;';
       const colorPalette = [
         { bg: '#e0f2fe', text: '#0369a1', border: '#bae6fd' },
@@ -135,15 +125,16 @@
         { bg: '#dcfce7', text: '#15803d', border: '#bbf7d0' },
         { bg: '#f3e8ff', text: '#6b21a8', border: '#e9d5ff' },
         { bg: '#ffe4e6', text: '#be123c', border: '#fecdd3' },
-        { bg: '#ccfbf1', text: '#0f766e', border: '#99f6e4' }
+        { bg: '#ccfbf1', text: '#0f766e', border: '#99f6e4' },
+        { bg: '#ffedd5', text: '#c2410c', border: '#fed7aa' },
+        { bg: '#f1f5f9', text: '#334155', border: '#e2e8f0' }
       ];
       let hash = 0;
       for (let i = 0; i < text.length; i++) hash = text.charCodeAt(i) + ((hash << 5) - hash);
-      const color = colorPalette[Math.abs(hash) % colorPalette.length];
+      const color = colorPalette[Math.abs(hash + offset) % colorPalette.length];
       return `background-color: ${color.bg}; color: ${color.text}; border: 1px solid ${color.border};`;
     }
 
-    // RENDU DE LA LISTE EN UNE SEULE COLONNE
     function renderList() {
       const container = document.getElementById("cards-list");
       const pollItems = pollResults[activePerimeter] || [];
@@ -155,39 +146,32 @@
       }
 
       container.innerHTML = pollItems.map((pollItem, idx) => {
-        // Retrouver l'objet complet dans data.json par ID
         const fullItem = jsonItems.find(i => i.id === pollItem.id) || {};
 
         const title = fullItem.title || pollItem.title;
         const category = fullItem.category || activePerimeter;
+        const subCategory = fullItem.subCategory || fullItem.device || "";
         const description = fullItem.description || "";
         const gains = fullItem.gains || "";
-        const resultats = fullItem.resultats || "";
-        const device = fullItem.device || "";
         const originalBusinessNote = fullItem.businessNote || null;
         const originalScore = fullItem.score || null;
 
-        // Badge de classement (#1, #2, #3, ...)
         let rankBadgeClass = "bg-slate-200 text-slate-700 font-bold";
         if (idx === 0) rankBadgeClass = "bg-amber-500 text-white font-black";
         else if (idx === 1) rankBadgeClass = "bg-slate-400 text-white font-bold";
         else if (idx === 2) rankBadgeClass = "bg-amber-700 text-white font-bold";
 
-        // Style pastel dynamique pour la thématique
-        const categoryStyle = getCategoryColorStyle(category);
+        const catStyle = getBadgeStyle(category, 0);
+        let badgesHtml = `<span style="${catStyle}" class="px-2.5 py-0.5 rounded-md font-semibold text-xs">${escapeHtml(category)}</span>`;
 
-        // Construction des badges et informations additionnelles
-        let badgesHtml = `<span style="${categoryStyle}" class="px-2.5 py-0.5 rounded-md font-semibold text-xs">${escapeHtml(category)}</span>`;
-        if (device) {
-          badgesHtml += `<span class="px-2.5 py-0.5 bg-blue-50 text-blue-700 border border-blue-100 rounded-md font-semibold text-xs">${escapeHtml(device)}</span>`;
+        if (subCategory && subCategory.trim() !== "") {
+          const subStyle = getBadgeStyle(subCategory, 3);
+          badgesHtml += `<span style="${subStyle}" class="px-2.5 py-0.5 rounded-md font-semibold text-xs">${escapeHtml(subCategory)}</span>`;
         }
 
         let detailsHtml = "";
         if (gains && gains.trim() !== "") {
-          detailsHtml += `<div class="mt-2 pt-2 border-t border-slate-100 text-xs text-emerald-700"><strong>Gain(s) attendu(s) :</strong> ${escapeHtml(gains)}</div>`;
-        }
-        if (resultats && resultats.trim() !== "") {
-          detailsHtml += `<div class="mt-1 text-xs text-slate-500"><strong>Résultats clés :</strong> ${escapeHtml(resultats)}</div>`;
+          detailsHtml = `<div class="mt-2 pt-2 border-t border-slate-100 text-xs text-emerald-700"><strong>Gains / Bénéfices :</strong> ${escapeHtml(gains)}</div>`;
         }
 
         return `
@@ -205,21 +189,14 @@
               </div>
             </div>
 
-            <!-- MÉTRIQUES ET VOTES (À DROITE) -->
             <div class="flex flex-wrap md:flex-col items-end justify-between md:justify-start gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100">
-              <div class="flex items-center gap-2">
-                <span class="px-3 py-1 text-xs font-black bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-lg shadow-2xs">
-                  Score : ${pollItem.score} pts
-                </span>
-              </div>
+              <span class="px-3 py-1 text-xs font-black bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-lg shadow-2xs">
+                Score : ${pollItem.score} pts
+              </span>
               <span class="px-2.5 py-1 text-[11px] font-semibold bg-emerald-50 text-emerald-700 rounded-md">
                 ${pollItem.votes} votes ${pollItem.top1 > 0 ? `(${pollItem.top1}x #1)` : ''}
               </span>
-              ${originalBusinessNote ? `
-                <span class="text-[11px] text-slate-400 font-medium">
-                  Val. Bus initial : ${originalBusinessNote}
-                </span>
-              ` : ''}
+              ${originalBusinessNote ? `<span class="text-[11px] text-slate-400 font-medium">Val. Bus: ${originalBusinessNote} \vert{} Poids:${originalScore}pt</span>` : ''}
             </div>
           </div>
         `;
