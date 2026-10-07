@@ -196,7 +196,11 @@
               <span class="px-2.5 py-1 text-[11px] font-semibold bg-emerald-50 text-emerald-700 rounded-md">
                 ${pollItem.votes} votes ${pollItem.top1 > 0 ? `(${pollItem.top1}x #1)` : ''}
               </span>
-              ${originalBusinessNote ? `<span class="text-[11px] text-slate-400 font-medium">Val. Bus: ${originalBusinessNote} \vert{} Poids:${originalScore}pt</span>` : ''}
+              ${(originalBusinessNote || originalScore) ? `
+              <span class="text-[11px] text-slate-400 font-medium">
+              Val. Bus : ${escapeHtml(originalBusinessNote || '-')} | Poids : ${originalScore ? originalScore + ' pts' : '-'}
+              </span>
+              ` : ''}
             </div>
           </div>
         `;
