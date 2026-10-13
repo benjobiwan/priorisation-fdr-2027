@@ -22,11 +22,11 @@
           </h1>
         </div>
         <div class="text-xs text-slate-500 font-medium">
-          Données croisées dynamiquement avec data.json
+          Résultats de la consultation FdR 2027
         </div>
       </div>
 
-      <!-- ONGLETS DE SÉLECTION -->
+      <!-- ONGLETS DE SÉLECTION (3 CTA) -->
       <div class="flex items-center gap-2 mt-6 border-b border-slate-200 pb-2 overflow-x-auto">
         <button id="cta-MagasinsU" onclick="switchPerimeter('MagasinsU')" class="tab-btn px-4 py-2 text-sm font-bold rounded-xl border transition-all flex items-center gap-2 whitespace-nowrap bg-indigo-600 text-white border-indigo-600 shadow-xs">
           <i data-lucide="store" class="w-4 h-4"></i>
@@ -50,112 +50,38 @@
   </main>
 
   <script>
-    // RÉSULTATS DU SONDAGE (ISSU DE L'ONGLET ANALYSE_RÉSULTATS)
     const pollResults = {
       "MagasinsU": [
-        { id: "mag-8", title: "Simplification et allègement du parcours d'inscription (profilage progressif)", votes: 100, top1: 0, score: 175 },
-        { id: "mag-5", title: "Espace Offres : Bouton d'achat direct « Acheter sur Courses U » sur les offres", votes: 100, top1: 0, score: 167 },
-        { id: "mag-13", title: "Harmonisation des tuiles produit avec convergence MU et CU (Nutri-Score, origine France, infos produit...)", votes: 83, top1: 0, score: 162 },
-        { id: "mag-15", title: "Liste de courses issue du tract promotionnel (Lot 3)", votes: 84, top1: 0, score: 155 },
-        { id: "mag-10", title: "Centralisation et affichage des codes promo éligibles dans l'Espace Client", votes: 70, top1: 0, score: 120 },
-        { id: "mag-4", title: "Évolution et refonte du parcours Facture U (Web & App)", votes: 70, top1: 0, score: 115 },
-        { id: "mag-11", title: "Refonte de la pré-home Magasins U et convergence de cette page avec Courses U", votes: 63, top1: 0, score: 105 },
-        { id: "mag-12", title: "Espace Client : Refonte de la page fidélité (Niveau 2 ESC)", votes: 60, top1: 0, score: 103 },
-        { id: "mag-21", title: "Dématérialisation des codes de participation aux jeux promotionnels", votes: 50, top1: 0, score: 87 },
-        { id: "mag-14", title: "Gamification (Lot 2) : Missions ESC et mécaniques de jeu omnicanales", votes: 40, top1: 0, score: 68 },
-        { id: "mag-17", title: "Consultation et suivi du solde de carte cadeau en ligne", votes: 40, top1: 0, score: 67 },
-        { id: "mag-19", title: "Personnalisation de l'affichage pour les nouveaux clients et non-porteurs de carte", votes: 40, top1: 0, score: 62 },
-        { id: "mag-20", title: "Digitalisation complète du parcours vignettes et collecteurs dématérialisés", votes: 31, top1: 1, score: 58 },
-        { id: "mag-3", title: "Espace Offres : Activation de toutes les offres en un clic", votes: 31, top1: 1, score: 56 },
-        { id: "mag-9", title: "Collecte de données déclaratives client (Zero-Party Data) pour le profil Courses U et Magasins U", votes: 31, top1: 1, score: 53 },
-        { id: "mag-2", title: "Suivi des demandes de contact dans l'Espace Client", votes: 30, top1: 0, score: 49 },
-        { id: "mag-16", title: "Refonte du header et du méga-menu du site web", votes: 30, top1: 0, score: 48 },
-        { id: "mag-1", title: "Ajout de pièces jointes sur les formulaires de contact Magasins U", votes: 30, top1: 0, score: 48 },
-        { id: "mag-7", title: "Refonte ergonomique et technique du Store Locator", votes: 30, top1: 0, score: 46 },
-        { id: "mag-18", title: "Affichage des indicateurs RSE dans l'ESC et l'application (Carbone, Origine France, Nutri-Score)", votes: 10, top1: 0, score: 14 }
+        { id: "mag-8", title: "Simplification et allègement du parcours d'inscription (profilage progressif)", category: "👋🏻Engagement client et acquisition", subCategory: "👨‍💻 ESC", description: "Alléger les formulaires d'inscription en ne demandant que le strict nécessaire au départ, puis proposer de compléter son profil au fil de l'eau.", gains: "Bénéfice client : création de compte plus rapide et fluide.\nBénéfice magasin : hausse du taux de conversion.", votes: 100, top1: 0, score: 175, businessNote: "10,90", originalScore: 100 },
+        { id: "mag-5", title: "Espace Offres : Bouton d'achat direct « Acheter sur Courses U » sur les offres", category: "👋🏻Engagement client et acquisition", subCategory: "👨‍💻 ESC", description: "Permettre d'ajouter un produit directement au panier Courses U depuis l'Espace Offres de Magasins U.", gains: "Bénéfice client : passage fluide de l'offre à l'achat.\nBénéfice magasin : création de synergies entre les canaux.", votes: 100, top1: 0, score: 167, businessNote: "8,55", originalScore: 100 },
+        { id: "mag-13", title: "Harmonisation des tuiles produit avec convergence MU et CU", category: "👋🏻Engagement client et acquisition", subCategory: "🖥️ Web, 📱 Apps", description: "Harmoniser la présentation des fiches et tuiles produits entre Magasins U et Courses U (Nutri-Score, origine France, pictos).", gains: "Bénéfice client : clarté et lisibilité sur tous les supports.\nBénéfice magasin : image unifiée et professionnelle.", votes: 83, top1: 0, score: 162, businessNote: "13,85", originalScore: 100 },
+        { id: "mag-15", title: "Liste de courses issue du tract promotionnel", category: "👋🏻Engagement client et acquisition", subCategory: "🖥️ Web, 📱 Apps, 👨‍💻 ESC", description: "Générer une liste de courses personnalisée directement à partir des promotions sélectionnées dans les e-tracts.", gains: "Bénéfice client : préparation facile de ses achats malins.\nBénéfice magasin : meilleure transformation des opérations catalogue.", votes: 84, top1: 0, score: 155, businessNote: "13,75", originalScore: 100 },
+        { id: "mag-10", title: "Centralisation et affichage des codes promo éligibles dans l'Espace Client", category: "👋🏻Engagement client et acquisition", subCategory: "👨‍💻 ESC", description: "Afficher l'ensemble des codes promotionnels actifs et éligibles directement dans le compte client.", gains: "Bénéfice client : ne rater aucune promotion active.\nBénéfice magasin : plus grande satisfaction client.", votes: 70, top1: 0, score: 120, businessNote: "11,50", originalScore: 75 },
+        { id: "mag-4", title: "Évolution et refonte du parcours Facture U (Web & App)", category: "🔄️Convergence Off et On-Line", subCategory: "🖥️ Web, 📱 Apps", description: "Moderniser la consultation et le téléchargement des factures et tickets de caisse dématérialisés.", gains: "Bénéfice client : dématérialisation simple et rapide.\nBénéfice magasin : réduction des coûts d'impression.", votes: 70, top1: 0, score: 115, businessNote: "9,45", originalScore: 100 },
+        { id: "mag-11", title: "Refonte de la pré-home Magasins U et convergence avec Courses U", category: "😣Urgences & Irritants", subCategory: "🖥️ Web", description: "Proposer un parcours d'entrée unifié permettant d'accéder plus rapidement au magasin de son choix et aux univers e-commerce.", gains: "Bénéfice client : accès instantané aux contenus utiles.\nBénéfice magasin : réduction du taux de rebond.", votes: 63, top1: 0, score: 105, businessNote: "5,40", originalScore: 100 },
+        { id: "mag-12", title: "Espace Client : Refonte de la page fidélité (Niveau 2 ESC)", category: "🎨Personnalisation et fidélisation", subCategory: "👨‍💻 ESC", description: "Redynamiser le tableau de bord Fidélité avec l'affichage clair de la cagnotte Carte U et des avantages acquis.", gains: "Bénéfice client : vision synthétique de ses avantages.\nBénéfice magasin : engagement renforcé du programme Carte U.", votes: 60, top1: 0, score: 103, businessNote: "11,00", originalScore: 50 }
       ],
       "CoursesU": [
-        { id: "cou-1", title: "Dettes Mécaniques promo manquantes et Automatisation des temps forts, jeudi +, prix coûtant, sur avantage", votes: 103, top1: 3, score: 192 },
-        { id: "cou-19", title: "Recherche ultra-rapide", votes: 83, top1: 0, score: 142 },
-        { id: "cou-36", title: "Chaînage EAN", votes: 71, top1: 1, score: 120 },
-        { id: "cou-10", title: "E-tracts - Usage 2", votes: 61, top1: 1, score: 105 },
-        { id: "cou-16", title: "Recommandations mini panier & checkout", votes: 52, top1: 0, score: 98 },
-        { id: "cou-29", title: "Listes de courses", votes: 50, top1: 0, score: 86 },
-        { id: "cou-18", title: "Fusion Pré-home et Home", votes: 40, top1: 0, score: 73 },
-        { id: "cou-12", title: "Activation des offres", votes: 40, top1: 0, score: 69 },
-        { id: "cou-9", title: "E-tracts - Usage 1", votes: 50, top1: 0, score: 67 },
-        { id: "cou-27", title: "Régimes alimentaires", votes: 40, top1: 0, score: 63 },
-        { id: "cou-14", title: "Carrousels", votes: 40, top1: 0, score: 61 },
-        { id: "cou-24", title: "Tuile produit", votes: 30, top1: 0, score: 49 },
-        { id: "cou-38", title: "Préparé sur place", votes: 30, top1: 0, score: 48 },
-        { id: "cou-40", title: "Éligibilité LAD", votes: 30, top1: 0, score: 42 },
-        { id: "cou-23", title: "Recommandations PDP", votes: 30, top1: 0, score: 41 },
-        { id: "cou-20", title: "Volet de recherche", votes: 20, top1: 0, score: 37 },
-        { id: "cou-3", title: "Gamification avec de nouveaux jeux", votes: 20, top1: 0, score: 37 },
-        { id: "cou-33", title: "Présence sur les IA du marché", votes: 21, top1: 1, score: 36 },
-        { id: "cou-45", title: "Wero", votes: 20, top1: 0, score: 32 },
-        { id: "cou-28", title: "Produits consignés", votes: 20, top1: 0, score: 31 },
-        { id: "cou-31", title: "Commande vocale", votes: 20, top1: 0, score: 31 },
-        { id: "cou-2", title: "Produit offert", votes: 20, top1: 0, score: 30 },
-        { id: "cou-39", title: "Quantité max au panier", votes: 20, top1: 0, score: 26 },
-        { id: "cou-32", title: "Agent conversationnel", votes: 20, top1: 0, score: 25 },
-        { id: "cou-15", title: "Espaces animés", votes: 10, top1: 0, score: 20 },
-        { id: "cou-41", title: "Uber Eats", votes: 10, top1: 0, score: 18 },
-        { id: "cou-30", title: "Recettes", votes: 10, top1: 0, score: 17 },
-        { id: "cou-13", title: "Offre non-alimentaire", votes: 10, top1: 0, score: 17 },
-        { id: "cou-44", title: "Ticket Restau dématerialisés", votes: 10, top1: 0, score: 17 },
-        { id: "cou-17", title: "Choix du magasin", votes: 10, top1: 0, score: 16 },
-        { id: "cou-11", title: "E-tracts - Usage 3", votes: 10, top1: 0, score: 15 },
-        { id: "cou-35", title: "Fiches produits & visuelss", votes: 10, top1: 0, score: 14 },
-        { id: "cou-46", title: "Paiement en n fois", votes: 10, top1: 0, score: 14 },
-        { id: "cou-5", title: "Dotation sur créneau", votes: 10, top1: 0, score: 13 },
-        { id: "cou-37", title: "Pictos et labels", votes: 10, top1: 0, score: 13 },
-        { id: "cou-21", title: "Filtres", votes: 10, top1: 0, score: 13 },
-        { id: "cou-34", title: "Service client", votes: 10, top1: 0, score: 11 }
+        { id: "cou-1", title: "Dettes Mécaniques promo manquantes et Automatisation des temps forts, jeudi +, prix coûtant, sur avantage", category: "Améliorer notre image prix", subCategory: "🏷️ Animation commerciale – Mécaniques commerciales spécifiques digitales", description: "Rendre jouables sur Courses U les 25 mécaniques promo du magasin qui ne le sont pas encore, et automatiser (suppression des actions manuelles) la mise en place des temps forts (jeudi Plus, prix coûtant, sur-avantage).", gains: "Bénéfice client : retrouver en ligne toutes les promos de son magasin.\nBénéfice magasin : parité promo avec le magasin et moins d'actions manuelles.", votes: 103, top1: 3, score: 192, businessNote: "25,9", originalScore: 150 },
+        { id: "cou-19", title: "Recherche ultra-rapide V2 sur l'App", category: "Faciliter la vie du client", subCategory: "🔍 Search", description: "Recherche ultra-rapide V2, qui permet de chercher plusieurs produits d'un coup, et en améliorer le parcours. Implémentation sur l'App.", gains: "Bénéfice client : faire sa liste en quelques secondes.\nBénéfice magasin : des paniers constitués plus vite et plus complets.", votes: 83, top1: 0, score: 142, businessNote: "29,5", originalScore: 50 },
+        { id: "cou-36", title: "Chaînage EAN (gestion des changements de codes produits)", category: "Fiabiliser notre catalogue", subCategory: "🗃️ Donnée produit", description: "Conserver le lien entre l'ancien et le nouveau code d'un produit qui change d'EAN (nouveau packaging, nouveau prix), et en informer le client.", gains: "Bénéfice client : retrouver ses produits dans ses achats récents et ses favoris.\nBénéfice magasin : ne plus perdre de produits dans les habitudes d'achat.", votes: 71, top1: 1, score: 120, businessNote: "14,7", originalScore: 150 },
+        { id: "cou-10", title: "E-tracts - Usage 2 : Ajout direct au panier depuis e-tract", category: "Améliorer notre image prix", subCategory: "📣 Mise en avant des promos", description: "Permettre d'ajouter au panier Courses U les produits vus dans les e-tracts de Magasins U.", gains: "Bénéfice client : passer du tract à la commande en un clic.\nBénéfice magasin : transformer la consultation du tract en ventes.", votes: 61, top1: 1, score: 105, businessNote: "20,8", originalScore: 100 },
+        { id: "cou-16", title: "Recommandations mini panier & checkout", category: "Améliorer notre image prix", subCategory: "🎯 Hyper-personnalisation", description: "Proposer des produits complémentaires dans le mini panier et au moment de valider la commande.", gains: "Bénéfice client : ne rien oublier.\nBénéfice magasin : hausse du panier moyen.", votes: 52, top1: 0, score: 98, businessNote: "51,6", originalScore: 50 },
+        { id: "cou-29", title: "Listes de courses : Retravail de la page Mes listes", category: "Faciliter la vie du client", subCategory: "🍽️ Bien manger", description: "Retravailler la page « Mes listes de courses » : modules plus utiles et personnalisés selon le profil.", gains: "Bénéfice client : refaire ses courses habituelles plus vite.\nBénéfice magasin : des clients qui reviennent plus souvent.", votes: 50, top1: 0, score: 86, businessNote: "29,5", originalScore: 50 },
+        { id: "cou-18", title: "Fusion Pré-home et Home", category: "Faciliter la vie du client", subCategory: "🚪 Accéder", description: "Refondre le parcours d'entrée (pré-home et page d'accueil) pour accéder plus vite aux rayons clés et aux opérations du moment.", gains: "Bénéfice client : une entrée plus simple et plus claire.\nBénéfice magasin : plus de visites qui se transforment en commandes.", votes: 40, top1: 0, score: 73, businessNote: "17,7", originalScore: 100 },
+        { id: "cou-12", title: "Activation des offres", category: "Améliorer notre image prix", subCategory: "📣 Mise en avant des promos", description: "Guider le client dans l'activation des offres de type 10 %, par exemple avec un lien vers les produits éligibles depuis le bloc d'offre.", gains: "Bénéfice client : comprendre et utiliser ses offres.\nBénéfice magasin : plus d'offres activées et réellement utilisées.", votes: 40, top1: 0, score: 69, businessNote: "4,7", originalScore: 100 }
       ],
       "MeP": [
-        { id: "mep-1", title: "Pilotage de la publication", votes: 114, top1: 4, score: 210 },
-        { id: "mep-6", title: "Chaînage des articles", votes: 92, top1: 2, score: 167 },
-        { id: "mep-22", title: "Process de remise", votes: 71, top1: 1, score: 122 },
-        { id: "mep-8", title: "Pilotage des manquants", votes: 60, top1: 0, score: 91 },
-        { id: "mep-7", title: "Pilotage des manquants", votes: 50, top1: 0, score: 87 },
-        { id: "mep-15", title: "Facilitation de la consolidation", votes: 52, top1: 0, score: 86 },
-        { id: "mep-18", title: "Collecte", votes: 50, top1: 0, score: 82 },
-        { id: "mep-11", title: "Planification", votes: 41, top1: 1, score: 79 },
-        { id: "mep-39", title: "Sectorisation (optimisation des tournées)", votes: 50, top1: 0, score: 77 },
-        { id: "mep-23", title: "Anticipation de l’arrivée client", votes: 40, top1: 0, score: 66 },
-        { id: "mep-24", title: "Expérience-utilisateur", votes: 40, top1: 0, score: 60 },
-        { id: "mep-10", title: "Seuils de dépublication Ulis (permanent, promo)", votes: 40, top1: 0, score: 55 },
-        { id: "mep-20", title: "Bonnes pratiques et formation", votes: 30, top1: 0, score: 48 },
-        { id: "mep-35", title: "Process de préparation", votes: 40, top1: 0, score: 47 },
-        { id: "mep-9", title: "Bonnes pratiques et formation", votes: 30, top1: 0, score: 43 },
-        { id: "mep-37", title: "Lacher caddie", votes: 30, top1: 0, score: 38 },
-        { id: "mep-34", title: "Accélération de la bascule vers le modèle de réserve dédiée", votes: 20, top1: 0, score: 37 },
-        { id: "mep-16", title: "Verticalisation du stockage", votes: 21, top1: 1, score: 33 },
-        { id: "mep-17", title: "Collecte", votes: 20, top1: 0, score: 31 },
-        { id: "mep-3", title: "Spécialisation des équipes F&L", votes: 20, top1: 0, score: 31 },
-        { id: "mep-21", title: "Expérience-utilisateur", votes: 20, top1: 0, score: 28 },
-        { id: "mep-13", title: "Pilotage de la productivité", votes: 20, top1: 0, score: 25 },
-        { id: "mep-5", title: "Qualité des F&L", votes: 20, top1: 0, score: 24 },
-        { id: "mep-33", title: "Optimisation du stock en réserve dédiée", votes: 10, top1: 0, score: 18 },
-        { id: "mep-4", title: "Homogénéisation des conditions de stockage", votes: 10, top1: 0, score: 16 },
-        { id: "mep-2", title: "Qualité des F&L", votes: 10, top1: 0, score: 16 },
-        { id: "mep-25", title: "Déploiement des solutions", votes: 10, top1: 0, score: 15 },
-        { id: "mep-12", title: "Pilotage de la productivité", votes: 10, top1: 0, score: 14 },
-        { id: "mep-30", title: "Formation des équipes Courses UC", votes: 10, top1: 0, score: 13 },
-        { id: "mep-27", title: "Activation du service LAD dans les 10% du parc restant", votes: 10, top1: 0, score: 13 },
-        { id: "mep-38", title: "Ciblage segments spécifiques (seniors, PMR...)", votes: 10, top1: 0, score: 12 },
-        { id: "mep-19", title: "Pilotage de la productivité", votes: 10, top1: 0, score: 12 },
-        { id: "mep-31", title: "Livraison gratuite à partir d'un seuil (50% du parc)", votes: 10, top1: 0, score: 12 },
-        { id: "mep-36", title: "Livraison express : livraison en moins d'une heure.", votes: 10, top1: 0, score: 9 }
+        { id: "mep-1", title: "Pilotage de la publication sur Courses U", category: "Modeles Exploitation (MeP)", subCategory: "📦 Publication & Assortiment", description: "Optimiser le pilotage de la mise en ligne des articles, la gestion des VMS et des stocks publiables.", gains: "Bénéfice client : visibilité sur la disponibilité réelle.\nBénéfice magasin : réduction du taux de manquants.", votes: 114, top1: 4, score: 210, businessNote: "10,0", originalScore: 100 },
+        { id: "mep-6", title: "Chaînage des articles & fiabilisation UC liées", category: "Modeles Exploitation (MeP)", subCategory: "🔍 Manquants", description: "Améliorer le chaînage automatique entre unités de vente et emballages promo.", gains: "Bénéfice client : commande exacte du besoin.\nBénéfice magasin : préparation de commande simplifiée.", votes: 92, top1: 2, score: 167, businessNote: "4,0", originalScore: 100 },
+        { id: "mep-22", title: "Process de remise au coffre digitalisé", category: "Modeles Exploitation (MeP)", subCategory: "🛒 Remise au coffre", description: "Accélérer la remise des commandes au Drive via terminal mobile et validation dématérialisée.", gains: "Bénéfice client : attente minimale au coffre.\nBénéfice magasin : rotation rapide des pistes Drive.", votes: 71, top1: 1, score: 122, businessNote: "2,0", originalScore: 100 }
       ]
     };
 
-    let jsonData = {};
     let activePerimeter = "MagasinsU";
+    let jsonData = {};
 
     document.addEventListener("DOMContentLoaded", () => {
-      // Chargement dynamique de data.json sans cache
       fetch(`data.json?v=${Date.now()}`)
         .then(res => res.json())
         .then(data => {
@@ -163,7 +89,7 @@
           renderList();
         })
         .catch(err => {
-          console.warn("data.json non chargé, affichage direct :", err);
+          console.warn("Utilisation des données intégrées :", err);
           renderList();
         });
     });
@@ -203,10 +129,6 @@
       return `background-color: ${color.bg}; color: ${color.text}; border: 1px solid ${color.border};`;
     }
 
-    function cleanString(str) {
-      return (str || "").toLowerCase().replace(/[^a-z0-9]/g, "");
-    }
-
     function renderList() {
       const container = document.getElementById("cards-list");
       const pollItems = pollResults[activePerimeter] || [];
@@ -222,20 +144,15 @@
       }
 
       container.innerHTML = pollItems.map((pollItem, idx) => {
-        // Recherche souple : par ID exact ou par comparaison nettoyée des titres
-        const fullItem = jsonItems.find(i => 
-          (i.id && pollItem.id && i.id.trim() === pollItem.id.trim()) ||
-          (i.title && pollItem.title && cleanString(i.title).includes(cleanString(pollItem.title))) ||
-          (i.title && pollItem.title && cleanString(pollItem.title).includes(cleanString(i.title)))
-        ) || {};
+        const fullItem = jsonItems.find(i => i.id === pollItem.id) || {};
 
         const title = fullItem.title || pollItem.title;
-        const category = fullItem.category || activePerimeter;
-        const subCategory = fullItem.subCategory || fullItem.device || "";
-        const description = fullItem.description || "";
-        const gains = fullItem.gains || "";
-        const originalBusinessNote = fullItem.businessNote || null;
-        const originalScore = fullItem.score || null;
+        const category = fullItem.category || pollItem.category || activePerimeter;
+        const subCategory = fullItem.subCategory || pollItem.subCategory || fullItem.device || "";
+        const description = fullItem.description || pollItem.description || "";
+        const gains = fullItem.gains || pollItem.gains || "";
+        const originalBusinessNote = fullItem.businessNote || pollItem.businessNote || null;
+        const originalScore = fullItem.score || pollItem.originalScore || null;
 
         let rankBadgeClass = "bg-slate-200 text-slate-700 font-bold";
         if (idx === 0) rankBadgeClass = "bg-amber-500 text-white font-black";
@@ -252,7 +169,7 @@
 
         let detailsHtml = "";
         if (gains && gains.trim() !== "") {
-          detailsHtml = `<div class="mt-2 pt-2 border-t border-slate-100 text-xs text-emerald-700"><strong>Gains / Bénéfices :</strong> ${escapeHtml(gains)}</div>`;
+          detailsHtml = `<div class="mt-2 pt-2 border-t border-slate-100 text-xs text-emerald-700 whitespace-pre-line"><strong>Gains / Bénéfices :</strong>\n${escapeHtml(gains)}</div>`;
         }
 
         return `
