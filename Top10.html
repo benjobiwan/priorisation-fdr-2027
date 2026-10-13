@@ -50,7 +50,6 @@
   </main>
 
   <script>
-    // RÉSULTATS EXTRAITS DIRECTEMENT DE L'ONGLET "Analyse_Résultats"
     const pollResults = {
       "MagasinsU": [
         { id: "mag-8", title: "Simplification et allègement du parcours d'inscription", votes: 10, top1: 0, score: 175 },
@@ -155,19 +154,21 @@
     let activePerimeter = "MagasinsU";
 
     document.addEventListener("DOMContentLoaded", () => {
-      // Compteurs sur les onglets
       document.getElementById("count-MagasinsU").textContent = pollResults.MagasinsU.length;
       document.getElementById("count-CoursesU").textContent = pollResults.CoursesU.length;
       document.getElementById("count-MeP").textContent = pollResults.MeP.length;
 
       fetch(`data.json?v=${Date.now()}`)
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) throw new Error("Fichier data.json non trouvé");
+          return res.json();
+        })
         .then(data => {
           jsonData = data;
           renderList();
         })
         .catch(err => {
-          console.error("Erreur de chargement de data.json :", err);
+          console.warn("Affichage en mode dégradé (sans data.json) :", err);
           renderList();
         });
     });
@@ -213,12 +214,16 @@
       const jsonItems = jsonData[activePerimeter] || [];
 
       if (pollItems.length === 0) {
-        container.innerHTML = `<div class="p-8 text-center text-slate-400 text-sm bg-white rounded-2xl border border-slate-200">Aucune donnée disponible.</div>`;
+        container.innerHTML = `<div class="p-8 text-center text-slate-400 text-sm bg-white rounded-2xl border border-slate-200">Aucune donnée disponible pour ce périmètre.</div>`;
         return;
       }
 
       container.innerHTML = pollItems.map((pollItem, idx) => {
-        const fullItem = jsonItems.find(i => i.id === pollItem.id) || {};
+        // Recherche souple : correspondance par ID exacte ou par inclusion du titre
+        const fullItem = jsonItems.find(i => 
+          i.id === pollItem.id || 
+          (i.title && pollItem.title && i.title.toLowerCase().trim() === pollItem.title.toLowerCase().trim())
+        ) || {};
 
         const title = fullItem.title || pollItem.title;
         const category = fullItem.category || activePerimeter;
