@@ -22,7 +22,7 @@
           </h1>
         </div>
         <div class="text-xs text-slate-500 font-medium">
-          Résultats consolidés (Google Form & Apps Script)
+          Résultats consolidés
         </div>
       </div>
 
@@ -50,103 +50,104 @@
   </main>
 
   <script>
+    // DONNÉES DE L'ONGLET ANALYSE_RÉSULTATS (NORMALISÉES ET SÉCURISÉES)
     const pollResults = {
       "MagasinsU": [
-        { id: "mag-8", title: "Simplification et allègement du parcours d'inscription", votes: 10, top1: 0, score: 175 },
-        { id: "mag-5", title: "Espace Offres : Bouton d'achat direct « Acheter sur Courses U » sur les offres", votes: 10, top1: 0, score: 167 },
-        { id: "mag-13", title: "Harmonisation des tuiles produit avec convergence MU et CU", votes: 8, top1: 3, score: 162 },
-        { id: "mag-15", title: "Liste de courses issue du tract promotionnel", votes: 8, top1: 4, score: 155 },
-        { id: "mag-10", title: "Centralisation et affichage des codes promo éligibles dans l'Espace Client", votes: 7, top1: 0, score: 120 },
-        { id: "mag-4", title: "Évolution et refonte du parcours Facture U", votes: 7, top1: 0, score: 115 },
-        { id: "mag-11", title: "Refonte de la pré-home Magasins U et convergence de cette page avec Courses U", votes: 6, top1: 3, score: 105 },
-        { id: "mag-12", title: "Espace Client : Refonte de la page fidélité", votes: 6, top1: 0, score: 103 },
-        { id: "mag-21", title: "Dématérialisation des codes de participation aux jeux promotionnels", votes: 5, top1: 0, score: 87 },
-        { id: "mag-14", title: "Gamification", votes: 4, top1: 0, score: 68 },
-        { id: "mag-17", title: "Consultation et suivi du solde de carte cadeau en ligne", votes: 4, top1: 0, score: 67 },
-        { id: "mag-19", title: "Personnalisation de l'affichage pour les nouveaux clients et non-porteurs de carte", votes: 4, top1: 0, score: 62 },
-        { id: "mag-20", title: "Digitalisation complète du parcours vignettes et collecteurs dématérialisés", votes: 3, top1: 1, score: 58 },
-        { id: "mag-3", title: "Espace Offres : Activation de toutes les offres en un clic", votes: 3, top1: 1, score: 56 },
-        { id: "mag-9", title: "Collecte de données déclaratives client", votes: 3, top1: 1, score: 53 },
-        { id: "mag-2", title: "Suivi des demandes de contact dans l'Espace Client", votes: 3, top1: 0, score: 49 },
-        { id: "mag-16", title: "Refonte du header et du méga-menu du site web", votes: 3, top1: 0, score: 48 },
-        { id: "mag-1", title: "Ajout de pièces jointes sur les formulaires de contact Magasins U", votes: 3, top1: 0, score: 48 },
-        { id: "mag-7", title: "Refonte ergonomique et technique du Store Locator", votes: 3, top1: 0, score: 46 },
-        { id: "mag-18", title: "Affichage des indicateurs RSE dans l'ESC et l'application", votes: 1, top1: 0, score: 14 }
+        { id: "mag-8", title: "Simplification et allègement du parcours d'inscription (profilage progressif)", votes: 100, top1: 0, score: 175 },
+        { id: "mag-5", title: "Espace Offres : Bouton d'achat direct « Acheter sur Courses U » sur les offres", votes: 100, top1: 0, score: 167 },
+        { id: "mag-13", title: "Harmonisation des tuiles produit avec convergence MU et CU (Nutri-Score, origine France, infos produit...)", votes: 83, top1: 0, score: 162 },
+        { id: "mag-15", title: "Liste de courses issue du tract promotionnel (Lot 3)", votes: 84, top1: 0, score: 155 },
+        { id: "mag-10", title: "Centralisation et affichage des codes promo éligibles dans l'Espace Client", votes: 70, top1: 0, score: 120 },
+        { id: "mag-4", title: "Évolution et refonte du parcours Facture U (Web & App)", votes: 70, top1: 0, score: 115 },
+        { id: "mag-11", title: "Refonte de la pré-home Magasins U et convergence de cette page avec Courses U", votes: 63, top1: 0, score: 105 },
+        { id: "mag-12", title: "Espace Client : Refonte de la page fidélité (Niveau 2 ESC)", votes: 60, top1: 0, score: 103 },
+        { id: "mag-21", title: "Dématérialisation des codes de participation aux jeux promotionnels", votes: 50, top1: 0, score: 87 },
+        { id: "mag-14", title: "Gamification (Lot 2) : Missions ESC et mécaniques de jeu omnicanales", votes: 40, top1: 0, score: 68 },
+        { id: "mag-17", title: "Consultation et suivi du solde de carte cadeau en ligne", votes: 40, top1: 0, score: 67 },
+        { id: "mag-19", title: "Personnalisation de l'affichage pour les nouveaux clients et non-porteurs de carte", votes: 40, top1: 0, score: 62 },
+        { id: "mag-20", title: "Digitalisation complète du parcours vignettes et collecteurs dématérialisés", votes: 31, top1: 1, score: 58 },
+        { id: "mag-3", title: "Espace Offres : Activation de toutes les offres en un clic", votes: 31, top1: 1, score: 56 },
+        { id: "mag-9", title: "Collecte de données déclaratives client (Zero-Party Data) pour le profil Courses U et Magasins U", votes: 31, top1: 1, score: 53 },
+        { id: "mag-2", title: "Suivi des demandes de contact dans l'Espace Client", votes: 30, top1: 0, score: 49 },
+        { id: "mag-16", title: "Refonte du header et du méga-menu du site web", votes: 30, top1: 0, score: 48 },
+        { id: "mag-1", title: "Ajout de pièces jointes sur les formulaires de contact Magasins U", votes: 30, top1: 0, score: 48 },
+        { id: "mag-7", title: "Refonte ergonomique et technique du Store Locator", votes: 30, top1: 0, score: 46 },
+        { id: "mag-18", title: "Affichage des indicateurs RSE dans l'ESC et l'application (Carbone, Origine France, Nutri-Score)", votes: 10, top1: 0, score: 14 }
       ],
       "CoursesU": [
-        { id: "cou-1", title: "Dettes Mécaniques promo manquantes et Automatisation des temps forts", votes: 10, top1: 3, score: 192 },
-        { id: "cou-19", title: "Recherche ultra-rapide", votes: 8, top1: 3, score: 142 },
-        { id: "cou-36", title: "Chaînage EAN", votes: 7, top1: 1, score: 120 },
-        { id: "cou-10", title: "E-tracts - Usage 2", votes: 6, top1: 1, score: 105 },
-        { id: "cou-16", title: "Recommandations mini panier & checkout", votes: 5, top1: 2, score: 98 },
-        { id: "cou-29", title: "Listes de courses", votes: 5, top1: 0, score: 86 },
-        { id: "cou-18", title: "Fusion Pré-home et Home", votes: 4, top1: 0, score: 73 },
-        { id: "cou-12", title: "Activation des offres", votes: 4, top1: 0, score: 69 },
-        { id: "cou-9", title: "E-tracts - Usage 1", votes: 5, top1: 0, score: 67 },
-        { id: "cou-27", title: "Régimes alimentaires", votes: 4, top1: 0, score: 63 },
-        { id: "cou-14", title: "Carrousels", votes: 4, top1: 0, score: 61 },
-        { id: "cou-24", title: "Tuile produit", votes: 3, top1: 0, score: 49 },
-        { id: "cou-38", title: "Préparé sur place", votes: 3, top1: 0, score: 48 },
-        { id: "cou-40", title: "Éligibilité LAD", votes: 3, top1: 0, score: 42 },
-        { id: "cou-23", title: "Recommandations PDP", votes: 3, top1: 0, score: 41 },
-        { id: "cou-20", title: "Volet de recherche", votes: 2, top1: 0, score: 37 },
-        { id: "cou-3", title: "Gamification avec de nouveaux jeux", votes: 2, top1: 0, score: 37 },
-        { id: "cou-33", title: "Présence sur les IA du marché", votes: 2, top1: 1, score: 36 },
-        { id: "cou-45", title: "Wero", votes: 2, top1: 0, score: 32 },
-        { id: "cou-28", title: "Produits consignés", votes: 2, top1: 0, score: 31 },
-        { id: "cou-31", title: "Commande vocale", votes: 2, top1: 0, score: 31 },
-        { id: "cou-2", title: "Produit offert", votes: 2, top1: 0, score: 30 },
-        { id: "cou-39", title: "Quantité max au panier", votes: 2, top1: 0, score: 26 },
-        { id: "cou-32", title: "Agent conversationnel", votes: 2, top1: 0, score: 25 },
-        { id: "cou-15", title: "Espaces animés", votes: 1, top1: 0, score: 20 },
-        { id: "cou-41", title: "Uber Eats", votes: 1, top1: 0, score: 18 },
-        { id: "cou-30", title: "Recettes", votes: 1, top1: 0, score: 17 },
-        { id: "cou-13", title: "Offre non-alimentaire", votes: 1, top1: 0, score: 17 },
-        { id: "cou-44", title: "Ticket Restau dématerialisés", votes: 1, top1: 0, score: 17 },
-        { id: "cou-17", title: "Choix du magasin", votes: 1, top1: 0, score: 16 },
-        { id: "cou-11", title: "E-tracts - Usage 3", votes: 1, top1: 0, score: 15 },
-        { id: "cou-35", title: "Fiches produits & visuels", votes: 1, top1: 0, score: 14 },
-        { id: "cou-46", title: "Paiement en n fois", votes: 1, top1: 0, score: 14 },
-        { id: "cou-5", title: "Dotation sur créneau", votes: 1, top1: 0, score: 13 },
-        { id: "cou-37", title: "Pictos et labels", votes: 1, top1: 0, score: 13 },
-        { id: "cou-21", title: "Filtres", votes: 1, top1: 0, score: 13 },
-        { id: "cou-34", title: "Service client", votes: 1, top1: 0, score: 11 }
+        { id: "cou-1", title: "Dettes Mécaniques promo manquantes et Automatisation des temps forts, jeudi +, prix coûtant, sur avantage", votes: 103, top1: 3, score: 192 },
+        { id: "cou-19", title: "Recherche ultra-rapide", votes: 83, top1: 0, score: 142 },
+        { id: "cou-36", title: "Chaînage EAN", votes: 71, top1: 1, score: 120 },
+        { id: "cou-10", title: "E-tracts - Usage 2", votes: 61, top1: 1, score: 105 },
+        { id: "cou-16", title: "Recommandations mini panier & checkout", votes: 52, top1: 0, score: 98 },
+        { id: "cou-29", title: "Listes de courses", votes: 50, top1: 0, score: 86 },
+        { id: "cou-18", title: "Fusion Pré-home et Home", votes: 40, top1: 0, score: 73 },
+        { id: "cou-12", title: "Activation des offres", votes: 40, top1: 0, score: 69 },
+        { id: "cou-9", title: "E-tracts - Usage 1", votes: 50, top1: 0, score: 67 },
+        { id: "cou-27", title: "Régimes alimentaires", votes: 40, top1: 0, score: 63 },
+        { id: "cou-14", title: "Carrousels", votes: 40, top1: 0, score: 61 },
+        { id: "cou-24", title: "Tuile produit", votes: 30, top1: 0, score: 49 },
+        { id: "cou-38", title: "Préparé sur place", votes: 30, top1: 0, score: 48 },
+        { id: "cou-40", title: "Éligibilité LAD", votes: 30, top1: 0, score: 42 },
+        { id: "cou-23", title: "Recommandations PDP", votes: 30, top1: 0, score: 41 },
+        { id: "cou-20", title: "Volet de recherche", votes: 20, top1: 0, score: 37 },
+        { id: "cou-3", title: "Gamification avec de nouveaux jeux", votes: 20, top1: 0, score: 37 },
+        { id: "cou-33", title: "Présence sur les IA du marché", votes: 21, top1: 1, score: 36 },
+        { id: "cou-45", title: "Wero", votes: 20, top1: 0, score: 32 },
+        { id: "cou-28", title: "Produits consignés", votes: 20, top1: 0, score: 31 },
+        { id: "cou-31", title: "Commande vocale", votes: 20, top1: 0, score: 31 },
+        { id: "cou-2", title: "Produit offert", votes: 20, top1: 0, score: 30 },
+        { id: "cou-39", title: "Quantité max au panier", votes: 20, top1: 0, score: 26 },
+        { id: "cou-32", title: "Agent conversationnel", votes: 20, top1: 0, score: 25 },
+        { id: "cou-15", title: "Espaces animés", votes: 10, top1: 0, score: 20 },
+        { id: "cou-41", title: "Uber Eats", votes: 10, top1: 0, score: 18 },
+        { id: "cou-30", title: "Recettes", votes: 10, top1: 0, score: 17 },
+        { id: "cou-13", title: "Offre non-alimentaire", votes: 10, top1: 0, score: 17 },
+        { id: "cou-44", title: "Ticket Restau dématerialisés", votes: 10, top1: 0, score: 17 },
+        { id: "cou-17", title: "Choix du magasin", votes: 10, top1: 0, score: 16 },
+        { id: "cou-11", title: "E-tracts - Usage 3", votes: 10, top1: 0, score: 15 },
+        { id: "cou-35", title: "Fiches produits & visuelss", votes: 10, top1: 0, score: 14 },
+        { id: "cou-46", title: "Paiement en n fois", votes: 10, top1: 0, score: 14 },
+        { id: "cou-5", title: "Dotation sur créneau", votes: 10, top1: 0, score: 13 },
+        { id: "cou-37", title: "Pictos et labels", votes: 10, top1: 0, score: 13 },
+        { id: "cou-21", title: "Filtres", votes: 10, top1: 0, score: 13 },
+        { id: "cou-34", title: "Service client", votes: 10, top1: 0, score: 11 }
       ],
       "MeP": [
-        { id: "mep-1", title: "Pilotage de la publication", votes: 11, top1: 4, score: 210 },
-        { id: "mep-6", title: "Chaînage des articles", votes: 9, top1: 2, score: 167 },
-        { id: "mep-22", title: "Process de remise", votes: 7, top1: 1, score: 122 },
-        { id: "mep-8", title: "Pilotage des manquants", votes: 6, top1: 0, score: 91 },
-        { id: "mep-7", title: "Pilotage des manquants (Export quotidien)", votes: 5, top1: 0, score: 87 },
-        { id: "mep-15", title: "Facilitation de la consolidation", votes: 5, top1: 2, score: 86 },
-        { id: "mep-18", title: "Collecte (Alignement codes produits)", votes: 5, top1: 0, score: 82 },
-        { id: "mep-11", title: "Planification des ressources", votes: 4, top1: 1, score: 79 },
-        { id: "mep-39", title: "Sectorisation (optimisation des tournées)", votes: 5, top1: 0, score: 77 },
-        { id: "mep-23", title: "Anticipation de l’arrivée client", votes: 4, top1: 0, score: 66 },
-        { id: "mep-24", title: "Expérience-utilisateur (Identification via app)", votes: 4, top1: 0, score: 60 },
-        { id: "mep-10", title: "Seuils de dépublication Ulis", votes: 4, top1: 0, score: 55 },
-        { id: "mep-20", title: "Bonnes pratiques et formation (Book 2027)", votes: 3, top1: 0, score: 48 },
-        { id: "mep-35", title: "Process de préparation (BO Light)", votes: 4, top1: 0, score: 47 },
-        { id: "mep-9", title: "Bonnes pratiques et formation (Portail BPM)", votes: 3, top1: 0, score: 43 },
-        { id: "mep-37", title: "Lacher caddie", votes: 3, top1: 0, score: 38 },
-        { id: "mep-34", title: "Accélération de la bascule vers la réserve dédiée", votes: 2, top1: 0, score: 37 },
-        { id: "mep-16", title: "Verticalisation du stockage", votes: 2, top1: 1, score: 33 },
-        { id: "mep-17", title: "Collecte (Adresses secondaires)", votes: 2, top1: 0, score: 31 },
-        { id: "mep-3", title: "Spécialisation des équipes F&L", votes: 2, top1: 0, score: 31 },
-        { id: "mep-21", title: "Expérience-utilisateur (Régie pub MSU)", votes: 2, top1: 0, score: 28 },
-        { id: "mep-13", title: "Pilotage de la productivité (Émetteurs TRD)", votes: 2, top1: 0, score: 25 },
-        { id: "mep-5", title: "Qualité des F&L (Stickers thermodynamiques)", votes: 2, top1: 0, score: 24 },
-        { id: "mep-33", title: "Optimisation du stock en réserve dédiée", votes: 1, top1: 0, score: 18 },
-        { id: "mep-4", title: "Homogénéisation des conditions de stockage", votes: 1, top1: 0, score: 16 },
-        { id: "mep-2", title: "Qualité des F&L (Signalement Mobudrive)", votes: 1, top1: 0, score: 16 },
-        { id: "mep-25", title: "Déploiement des solutions (Triptyque)", votes: 1, top1: 0, score: 15 },
-        { id: "mep-12", title: "Pilotage de la productivité (Ergonomie BO)", votes: 1, top1: 0, score: 14 },
-        { id: "mep-30", title: "Formation des équipes Courses U LAD", votes: 1, top1: 0, score: 13 },
-        { id: "mep-27", title: "Activation du service LAD dans les 10% restants", votes: 1, top1: 0, score: 13 },
-        { id: "mep-38", title: "Ciblage segments spécifiques (Seniors, PMR)", votes: 1, top1: 0, score: 12 },
-        { id: "mep-19", title: "Pilotage de la productivité (Points Relais)", votes: 1, top1: 0, score: 12 },
-        { id: "mep-31", title: "Livraison gratuite à partir d'un seuil", votes: 1, top1: 0, score: 12 },
-        { id: "mep-36", title: "Livraison express : livraison en moins d'une heure", votes: 1, top1: 0, score: 9 }
+        { id: "mep-1", title: "Pilotage de la publication", votes: 114, top1: 4, score: 210 },
+        { id: "mep-6", title: "Chaînage des articles", votes: 92, top1: 2, score: 167 },
+        { id: "mep-22", title: "Process de remise", votes: 71, top1: 1, score: 122 },
+        { id: "mep-8", title: "Pilotage des manquants", votes: 60, top1: 0, score: 91 },
+        { id: "mep-7", title: "Pilotage des manquants", votes: 50, top1: 0, score: 87 },
+        { id: "mep-15", title: "Facilitation de la consolidation", votes: 52, top1: 0, score: 86 },
+        { id: "mep-18", title: "Collecte", votes: 50, top1: 0, score: 82 },
+        { id: "mep-11", title: "Planification", votes: 41, top1: 1, score: 79 },
+        { id: "mep-39", title: "Sectorisation (optimisation des tournées)", votes: 50, top1: 0, score: 77 },
+        { id: "mep-23", title: "Anticipation de l’arrivée client", votes: 40, top1: 0, score: 66 },
+        { id: "mep-24", title: "Expérience-utilisateur", votes: 40, top1: 0, score: 60 },
+        { id: "mep-10", title: "Seuils de dépublication Ulis (permanent, promo)", votes: 40, top1: 0, score: 55 },
+        { id: "mep-20", title: "Bonnes pratiques et formation", votes: 30, top1: 0, score: 48 },
+        { id: "mep-35", title: "Process de préparation", votes: 40, top1: 0, score: 47 },
+        { id: "mep-9", title: "Bonnes pratiques et formation", votes: 30, top1: 0, score: 43 },
+        { id: "mep-37", title: "Lacher caddie", votes: 30, top1: 0, score: 38 },
+        { id: "mep-34", title: "Accélération de la bascule vers le modèle de réserve dédiée", votes: 20, top1: 0, score: 37 },
+        { id: "mep-16", title: "Verticalisation du stockage", votes: 21, top1: 1, score: 33 },
+        { id: "mep-17", title: "Collecte", votes: 20, top1: 0, score: 31 },
+        { id: "mep-3", title: "Spécialisation des équipes F&L", votes: 20, top1: 0, score: 31 },
+        { id: "mep-21", title: "Expérience-utilisateur", votes: 20, top1: 0, score: 28 },
+        { id: "mep-13", title: "Pilotage de la productivité", votes: 20, top1: 0, score: 25 },
+        { id: "mep-5", title: "Qualité des F&L", votes: 20, top1: 0, score: 24 },
+        { id: "mep-33", title: "Optimisation du stock en réserve dédiée", votes: 10, top1: 0, score: 18 },
+        { id: "mep-4", title: "Homogénéisation des conditions de stockage", votes: 10, top1: 0, score: 16 },
+        { id: "mep-2", title: "Qualité des F&L", votes: 10, top1: 0, score: 16 },
+        { id: "mep-25", title: "Déploiement des solutions", votes: 10, top1: 0, score: 15 },
+        { id: "mep-12", title: "Pilotage de la productivité", votes: 10, top1: 0, score: 14 },
+        { id: "mep-30", title: "Formation des équipes Courses UC", votes: 10, top1: 0, score: 13 },
+        { id: "mep-27", title: "Activation du service LAD dans les 10% du parc restant", votes: 10, top1: 0, score: 13 },
+        { id: "mep-38", title: "Ciblage segments spécifiques (seniors, PMR...)", votes: 10, top1: 0, score: 12 },
+        { id: "mep-19", title: "Pilotage de la productivité", votes: 10, top1: 0, score: 12 },
+        { id: "mep-31", title: "Livraison gratuite à partir d'un seuil (50% du parc)", votes: 10, top1: 0, score: 12 },
+        { id: "mep-36", title: "Livraison express : livraison en moins d'une heure.", votes: 10, top1: 0, score: 9 }
       ]
     };
 
@@ -154,21 +155,19 @@
     let activePerimeter = "MagasinsU";
 
     document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("count-MagasinsU").textContent = pollResults.MagasinsU.length;
-      document.getElementById("count-CoursesU").textContent = pollResults.CoursesU.length;
-      document.getElementById("count-MeP").textContent = pollResults.MeP.length;
+      // Met à jour les compteurs des badges sur les onglets
+      document.getElementById("count-MagasinsU").textContent = pollResults.MagasinsU ? pollResults.MagasinsU.length : 0;
+      document.getElementById("count-CoursesU").textContent = pollResults.CoursesU ? pollResults.CoursesU.length : 0;
+      document.getElementById("count-MeP").textContent = pollResults.MeP ? pollResults.MeP.length : 0;
 
       fetch(`data.json?v=${Date.now()}`)
-        .then(res => {
-          if (!res.ok) throw new Error("Fichier data.json non trouvé");
-          return res.json();
-        })
+        .then(res => res.json())
         .then(data => {
           jsonData = data;
           renderList();
         })
         .catch(err => {
-          console.warn("Affichage en mode dégradé (sans data.json) :", err);
+          console.warn("Attention: data.json non chargé (utilisation du mode direct local) :", err);
           renderList();
         });
     });
@@ -214,14 +213,14 @@
       const jsonItems = jsonData[activePerimeter] || [];
 
       if (pollItems.length === 0) {
-        container.innerHTML = `<div class="p-8 text-center text-slate-400 text-sm bg-white rounded-2xl border border-slate-200">Aucune donnée disponible pour ce périmètre.</div>`;
+        container.innerHTML = `<div class="p-8 text-center text-slate-400 text-sm bg-white rounded-2xl border border-slate-200">Aucune donnée disponible pour le périmètre ${activePerimeter}.</div>`;
         return;
       }
 
       container.innerHTML = pollItems.map((pollItem, idx) => {
-        // Recherche souple : correspondance par ID exacte ou par inclusion du titre
+        // Recherche robuste de la carte dans data.json par ID ou par Titre
         const fullItem = jsonItems.find(i => 
-          i.id === pollItem.id || 
+          (i.id && pollItem.id && i.id.toLowerCase().trim() === pollItem.id.toLowerCase().trim()) || 
           (i.title && pollItem.title && i.title.toLowerCase().trim() === pollItem.title.toLowerCase().trim())
         ) || {};
 
