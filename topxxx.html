@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-slate-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restitution de la Priorisation — FdR 2027</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="h-full text-slate-800 antialiased flex flex-col font-sans">
+
+  <!-- EN-TÊTE PRINCIPAL -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <a href="index.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-800 mb-1">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Retour à l'accueil
+          </a>
+          <h1 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+            🏆 Restitution des sujets priorisés
+          </h1>
+        </div>
+        <div class="text-xs text-slate-500 font-medium">
+          Résultats consolidés (Google Form & Apps Script)
+        </div>
+      </div>
+
+      <!-- ONGLETS DE SÉLECTION (3 CTA) -->
+      <div class="flex items-center gap-2 mt-6 border-b border-slate-200 pb-2 overflow-x-auto">
+        <button id="cta-MagasinsU" onclick="switchPerimeter('MagasinsU')" class="tab-btn px-4 py-2 text-sm font-bold rounded-xl border transition-all flex items-center gap-2 whitespace-nowrap bg-indigo-600 text-white border-indigo-600 shadow-xs">
+          <i data-lucide="store" class="w-4 h-4"></i>
+          Magasins U <span id="count-MagasinsU" class="px-2 py-0.5 text-xs rounded-full bg-white/20 text-white">0</span>
+        </button>
+        <button id="cta-CoursesU" onclick="switchPerimeter('CoursesU')" class="tab-btn px-4 py-2 text-sm font-bold rounded-xl border transition-all flex items-center gap-2 whitespace-nowrap bg-white text-slate-600 border-slate-200 hover:bg-slate-100">
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          Courses U <span id="count-CoursesU" class="px-2 py-0.5 text-xs rounded-full bg-slate-100 text-slate-600">0</span>
+        </button>
+        <button id="cta-MeP" onclick="switchPerimeter('MeP')" class="tab-btn px-4 py-2 text-sm font-bold rounded-xl border transition-all flex items-center gap-2 whitespace-nowrap bg-white text-slate-600 border-slate-200 hover:bg-slate-100">
+          <i data-lucide="settings" class="w-4 h-4"></i>
+          MeP (Exploitation & Productivité) <span id="count-MeP" class="px-2 py-0.5 text-xs rounded-full bg-slate-100 text-slate-600">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENU PRINCIPAL -->
+  <main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div id="cards-list" class="space-y-4"></div>
+  </main>
+
+  <script>
+    const pollResults = {
+      "MagasinsU": [
+        { id: "mag-8", title: "Simplification et allègement du parcours d'inscription (profilage progressif)", category: "👋🏻Engagement client et acquisition", subCategory: "👨‍💻 ESC", votes: 100, top1: 0, score: 175, businessNote: "10,90", originalScore: 100 },
+        { id: "mag-5", title: "Espace Offres : Bouton d'achat direct « Acheter sur Courses U » sur les offres", category: "👋🏻Engagement client et acquisition", subCategory: "👨‍💻 ESC", votes: 100, top1: 0, score: 167, businessNote: "8,55", originalScore: 100 },
+        { id: "mag-13", title: "Harmonisation des tuiles produit avec convergence MU et CU", category: "👋🏻Engagement client et acquisition", subCategory: "🖥️ Web, 📱 Apps", votes: 83, top1: 0, score: 162, businessNote: "13,85", originalScore: 100 },
+        { id: "mag-15", title: "Liste de courses issue du tract promotionnel (Lot 3)", category: "👋🏻Engagement client et acquisition", subCategory: "🖥️ Web, 📱 Apps, 👨‍💻 ESC", votes: 84, top1: 0, score: 155, businessNote: "13,75", originalScore: 100 },
+        { id: "mag-10", title: "Centralisation et affichage des codes promo éligibles dans l'Espace Client", category: "👋🏻Engagement client et acquisition", subCategory: "👨‍💻 ESC", votes: 70, top1: 0, score: 120, businessNote: "11,50", originalScore: 75 },
+        { id: "mag-4", title: "Évolution et refonte du parcours Facture U (Web & App)", category: "🔄️Convergence Off et On-Line", subCategory: "🖥️ Web, 📱 Apps", votes: 70, top1: 0, score: 115, businessNote: "9,45", originalScore: 100 },
+        { id: "mag-11", title: "Refonte de la pré-home Magasins U et convergence avec Courses U", category: "😣Urgences & Irritants", subCategory: "🖥️ Web", votes: 63, top1: 0, score: 105, businessNote: "5,40", originalScore: 100 },
+        { id: "mag-12", title: "Espace Client : Refonte de la page fidélité (Niveau 2 ESC)", category: "🎨Personnalisation et fidélisation", subCategory: "👨‍💻 ESC", votes: 60, top1: 0, score: 103, businessNote: "11,00", originalScore: 50 },
+        { id: "mag-21", title: "Dématérialisation des codes de participation aux jeux promotionnels", category: "🔄️Convergence Off et On-Line", subCategory: "👨‍💻 ESC", votes: 50, top1: 0, score: 87, businessNote: "11,00", originalScore: 75 },
+        { id: "mag-14", title: "Gamification (Lot 2) : Missions ESC et mécaniques de jeu omnicanales", category: "👋🏻Engagement client et acquisition", subCategory: "📱 Apps, 👨‍💻 ESC", votes: 40, top1: 0, score: 68, businessNote: "11,00", originalScore: 25 },
+        { id: "mag-17", title: "Consultation et suivi du solde de carte cadeau en ligne", category: "🔄️Convergence Off et On-Line", subCategory: "🖥️ Web", votes: 40, top1: 0, score: 67, businessNote: "6,60", originalScore: 75 },
+        { id: "mag-19", title: "Personnalisation de l'affichage pour les nouveaux clients", category: "🎨Personnalisation et fidélisation", subCategory: "🖥️ Web, 📱 Apps", votes: 40, top1: 0, score: 62, businessNote: "5,10", originalScore: 75 },
+        { id: "mag-20", title: "Digitalisation complète du parcours vignettes et collecteurs dématérialisés", category: "🔄️Convergence Off et On-Line", subCategory: "👨‍💻 ESC", votes: 31, top1: 1, score: 58, businessNote: "11,00", originalScore: 100 },
+        { id: "mag-3", title: "Espace Offres : Activation de toutes les offres en un clic", category: "👋🏻Engagement client et acquisition", subCategory: "👨‍💻 ESC", votes: 31, top1: 1, score: 56, businessNote: "4,15", originalScore: 50 },
+        { id: "mag-9", title: "Collecte de données déclaratives client (Zero-Party Data)", category: "🎨Personnalisation et fidélisation", subCategory: "👨‍💻 ESC", votes: 31, top1: 1, score: 53, businessNote: "8,10", originalScore: 75 },
+        { id: "mag-2", title: "Suivi des demandes de contact dans l'Espace Client", category: "🔄️Convergence Off et On-Line", subCategory: "👨‍💻 ESC", votes: 30, top1: 0, score: 49, businessNote: "4,55", originalScore: 75 },
+        { id: "mag-16", title: "Refonte du header et du méga-menu du site web", category: "😣Urgences & Irritants", subCategory: "🖥️ Web", votes: 30, top1: 0, score: 48, businessNote: "4,60", originalScore: 100 },
+        { id: "mag-1", title: "Ajout de pièces jointes sur les formulaires de contact Magasins U", category: "🔄️Convergence Off et On-Line", subCategory: "🖥️ Web, 📱 Apps", votes: 30, top1: 0, score: 48, businessNote: "4,55", originalScore: 75 },
+        { id: "mag-7", title: "Refonte ergonomique et technique du Store Locator", category: "👋🏻Engagement client et acquisition", subCategory: "🗺️Store locator", votes: 30, top1: 0, score: 46, businessNote: "7,35", originalScore: 100 },
+        { id: "mag-18", title: "Affichage des indicateurs RSE dans l'ESC et l'application", category: "🎨Personnalisation et fidélisation", subCategory: "👨‍💻 ESC", votes: 10, top1: 0, score: 14, businessNote: "4,10", originalScore: 75 }
+      ],
+      "CoursesU": [
+        { id: "cou-1", title: "Dettes Mécaniques promo manquantes et Automatisation des temps forts", category: "Améliorer notre image prix", subCategory: "🏷️ Animation commerciale", votes: 103, top1: 3, score: 192, businessNote: "25,9", originalScore: 150 },
+        { id: "cou-19", title: "Recherche ultra-rapide V2 sur l'App", category: "Faciliter la vie du client", subCategory: "🔍 Search", votes: 83, top1: 0, score: 142, businessNote: "29,5", originalScore: 50 },
+        { id: "cou-36", title: "Chaînage EAN (gestion des changements de codes produits)", category: "Fiabiliser notre catalogue", subCategory: "🗃️ Donnée produit", votes: 71, top1: 1, score: 120, businessNote: "14,7", originalScore: 150 },
+        { id: "cou-10", title: "E-tracts - Usage 2 : Ajout direct au panier depuis e-tract", category: "Améliorer notre image prix", subCategory: "📣 Mise en avant des promos", votes: 61, top1: 1, score: 105, businessNote: "20,8", originalScore: 100 },
+        { id: "cou-16", title: "Recommandations mini panier & checkout", category: "Améliorer notre image prix", subCategory: "🎯 Hyper-personnalisation", votes: 52, top1: 0, score: 98, businessNote: "51,6", originalScore: 50 },
+        { id: "cou-29", title: "Listes de courses : Retravail de la page Mes listes", category: "Faciliter la vie du client", subCategory: "🍽️ Bien manger", votes: 50, top1: 0, score: 86, businessNote: "29,5", originalScore: 50 },
+        { id: "cou-18", title: "Fusion Pré-home et Home", category: "Faciliter la vie du client", subCategory: "🚪 Accéder", votes: 40, top1: 0, score: 73, businessNote: "17,7", originalScore: 100 },
+        { id: "cou-12", title: "Activation des offres de type 10%", category: "Améliorer notre image prix", subCategory: "📣 Mise en avant des promos", votes: 40, top1: 0, score: 69, businessNote: "4,7", originalScore: 100 },
+        { id: "cou-9", title: "E-tracts - Usage 1 : Catalogues promo en ligne", category: "Améliorer notre image prix", subCategory: "📣 Mise en avant des promos", votes: 50, top1: 0, score: 67, businessNote: "8,3", originalScore: 25 },
+        { id: "cou-27", title: "Régimes alimentaires & enregistrement des allergènes", category: "Faciliter la vie du client", subCategory: "🍽️ Bien manger", votes: 40, top1: 0, score: 63, businessNote: "5,9", originalScore: 100 },
+        { id: "cou-14", title: "Carrousels personnalisés selon le profil client", category: "Améliorer notre image prix", subCategory: "🎯 Hyper-personnalisation", votes: 40, top1: 0, score: 61, businessNote: "12,9", originalScore: 100 },
+        { id: "cou-24", title: "Tuile produit : Évolutions visuelles et informations", category: "Faciliter la vie du client", subCategory: "📱 Résultats Search", votes: 30, top1: 0, score: 49, businessNote: "17,7", originalScore: 100 },
+        { id: "cou-38", title: "Préparé sur place : Mise en avant du fait maison", category: "Fiabiliser notre catalogue", subCategory: "🗃️ Donnée produit", votes: 30, top1: 0, score: 48, businessNote: "0,7", originalScore: 75 },
+        { id: "cou-40", title: "Éligibilité LAD : Gestion des produits volumineux", category: "Fiabiliser notre catalogue", subCategory: "⚙️ Règles de gestion", votes: 30, top1: 0, score: 42, businessNote: "3,9", originalScore: 100 },
+        { id: "cou-23", title: "Recommandations PDP : Variantes sur fiches produits", category: "Faciliter la vie du client", subCategory: "📱 Résultats Search", votes: 30, top1: 0, score: 41, businessNote: "7,4", originalScore: 50 }
+      ],
+      "MeP": [
+        { id: "mep-1", title: "Pilotage de la publication sur Courses U", category: "Excellence opérationnelle", subCategory: "📦 Assortiment et publication", votes: 114, top1: 4, score: 210, businessNote: "10,0", originalScore: 100 },
+        { id: "mep-6", title: "Chaînage des articles & fiabilisation UC liées", category: "Excellence opérationnelle", subCategory: "🔍 Manquants", votes: 92, top1: 2, score: 167, businessNote: "4,0", originalScore: 100 },
+        { id: "mep-22", title: "Process de remise au coffre digitalisé", category: "Excellence opérationnelle", subCategory: "🛒 Remise au coffre", votes: 71, top1: 1, score: 122, businessNote: "2,0", originalScore: 100 },
+        { id: "mep-8", title: "Pilotage des manquants (Quick wins ULIS)", category: "Excellence opérationnelle", subCategory: "🔍 Manquants", votes: 60, top1: 0, score: 91, businessNote: "3,0", originalScore: 25 },
+        { id: "mep-7", title: "Pilotage des manquants (Export quotidien)", category: "Excellence opérationnelle", subCategory: "🔍 Manquants", votes: 50, top1: 0, score: 87, businessNote: "3,0", originalScore: 50 },
+        { id: "mep-15", title: "Facilitation de la consolidation (Gencodage bacs)", category: "Excellence opérationnelle", subCategory: "📈 Productivité", votes: 52, top1: 0, score: 86, businessNote: "3,0", originalScore: 50 },
+        { id: "mep-18", title: "Collecte (Alignement des codes PLU, Front et BO)", category: "Excellence opérationnelle", subCategory: "📈 Productivité", votes: 50, top1: 0, score: 82, businessNote: "2,0", originalScore: 100 },
+        { id: "mep-11", title: "Planification des ressources prévisionnelles", category: "Excellence opérationnelle", subCategory: "📈 Productivité", votes: 41, top1: 1, score: 79, businessNote: "2,0", originalScore: 100 },
+        { id: "mep-39", title: "Sectorisation (optimisation des tournées de livraison)", category: "Proximité", subCategory: "📈 Productivité", votes: 50, top1: 0, score: 77, businessNote: "7,0", originalScore: 100 },
+        { id: "mep-23", title: "Anticipation de l’arrivée client (Géolocalisation)", category: "Excellence opérationnelle", subCategory: "🛒 Remise au coffre", votes: 40, top1: 0, score: 66, businessNote: "2,0", originalScore: 50 }
+      ]
+    };
+
+    let activePerimeter = "MagasinsU";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      render();
+    });
+
+    function switchPerimeter(perimeter) {
+      activePerimeter = perimeter;
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.className = "tab-btn px-4 py-2 text-sm font-bold rounded-xl border transition-all flex items-center gap-2 whitespace-nowrap bg-white text-slate-600 border-slate-200 hover:bg-slate-100";
+        const badge = btn.querySelector("span");
+        if (badge) badge.className = "px-2 py-0.5 text-xs rounded-full bg-slate-100 text-slate-600";
+      });
+
+      const activeBtn = document.getElementById(`cta-${perimeter}`);
+      if (activeBtn) {
+        activeBtn.className = "tab-btn px-4 py-2 text-sm font-bold rounded-xl border transition-all flex items-center gap-2 whitespace-nowrap bg-indigo-600 text-white border-indigo-600 shadow-xs";
+        const badge = activeBtn.querySelector("span");
+        if (badge) badge.className = "px-2 py-0.5 text-xs rounded-full bg-white/20 text-white";
+      }
+      render();
+    }
+
+    function getBadgeStyle(text, offset = 0) {
+      if (!text) return 'background-color: #f1f5f9; color: #334155; border: 1px solid #e2e8f0;';
+      const colorPalette = [
+        { bg: '#e0f2fe', text: '#0369a1', border: '#bae6fd' },
+        { bg: '#fef3c7', text: '#b45309', border: '#fde68a' },
+        { bg: '#dcfce7', text: '#15803d', border: '#bbf7d0' },
+        { bg: '#f3e8ff', text: '#6b21a8', border: '#e9d5ff' },
+        { bg: '#ffe4e6', text: '#be123c', border: '#fecdd3' },
+        { bg: '#ccfbf1', text: '#0f766e', border: '#99f6e4' },
+        { bg: '#ffedd5', text: '#c2410c', border: '#fed7aa' },
+        { bg: '#f1f5f9', text: '#334155', border: '#e2e8f0' }
+      ];
+      let hash = 0;
+      for (let i = 0; i < text.length; i++) hash = text.charCodeAt(i) + ((hash << 5) - hash);
+      const color = colorPalette[Math.abs(hash + offset) % colorPalette.length];
+      return `background-color: ${color.bg}; color: ${color.text}; border: 1px solid ${color.border};`;
+    }
+
+    function render() {
+      // Met à jour les compteurs
+      document.getElementById("count-MagasinsU").textContent = pollResults.MagasinsU.length;
+      document.getElementById("count-CoursesU").textContent = pollResults.CoursesU.length;
+      document.getElementById("count-MeP").textContent = pollResults.MeP.length;
+
+      const container = document.getElementById("cards-list");
+      const items = pollResults[activePerimeter] || [];
+
+      if (items.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-slate-400 text-sm bg-white rounded-2xl border border-slate-200">Aucun sujet pour ce périmètre.</div>`;
+        return;
+      }
+
+      container.innerHTML = items.map((item, idx) => {
+        let rankBadgeClass = "bg-slate-200 text-slate-700 font-bold";
+        if (idx === 0) rankBadgeClass = "bg-amber-500 text-white font-black";
+        else if (idx === 1) rankBadgeClass = "bg-slate-400 text-white font-bold";
+        else if (idx === 2) rankBadgeClass = "bg-amber-700 text-white font-bold";
+
+        const catStyle = getBadgeStyle(item.category, 0);
+        let badgesHtml = `<span style="${catStyle}" class="px-2.5 py-0.5 rounded-md font-semibold text-xs">${escapeHtml(item.category)}</span>`;
+
+        if (item.subCategory) {
+          const subStyle = getBadgeStyle(item.subCategory, 3);
+          badgesHtml += `<span style="${subStyle}" class="px-2.5 py-0.5 rounded-md font-semibold text-xs">${escapeHtml(item.subCategory)}</span>`;
+        }
+
+        return `
+          <div class="p-5 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row md:items-start justify-between gap-4 shadow-xs hover:shadow-md transition-all">
+            <div class="flex items-start gap-3.5 min-w-0 flex-1">
+              <span class="w-7 h-7 rounded-lg ${rankBadgeClass} text-xs flex items-center justify-center shrink-0 shadow-xs">#${idx + 1}</span>
+              <div class="space-y-1.5 min-w-0 flex-1">
+                <div class="flex gap-2 flex-wrap items-center">
+                  ${badgesHtml}
+                  <span class="text-[11px] font-mono text-slate-400">ID: ${item.id}</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-base leading-snug">${escapeHtml(item.title)}</h3>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap md:flex-col items-end justify-between md:justify-start gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100">
+              <span class="px-3 py-1 text-xs font-black bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-lg shadow-2xs">
+                Score : ${item.score} pts
+              </span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-emerald-50 text-emerald-700 rounded-md">
+                ${item.votes} votes ${item.top1 > 0 ? `(${item.top1}x #1)` : ''}
+              </span>
+              ${item.businessNote ? `
+                <span class="text-[11px] text-slate-400 font-medium">
+                  Val. Bus : ${escapeHtml(item.businessNote)} \vert{} Poids :${item.originalScore} pts
+                </span>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function escapeHtml(t) { return String(t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  </script>
+</body>
+</html>
+
