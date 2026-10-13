@@ -269,10 +269,10 @@
                 ${pollItem.votes} votes ${pollItem.top1 > 0 ? `(${pollItem.top1}x #1)` : ''}
               </span>
               ${(originalBusinessNote || originalScore) ? `
-                <span class="text-[11px] text-slate-400 font-medium">
-                  Val. Bus : ${escapeHtml(originalBusinessNote)} \vert{} Poids :${originalScore ? originalScore + ' pts' : '-'}
-                </span>
-              ` : ''}
+  <span class="text-[11px] text-slate-400 font-medium">
+    Val. Bus : ${escapeHtml(originalBusinessNote || '-')} | Poids : ${originalScore ? originalScore + ' pts' : '-'}
+  </span>
+` : ''}
             </div>
           </div>
         `;
