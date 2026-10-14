@@ -331,9 +331,10 @@
                 </span>
                 ${(businessNoteClean || originalScore) ? `
                   <span class="text-[11px] text-slate-400 font-medium">
-                    ${businessNoteClean ? 'Valeur Business : ' + escapeHtml(businessNoteClean) : ''}
-                    ${(businessNoteClean && originalScore) ? ' \vert{} ' : ''}${originalScore ? ' Poids : ' + originalScore : ''}
-                  </span>
+    ${businessNoteClean ? 'Valeur Business : ' + escapeHtml(businessNoteClean) : ''}
+    ${(businessNoteClean && originalScore) ? ' | ' : ''}
+    ${originalScore ? 'Poids : ' + originalScore : ''}
+  </span>
                 ` : ''}
               </div>
             </div>
