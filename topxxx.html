@@ -171,9 +171,13 @@
       return String(t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); 
     }
 
+    // Nettoyage complet : supprime tous les caractères de contrôle invisibles (\x00-\x1F) et le motif vert{}
     function cleanNote(note) {
       if (!note) return "";
-      return String(note).replace(/vert\{\}/gi, "").trim();
+      return String(note)
+        .replace(/[\x00-\x1F\x7F-\x9F]/g, "")
+        .replace(/vert\{\}/gi, "")
+        .trim();
     }
 
     function getBadgeStyle(text, offset) {
