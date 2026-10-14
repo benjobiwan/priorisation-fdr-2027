@@ -9,7 +9,7 @@
 </head>
 <body class="h-full text-slate-800 antialiased flex flex-col font-sans">
 
-  <!-- EN-TÊTE PRINCIPAL -->
+  <!-- EN-TÊTE PRINCIPAL (max-w-6xl) -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -22,7 +22,7 @@
           </h1>
         </div>
         <div class="text-xs text-slate-500 font-medium">
-          Croisement dynamique avec data.json
+          Résultats de la consultation FdR 2027
         </div>
       </div>
 
@@ -44,13 +44,12 @@
     </div>
   </header>
 
-  <!-- CONTENU PRINCIPAL -->
+  <!-- CONTENU PRINCIPAL (max-w-6xl) -->
   <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div id="cards-list" class="space-y-4"></div>
   </main>
 
   <script>
-    // 1. RÉSULTATS DES VOTES (Uniquement les métriques générées par Apps Script)
     const pollResults = {
       MagasinsU: [
         { id: "mag-8", votes: 120, top1: 21, score: 211 },
@@ -214,7 +213,6 @@
       document.getElementById("count-MeP").textContent = pollResults.MeP.length;
 
       container.innerHTML = votesList.map((voteItem, idx) => {
-        // 🔍 CROISEMENT DYNAMIQUE AVEC DATA.JSON PAR ID OU PAR TITRE
         const catalogItem = catalogList.find(c => c && c.id && c.id.trim() === voteItem.id.trim()) || {};
 
         const title = catalogItem.title || voteItem.id;
@@ -258,7 +256,6 @@
               </div>
             </div>
 
-            <!-- BLOC SCORE ET RÉSULTAT DU VOTE -->
             <div class="flex flex-wrap md:flex-col items-end justify-between md:justify-start gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100">
               <span class="px-3 py-1 text-xs font-black bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-lg shadow-2xs">
                 Score : ${voteItem.score} pts
@@ -281,18 +278,17 @@
       }
     }
 
-    // ⚡ APPEL DU FICHIER DATA.JSON DE DÉPART ET REPLI SÉCURISÉ
     document.addEventListener("DOMContentLoaded", () => {
-      renderList(); // Rendu synchrone immédiat
+      renderList();
 
       fetch(`data.json?v=${Date.now()}`)
         .then(res => res.json())
         .then(data => {
           catalogData = data;
-          renderList(); // Mise à jour avec les informations enrichies de data.json
+          renderList();
         })
         .catch(err => {
-          console.warn("data.json non accessible localement, affichage direct fonctionnel :", err);
+          console.warn("data.json non accessible localement :", err);
         });
     });
   </script>
