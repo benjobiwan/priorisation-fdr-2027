@@ -9,9 +9,9 @@
 </head>
 <body class="h-full text-slate-800 antialiased flex flex-col font-sans">
 
-  <!-- EN-TÊTE PRINCIPAL -->
+  <!-- EN-TÊTE PRINCIPAL (max-w-6xl) -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <a href="index.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-800 mb-1">
@@ -44,8 +44,26 @@
     </div>
   </header>
 
-  <!-- CONTENU PRINCIPAL -->
-  <main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- CONTENU PRINCIPAL (max-w-6xl) -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+    <!-- BANNIÈRE DE RAPPEL DU PLAFOND MAX -->
+    <div class="mb-6 p-4 bg-amber-50/80 border border-amber-200/80 rounded-2xl flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+          <i data-lucide="arrow-up-right font-bold" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h2 class="text-xs font-bold text-amber-900 uppercase tracking-wide">Plafond théorique de classement</h2>
+          <p class="text-xs text-amber-700 leading-snug">Chaque barre illustre le niveau atteint par rapport au score maximal théorique indépassable.</p>
+        </div>
+      </div>
+      <div class="text-right shrink-0">
+        <span id="ceiling-display" class="text-sm font-black text-amber-900 font-mono">Plafond : -- pts</span>
+      </div>
+    </div>
+
+    <!-- LISTE DES CARTES -->
     <div id="cards-list" class="space-y-4"></div>
   </main>
 
@@ -154,10 +172,18 @@
       ]
     };
 
+    // DEFINITION DU PLAFOND MAX THEORIQUE DE VOTES (Ex: 12 votants * 21 pts max)
+    const PLAFOND_MAX = 252;
+
     let activePerimeter = "MagasinsU";
 
     function escapeHtml(t) { 
       return String(t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); 
+    }
+
+    function cleanNote(note) {
+      if (!note) return "";
+      return String(note).replace(/vert\{\}/gi, "").trim();
     }
 
     function getBadgeStyle(text, offset) {
@@ -204,6 +230,7 @@
       document.getElementById("count-MagasinsU").textContent = itemsData.MagasinsU.length;
       document.getElementById("count-CoursesU").textContent = itemsData.CoursesU.length;
       document.getElementById("count-MeP").textContent = itemsData.MeP.length;
+      document.getElementById("ceiling-display").textContent = "Plafond : " + PLAFOND_MAX + " pts";
 
       container.innerHTML = items.map((item, idx) => {
         const title = item.title;
@@ -211,6 +238,10 @@
         const subCategory = item.subCategory || "";
         const description = item.description || "";
         const gains = item.gains || "";
+        const businessNoteClean = cleanNote(item.businessNote);
+
+        // Pourcentage par rapport au PLAFOND MAX ABSOLU
+        const percentToMax = Math.min(100, Math.round((item.score / PLAFOND_MAX) * 100));
 
         let rankBadgeClass = "bg-slate-200 text-slate-700 font-bold";
         if (idx === 0) rankBadgeClass = "bg-amber-500 text-white font-black";
@@ -245,18 +276,31 @@
               </div>
             </div>
 
-            <div class="flex flex-wrap md:flex-col items-end justify-between md:justify-start gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100">
-              <span class="px-3 py-1 text-xs font-black bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-lg shadow-2xs">
-                Score : ${item.score} pts
-              </span>
-              <span class="px-2.5 py-1 text-[11px] font-semibold bg-emerald-50 text-emerald-700 rounded-md">
-                ${item.votes} votes ${item.top1 > 0 ? `(${item.top1}x #1)` : ''}
-              </span>
-          ${item.businessNote ? `
-  <span class="text-[11px] text-slate-400 font-medium">
-    Val. Bus : ${escapeHtml(item.businessNote).replace(/vert\{\}/gi, '').trim()} | Poids : ${item.originalScore} pts
-  </span>
-` : ''}
+            <!-- JAUGE ET SCORE REPRÉSENTÉS PAR RAPPORT AU PLAFOND MAX -->
+            <div class="flex flex-col items-end gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100 w-full md:w-56">
+              <div class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl">
+                <div class="flex items-center justify-between text-xs font-bold text-slate-900 mb-1">
+                  <span>Score : ${item.score} pts</span>
+                  <span class="text-[10px] text-amber-600 font-semibold">${percentToMax}% du plafond</span>
+                </div>
+                <!-- BARRE D'AVANCEMENT SUR LE PLAFOND MAX -->
+                <div class="relative w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+                  <div class="bg-indigo-600 h-full rounded-full transition-all duration-500" style="width: ${percentToMax}%;"></div>
+                  <!-- MARQUEUR VISUEL DU PLAFOND (EXTRÉMITÉ DROITE) -->
+                  <div class="absolute right-0 top-0 bottom-0 w-1 bg-amber-500" title="Plafond maximal indépassable"></div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between w-full px-1">
+                <span class="px-2 py-0.5 text-[11px] font-semibold bg-emerald-50 text-emerald-700 rounded-md">
+                  ${item.votes} votes ${item.top1 > 0 ? `(${item.top1}x #1)` : ''}
+                </span>
+                ${businessNoteClean ? `
+                  <span class="text-[11px] text-slate-400 font-medium">
+                    Val. Bus : ${escapeHtml(businessNoteClean)}
+                  </span>
+                ` : ''}
+              </div>
             </div>
           </div>
         `;
