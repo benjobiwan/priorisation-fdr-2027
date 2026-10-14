@@ -50,7 +50,6 @@
   </main>
 
   <script>
-    // NOUVEAUX RÉSULTATS D'ANALYSE
     const pollResults = {
       "MagasinsU": [
         { id: "mag-8", title: "Simplification et allègement du parcours d'inscription", votes: 12, top1: 0, score: 211 },
@@ -159,15 +158,21 @@
     let activePerimeter = "MagasinsU";
 
     document.addEventListener("DOMContentLoaded", () => {
+      // 1. Rendu immédiat pour garantir qu'aucun écran blanc n'apparaisse
+      renderList();
+
+      // 2. Chargement asynchrone de data.json pour enrichir les cartes si disponible
       fetch(`data.json?v=${Date.now()}`)
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) throw new Error("Accès data.json indisponible");
+          return res.json();
+        })
         .then(data => {
           jsonData = data;
           renderList();
         })
         .catch(err => {
-          console.warn("Chargement de data.json impossible, affichage direct :", err);
-          renderList();
+          console.warn("Utilisation du mode direct (sans data.json) :", err);
         });
     });
 
@@ -212,6 +217,8 @@
 
     function renderList() {
       const container = document.getElementById("cards-list");
+      if (!container) return;
+
       const pollItems = pollResults[activePerimeter] || [];
       const jsonItems = jsonData[activePerimeter] || [];
 
@@ -225,12 +232,11 @@
       }
 
       container.innerHTML = pollItems.map((pollItem, idx) => {
-        // Recherche souple par ID exact ou par Titre nettoyé
+        // Recherche souple et tolérante de la carte dans data.json
         const fullItem = jsonItems.find(i => 
-          (i.id && pollItem.id && i.id.trim() === pollItem.id.trim()) ||
+          (i.id && pollItem.id && i.id.trim().toLowerCase() === pollItem.id.trim().toLowerCase()) ||
           (i.title && pollItem.title && cleanString(i.title) === cleanString(pollItem.title)) ||
-          (i.title && pollItem.title && cleanString(i.title).includes(cleanString(pollItem.title))) ||
-          (i.title && pollItem.title && cleanString(pollItem.title).includes(cleanString(i.title)))
+          (i.title && pollItem.title && cleanString(i.title).includes(cleanString(pollItem.title)))
         ) || {};
 
         const title = fullItem.title || pollItem.title;
@@ -291,7 +297,9 @@
         `;
       }).join('');
 
-      lucide.createIcons();
+      if (window.lucide) {
+        lucide.createIcons();
+      }
     }
 
     function escapeHtml(t) { return String(t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
