@@ -46,24 +46,6 @@
 
   <!-- CONTENU PRINCIPAL (max-w-6xl) -->
   <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    
-    <!-- BANNIÈRE DE RAPPEL DU PLAFOND MAX -->
-    <div class="mb-6 p-4 bg-amber-50/80 border border-amber-200/80 rounded-2xl flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs">
-          <i data-lucide="arrow-up-right font-bold" class="w-5 h-5"></i>
-        </div>
-        <div>
-          <h2 class="text-xs font-bold text-amber-900 uppercase tracking-wide">Plafond théorique de classement</h2>
-          <p class="text-xs text-amber-700 leading-snug">Chaque barre illustre le niveau atteint par rapport au score maximal théorique indépassable.</p>
-        </div>
-      </div>
-      <div class="text-right shrink-0">
-        <span id="ceiling-display" class="text-sm font-black text-amber-900 font-mono">Plafond : -- pts</span>
-      </div>
-    </div>
-
-    <!-- LISTE DES CARTES -->
     <div id="cards-list" class="space-y-4"></div>
   </main>
 
@@ -107,30 +89,30 @@
         { id: "cou-38", title: "Préparé sur place", category: "Fiabiliser notre catalogue", subCategory: "🗃️ Donnée produit", description: "Mise en avant et valorisation des produits préparés sur place en magasin.", gains: "Bénéfice client : garantie de fraîcheur.\nBénéfice magasin : valorisation du savoir-faire métier.", votes: 40, top1: 5, score: 58, businessNote: "0,7", originalScore: 75 },
         { id: "cou-40", title: "Éligibilité LAD", category: "Fiabiliser notre catalogue", subCategory: "⚙️ Règles de gestion", description: "Gestion des conditions d'éligibilité pour la Livraison À Domicile (produits volumineux, frais).", gains: "Bénéfice client : lisibilité sur les services livrables.\nBénéfice magasin : respect des contraintes logistiques.", votes: 30, top1: 4, score: 42, businessNote: "3,9", originalScore: 100 },
         { id: "cou-23", title: "Recommandations PDP", category: "Faciliter la vie du client", subCategory: "📱 Résultats Search", description: "Proposer des produits similaires ou des variantes directement sur la fiche produit.", gains: "Bénéfice client : trouver une alternative si produit indisponible.\nBénéfice magasin : limitation du taux d'abandon.", votes: 30, top1: 4, score: 41, businessNote: "7,4", originalScore: 50 },
-        { id: "cou-20", title: "Volet de recherche", category: "Faciliter la vie du client", subCategory: "🔍 Search", description: "Accès rapide aux dernières recherches et suggestions dynamiques.", votes: 20, top1: 3, score: 37 },
-        { id: "cou-3", title: "Gamification avec de nouveaux jeux", category: "Améliorer notre image prix", subCategory: "🎯 Animation", description: "Nouveaux jeux concours interactifs intégrés au parcours de commande.", votes: 20, top1: 3, score: 37 },
-        { id: "cou-33", title: "Présence sur les IA du marché", category: "Faciliter la vie du client", subCategory: "🤖 IA & Innovation", description: "Intégration du catalogue Courses U dans les assistants IA génératifs.", votes: 21, top1: 3, score: 36 },
-        { id: "cou-5", title: "Dotation sur créneau", category: "Améliorer notre image prix", subCategory: "🚚 Livraison", description: "Optimisation de l'attribution des créneaux de livraison VIP ou à avantages.", votes: 20, top1: 3, score: 33 },
-        { id: "cou-45", title: "Wero", category: "Faciliter la vie du client", subCategory: "💳 Paiement", description: "Intégration de la solution de paiement instantané européen Wero.", votes: 20, top1: 3, score: 32 },
-        { id: "cou-28", title: "Produits consignés", category: "Fiabiliser notre catalogue", subCategory: "🌱 RSE", description: "Prise en charge du parcours de consigne et retour d'emballages en ligne.", votes: 20, top1: 3, score: 31 },
-        { id: "cou-31", title: "Commande vocale", category: "Faciliter la vie du client", subCategory: "🎙️ Voice", description: "Ajout de produits au panier par commande vocale sur l'App.", votes: 20, top1: 3, score: 31 },
-        { id: "cou-2", title: "Produit offert", category: "Améliorer notre image prix", subCategory: "🎁 Promo", description: "Mécanique d'ajout automatique d'un produit offert lors de l'atteinte d'un seuil.", votes: 20, top1: 3, score: 30 },
-        { id: "cou-17", title: "Choix du magasin", category: "Faciliter la vie du client", subCategory: "📍 Géolocalisation", description: "Changement de magasin rattrapé plus facilement en cours de commande.", votes: 20, top1: 3, score: 30 },
-        { id: "cou-39", title: "Quantité max au panier", category: "Fiabiliser notre catalogue", subCategory: "⚙️ Règles de gestion", description: "Règles d'anti-rabattage et gestion des plafonds de commande par produit.", votes: 20, top1: 2, score: 26 },
-        { id: "cou-32", title: "Agent conversationnel", category: "Faciliter la vie du client", subCategory: "🤖 IA & Support", description: "Assistant virtuel pour guider le client dans la recherche de recettes et produits.", votes: 20, top1: 2, score: 25 },
-        { id: "cou-6", title: "Offre de recrutement et de réactivation", category: "Améliorer notre image prix", subCategory: "📣 CRM", description: "Offres ciblées pour la réactivation des clients dormants.", votes: 11, top1: 2, score: 21 },
-        { id: "cou-15", title: "Espaces animés", category: "Améliorer notre image prix", subCategory: "🎨 Merchandising", description: "Mise en avant éditorialisée des opérations saisonnières.", votes: 10, top1: 2, score: 20 },
-        { id: "cou-41", title: "Uber Eats", category: "Faciliter la vie du client", subCategory: "🚀 Express", description: "Partenariat pour la livraison express du quotidien via Uber Eats.", votes: 10, top1: 1, score: 18 },
-        { id: "cou-30", title: "Recettes", category: "Faciliter la vie du client", subCategory: "🍽️ Bien manger", description: "Inspiration recettes et ajout en 1 clic de tous les ingrédients au panier.", votes: 10, top1: 1, score: 17 },
-        { id: "cou-13", title: "Offre non-alimentaire", category: "Fiabiliser notre catalogue", subCategory: "📦 Rayons", description: "Valorisation des rayons maison, textile et bazar sur Courses U.", votes: 10, top1: 1, score: 17 },
-        { id: "cou-44", title: "Ticket Restau dématerialisés", category: "Faciliter la vie du client", subCategory: "💳 Paiement", description: "Paiement en ligne via cartes Titres-Restaurant (Edenred, Swile, etc.).", votes: 10, top1: 1, score: 17 },
-        { id: "cou-11", title: "E-tracts - Usage 3", category: "Améliorer notre image prix", subCategory: "📣 Promo", description: "Personnalisation du catalogue e-tract selon les achats du client.", votes: 10, top1: 1, score: 15 },
-        { id: "cou-35", title: "Fiches produits & visuels", category: "Fiabiliser notre catalogue", subCategory: "🗃️ Donnée produit", description: "Enrichissement HD des visuels produits et détails d'ingrédients.", votes: 10, top1: 1, score: 14 },
-        { id: "cou-46", title: "Paiement en n fois", category: "Faciliter la vie du client", subCategory: "💳 Paiement", description: "Possibilité de paiement fractionné pour les grosses commandes.", votes: 10, top1: 1, score: 14 },
-        { id: "cou-37", title: "Pictos et labels", category: "Fiabiliser notre catalogue", subCategory: "🏷️ Information", description: "Affichage clair des labels Qualité, Origine et RSE sur les tuiles.", votes: 10, top1: 1, score: 13 },
-        { id: "cou-21", title: "Filtres", category: "Faciliter la vie du client", subCategory: "🔍 Search", description: "Filtres de recherche avancés par marque, prix au kilo et promotions.", votes: 10, top1: 1, score: 13 },
-        { id: "cou-34", title: "Service client", category: "Faciliter la vie du client", subCategory: "💬 SAV", description: "Formulaire de contact dédié directement intégré au suivi de commande.", votes: 10, top1: 1, score: 11 },
-        { id: "cou-43", title: "Ventes aux associations et professionnels", category: "Faciliter la vie du client", subCategory: "🏢 Pro", description: "Parcours d'achat spécifique et facturation dédiée aux Pros.", votes: 10, top1: 0, score: 9 }
+        { id: "cou-20", title: "Volet de recherche", category: "Faciliter la vie du client", subCategory: "🔍 Search", description: "Accès rapide aux dernières recherches et suggestions dynamiques.", gains: "Bénéfice client : recherche guidée et rapide.\nBénéfice magasin : hausse de la recherche aboutie.", votes: 20, top1: 3, score: 37, businessNote: "12,1", originalScore: 50 },
+        { id: "cou-3", title: "Gamification avec de nouveaux jeux", category: "Améliorer notre image prix", subCategory: "🎯 Animation", description: "Nouveaux jeux concours interactifs intégrés au parcours de commande.", gains: "Bénéfice client : animation ludique et gains.\nBénéfice magasin : réengagement des acheteurs.", votes: 20, top1: 3, score: 37, businessNote: "8,9", originalScore: 25 },
+        { id: "cou-33", title: "Présence sur les IA du marché", category: "Faciliter la vie du client", subCategory: "🤖 IA & Innovation", description: "Intégration du catalogue Courses U dans les assistants IA génératifs.", gains: "Bénéfice client : commande assistée par IA.\nBénéfice magasin : captation des nouveaux usages.", votes: 21, top1: 3, score: 36, businessNote: "15,2", originalScore: 50 },
+        { id: "cou-5", title: "Dotation sur créneau", category: "Améliorer notre image prix", subCategory: "🚚 Livraison", description: "Optimisation de l'attribution des créneaux de livraison VIP ou à avantages.", gains: "Bénéfice client : choix étendu de créneaux.\nBénéfice magasin : lissage de la charge logistique.", votes: 20, top1: 3, score: 33, businessNote: "6,4", originalScore: 75 },
+        { id: "cou-45", title: "Wero", category: "Faciliter la vie du client", subCategory: "💳 Paiement", description: "Intégration de la solution de paiement instantané européen Wero.", gains: "Bénéfice client : règlement sécurisé et instantané.\nBénéfice magasin : baisse des frais monétiques.", votes: 20, top1: 3, score: 32, businessNote: "9,1", originalScore: 50 },
+        { id: "cou-28", title: "Produits consignés", category: "Fiabiliser notre catalogue", subCategory: "🌱 RSE", description: "Prise en charge du parcours de consigne et retour d'emballages en ligne.", gains: "Bénéfice client : geste écologique récompensé.\nBénéfice magasin : engagement écoresponsable.", votes: 20, top1: 3, score: 31, businessNote: "11,0", originalScore: 75 },
+        { id: "cou-31", title: "Commande vocale", category: "Faciliter la vie du client", subCategory: "🎙️ Voice", description: "Ajout de produits au panier par commande vocale sur l'App.", gains: "Bénéfice client : saisie ultra-rapide des besoins.\nBénéfice magasin : rétention mobile.", votes: 20, top1: 3, score: 31, businessNote: "7,8", originalScore: 25 },
+        { id: "cou-2", title: "Produit offert", category: "Améliorer notre image prix", subCategory: "🎁 Promo", description: "Mécanique d'ajout automatique d'un produit offert lors de l'atteinte d'un seuil.", gains: "Bénéfice client : cadeau promotionnel clair.\nBénéfice magasin : hausse de la valeur panier.", votes: 20, top1: 3, score: 30, businessNote: "14,3", originalScore: 50 },
+        { id: "cou-17", title: "Choix du magasin", category: "Faciliter la vie du client", subCategory: "📍 Géolocalisation", description: "Changement de magasin rattrapé plus facilement en cours de commande.", gains: "Bénéfice client : aucun panier perdu en cas d'erreur de lieu.\nBénéfice magasin : baisse des annulations.", votes: 20, top1: 3, score: 30, businessNote: "18,2", originalScore: 100 },
+        { id: "cou-39", title: "Quantité max au panier", category: "Fiabiliser notre catalogue", subCategory: "⚙️ Règles de gestion", description: "Règles d'anti-rabattage et gestion des plafonds de commande par produit.", gains: "Bénéfice client : répartition équitable des stocks.\nBénéfice magasin : protection des disponibilités.", votes: 20, top1: 2, score: 26, businessNote: "5,3", originalScore: 75 },
+        { id: "cou-32", title: "Agent conversationnel", category: "Faciliter la vie du client", subCategory: "🤖 IA & Support", description: "Assistant virtuel pour guider le client dans la recherche de recettes et produits.", gains: "Bénéfice client : conseil personnalisé en direct.\nBénéfice magasin : diminution de la charge support.", votes: 20, top1: 2, score: 25, businessNote: "12,0", originalScore: 50 },
+        { id: "cou-6", title: "Offre de recrutement et de réactivation", category: "Améliorer notre image prix", subCategory: "📣 CRM", description: "Offres ciblées pour la réactivation des clients dormants.", gains: "Bénéfice client : bons d'achat de bienvenue.\nBénéfice magasin : reconquête des clients inactifs.", votes: 11, top1: 2, score: 21, businessNote: "16,4", originalScore: 75 },
+        { id: "cou-15", title: "Espaces animés", category: "Améliorer notre image prix", subCategory: "🎨 Merchandising", description: "Mise en avant éditorialisée des opérations saisonnières.", gains: "Bénéfice client : thématisation inspirante.\nBénéfice magasin : meilleure valorisation des temps forts.", votes: 10, top1: 2, score: 20, businessNote: "8,2", originalScore: 50 },
+        { id: "cou-41", title: "Uber Eats", category: "Faciliter la vie du client", subCategory: "🚀 Express", description: "Partenariat pour la livraison express du quotidien via Uber Eats.", gains: "Bénéfice client : dépannage express en 30 min.\nBénéfice magasin : acquisition d'une clientèle urbaine.", votes: 10, top1: 1, score: 18, businessNote: "19,1", originalScore: 50 },
+        { id: "cou-30", title: "Recettes", category: "Faciliter la vie du client", subCategory: "🍽️ Bien manger", description: "Inspiration recettes et ajout en 1 clic de tous les ingrédients au panier.", gains: "Bénéfice client : idées repas simplifiées.\nBénéfice magasin : paniers multi-produits automatisés.", votes: 10, top1: 1, score: 17, businessNote: "11,5", originalScore: 75 },
+        { id: "cou-13", title: "Offre non-alimentaire", category: "Fiabiliser notre catalogue", subCategory: "📦 Rayons", description: "Valorisation des rayons maison, textile et bazar sur Courses U.", gains: "Bénéfice client : offre globale sur un seul site.\nBénéfice magasin : développement des ventes hors PGC.", votes: 10, top1: 1, score: 17, businessNote: "7,1", originalScore: 50 },
+        { id: "cou-44", title: "Ticket Restau dématerialisés", category: "Faciliter la vie du client", subCategory: "💳 Paiement", description: "Paiement en ligne via cartes Titres-Restaurant (Edenred, Swile, etc.).", gains: "Bénéfice client : utilisation fluide de son budget repas.\nBénéfice magasin : déclencheur d'achat sur l'alimentaire.", votes: 10, top1: 1, score: 17, businessNote: "13,8", originalScore: 100 },
+        { id: "cou-11", title: "E-tracts - Usage 3", category: "Améliorer notre image prix", subCategory: "📣 Promo", description: "Personnalisation du catalogue e-tract selon les achats du client.", gains: "Bénéfice client : offres personnalisées en tête de catalogue.\nBénéfice magasin : meilleure efficacité promotionnelle.", votes: 10, top1: 1, score: 15, businessNote: "9,0", originalScore: 75 },
+        { id: "cou-35", title: "Fiches produits & visuels", category: "Fiabiliser notre catalogue", subCategory: "🗃️ Donnée produit", description: "Enrichissement HD des visuels produits et détails d'ingrédients.", gains: "Bénéfice client : rassurance sur la composition.\nBénéfice magasin : réduction des retours d'information.", votes: 10, top1: 1, score: 14, businessNote: "14,5", originalScore: 100 },
+        { id: "cou-46", title: "Paiement en n fois", category: "Faciliter la vie du client", subCategory: "💳 Paiement", description: "Possibilité de paiement fractionné pour les grosses commandes.", gains: "Bénéfice client : souplesse de trésorerie.\nBénéfice magasin : hausse des gros paniers.", votes: 10, top1: 1, score: 14, businessNote: "6,7", originalScore: 50 },
+        { id: "cou-37", title: "Pictos et labels", category: "Fiabiliser notre catalogue", subCategory: "🏷️ Information", description: "Affichage clair des labels Qualité, Origine et RSE sur les tuiles.", gains: "Bénéfice client : repérage instantané de l'origine.\nBénéfice magasin : valorisation des filières U.", votes: 10, top1: 1, score: 13, businessNote: "10,2", originalScore: 75 },
+        { id: "cou-21", title: "Filtres", category: "Faciliter la vie du client", subCategory: "🔍 Search", description: "Filtres de recherche avancés par marque, prix au kilo et promotions.", gains: "Bénéfice client : affinement sur-mesure du rayon.\nBénéfice magasin : conversion facilitée.", votes: 10, top1: 1, score: 13, businessNote: "15,1", originalScore: 100 },
+        { id: "cou-34", title: "Service client", category: "Faciliter la vie du client", subCategory: "💬 SAV", description: "Formulaire de contact dédié directement intégré au suivi de commande.", gains: "Bénéfice client : prise en charge SAV directe.\nBénéfice magasin : traçabilité des tickets clients.", votes: 10, top1: 1, score: 11, businessNote: "8,0", originalScore: 75 },
+        { id: "cou-43", title: "Ventes aux associations et professionnels", category: "Faciliter la vie du client", subCategory: "🏢 Pro", description: "Parcours d'achat spécifique et facturation dédiée aux Pros.", gains: "Bénéfice client : facturation et devis simplifiés.\nBénéfice magasin : développement du chiffre d'affaires B2B.", votes: 10, top1: 0, score: 9, businessNote: "11,9", originalScore: 75 }
       ],
       MeP: [
         { id: "mep-1", title: "Pilotage de la publication", category: "Modeles Exploitation (MeP)", subCategory: "📦 Publication & Assortiment", description: "Optimiser le pilotage de la mise en ligne des articles, la gestion des VMS et des stocks publiables.", gains: "Bénéfice client : visibilité sur la disponibilité réelle.\nBénéfice magasin : réduction du taux de manquants.", votes: 125, top1: 23, score: 231, businessNote: "10,0", originalScore: 100 },
@@ -142,38 +124,35 @@
         { id: "mep-18", title: "Collecte", category: "Modeles Exploitation (MeP)", subCategory: "📈 Productivité", description: "Alignement des codes PLU et pesée pour la collecte des fruits et légumes.", gains: "Bénéfice client : prix exact au gramme près.\nBénéfice magasin : suppression des écarts d'inventaire.", votes: 60, top1: 9, score: 94, businessNote: "2,0", originalScore: 100 },
         { id: "mep-8", title: "Pilotage des manquants", category: "Modeles Exploitation (MeP)", subCategory: "🔍 Manquants", description: "Mise en place de Quick Wins dans ULIS pour dépublier automatiquement les produits hors stock.", gains: "Bénéfice client : évite de commander un produit indisponible.\nBénéfice magasin : baisse du taux de réclamation.", votes: 60, top1: 9, score: 91, businessNote: "3,0", originalScore: 25 },
         { id: "mep-23", title: "Anticipation de l’arrivée client", category: "Modeles Exploitation (MeP)", subCategory: "🛒 Remise au coffre", description: "Notification géolocalisée informant le Drive de l'approche du client.", gains: "Bénéfice client : commande prête dès l'arrivée sur la piste.\nBénéfice magasin : fluidification du trafic Drive.", votes: 50, top1: 7, score: 77, businessNote: "2,0", originalScore: 50 },
-        { id: "mep-39", title: "Sectorisation", category: "Modeles Exploitation (MeP)", subCategory: "🚚 Logistique", description: "Optimisation de la sectorisation géographique des tournées de livraison.", votes: 50, top1: 7, score: 77 },
-        { id: "mep-10", title: "Seuils de dépublication Ulis", category: "Modeles Exploitation (MeP)", subCategory: "📦 Stock", description: "Réglage fin des seuils automatiques de dépublication d'articles en réserve.", votes: 50, top1: 7, score: 72 },
-        { id: "mep-24", title: "Expérience-utilisateur", category: "Modeles Exploitation (MeP)", subCategory: "📱 Outils Magasin", description: "Refonte ergonomique de l'application de préparation sur terminal portable.", votes: 50, top1: 7, score: 70 },
-        { id: "mep-9", title: "Bonnes pratiques et formation", category: "Modeles Exploitation (MeP)", subCategory: "🎓 Accompagnement", description: "Support d'accompagnement et modules e-learning pour les préparateurs Drive.", votes: 40, top1: 6, score: 61 },
-        { id: "mep-3", title: "Spécialisation des équipes F&L", category: "Modeles Exploitation (MeP)", subCategory: "🍓 Qualité", description: "Parcours de formation dédié au choix et à la fraîcheur des Fruits & Légumes.", votes: 30, top1: 5, score: 51 },
-        { id: "mep-35", title: "Process de préparation", category: "Modeles Exploitation (MeP)", subCategory: "📈 Productivité", description: "Optimisation du chemin de ramasse en magasin pour réduire les distances à pied.", votes: 50, top1: 5, score: 50 },
-        { id: "mep-20", title: "Bonnes pratiques et formation", category: "Modeles Exploitation (MeP)", subCategory: "🎓 Accompagnement", description: "Partage des meilleures astuces d'organisation inter-magasins.", votes: 30, top1: 4, score: 48 },
-        { id: "mep-16", title: "Verticalisation du stockage", category: "Modeles Exploitation (MeP)", subCategory: "🏬 Reserve", description: "Aménagement et optimisation de l'espace de stockage vertical en réserve Drive.", votes: 31, top1: 4, score: 46 },
-        { id: "mep-34", title: "Accélération de la bascule vers le modèle de réserve dédiée", category: "Modeles Exploitation (MeP)", subCategory: "🏬 Reserve", description: "Accompagnement des magasins pour la transition vers une réserve 100% dédiée au Drive.", votes: 30, top1: 4, score: 43 },
-        { id: "mep-37", title: "Lacher caddie", category: "Modeles Exploitation (MeP)", subCategory: "🛒 Drive", description: "Procédure accélérée de dépôt des caddies de préparation en zone de transfert.", votes: 40, top1: 4, score: 42 },
-        { id: "mep-17", title: "Collecte", category: "Modeles Exploitation (MeP)", subCategory: "📈 Productivité", description: "Amélioration du scan des codes-barres en zone de ramasse encombrée.", votes: 20, top1: 3, score: 31 },
-        { id: "mep-12", title: "Pilotage de la productivité", category: "Modeles Exploitation (MeP)", subCategory: "📊 KPIs", description: "Tableau de bord de suivi du nombre d'articles préparés par heure et par préparateur.", votes: 20, top1: 2, score: 29 },
-        { id: "mep-21", title: "Expérience-utilisateur", category: "Modeles Exploitation (MeP)", subCategory: "📱 Outils Magasin", description: "Réduction des clics requis pour valider une substitution de produit.", votes: 20, top1: 2, score: 28 },
-        { id: "mep-13", title: "Pilotage de la productivité", category: "Modeles Exploitation (MeP)", subCategory: "📊 KPIs", description: "Analyse des temps morts entre deux vagues de préparation.", votes: 20, top1: 2, score: 25 },
-        { id: "mep-5", title: "Qualité des F&L", category: "Modeles Exploitation (MeP)", subCategory: "🍓 Qualité", description: "Contrôle qualité systématique avant la mise en sac des produits frais.", votes: 20, top1: 2, score: 24 },
-        { id: "mep-30", title: "Formation des équipes Courses UC", category: "Modeles Exploitation (MeP)", subCategory: "🎓 Accompagnement", description: "Formation renforcée sur la gestion de la relation client au moment du retrait.", votes: 20, top1: 2, score: 20 },
-        { id: "mep-33", title: "Optimisation du stock en réserve dédiée", category: "Modeles Exploitation (MeP)", subCategory: "🏬 Reserve", description: "Algorithme d'emplacement préférentiel des Tops de vente en réserve.", votes: 10, top1: 1, score: 18 },
-        { id: "mep-4", title: "Homogénéisation des conditions de stockage", category: "Modeles Exploitation (MeP)", subCategory: "❄️ Chaîne du froid", description: "Contrôle rigoureux des températures des bacs de stockage froid/gel.", votes: 10, top1: 1, score: 16 },
-        { id: "mep-2", title: "Qualité des F&L", category: "Modeles Exploitation (MeP)", subCategory: "🍓 Qualité", description: "Guide visuel sur PDA pour évaluer la maturité des fruits.", votes: 10, top1: 1, score: 16 },
-        { id: "mep-25", title: "Déploiement des solutions", category: "Modeles Exploitation (MeP)", subCategory: "🚀 IT", description: "Déploiement accéléré des mises à jour applicatives sur terminaux préparateurs.", votes: 10, top1: 1, score: 15 },
-        { id: "mep-36", title: "Livraison express : livraison en moins d'une heure.", category: "Modeles Exploitation (MeP)", subCategory: "🚀 Express", description: "Organisation du picking prioritaire pour les commandes express.", votes: 20, top1: 1, score: 14 },
-        { id: "mep-27", title: "Activation du service LAD dans les 10% du parc restant", category: "Modeles Exploitation (MeP)", subCategory: "🚚 Livraison", description: "Accompagnement au lancement de la LAD pour les derniers magasins non équipés.", votes: 10, top1: 1, score: 13 },
-        { id: "mep-38", title: "Ciblage segments spécifiques", category: "Modeles Exploitation (MeP)", subCategory: "🚚 Livraison", description: "Options de livraison adaptées pour les personnes à mobilité réduite.", votes: 10, top1: 1, score: 12 },
-        { id: "mep-19", title: "Pilotage de la productivité", category: "Modeles Exploitation (MeP)", subCategory: "📊 KPIs", description: "Suivi des temps de chargement dans le coffre client.", votes: 10, top1: 1, score: 12 },
-        { id: "mep-31", title: "Livraison gratuite à partir d'un seuil", category: "Modeles Exploitation (MeP)", subCategory: "🚚 Livraison", description: "Généralisation du seuil de gratuité de livraison sur 50% du parc.", votes: 10, top1: 1, score: 12 },
-        { id: "mep-28", title: "Qualité de service", category: "Modeles Exploitation (MeP)", subCategory: "⭐ Satisfaction", description: "Enquête de satisfaction à chaud envoyée après chaque remise de commande.", votes: 10, top1: 0, score: 9 },
-        { id: "mep-29", title: "Elargissement de l'offre de livraison", category: "Modeles Exploitation (MeP)", subCategory: "🚚 Livraison", description: "Extension des rayons de livraison à domicile en zone rurale.", votes: 10, top1: 0, score: 8 }
+        { id: "mep-39", title: "Sectorisation", category: "Modeles Exploitation (MeP)", subCategory: "🚚 Logistique", description: "Optimisation de la sectorisation géographique des tournées de livraison.", gains: "Bénéfice client : fenêtres de livraison resserrées.\nBénéfice magasin : baisse des coûts kilométriques.", votes: 50, top1: 7, score: 77, businessNote: "1,5", originalScore: 50 },
+        { id: "mep-10", title: "Seuils de dépublication Ulis", category: "Modeles Exploitation (MeP)", subCategory: "📦 Stock", description: "Réglage fin des seuils automatiques de dépublication d'articles en réserve.", gains: "Bénéfice client : fiabilité de l'offre en ligne.\nBénéfice magasin : automatisation des règles de rupture.", votes: 50, top1: 7, score: 72, businessNote: "2,5", originalScore: 75 },
+        { id: "mep-24", title: "Expérience-utilisateur", category: "Modeles Exploitation (MeP)", subCategory: "📱 Outils Magasin", description: "Refonte ergonomique de l'application de préparation sur terminal portable.", gains: "Bénéfice client : diminution des erreurs de saisie.\nBénéfice magasin : confort de travail et rapidité.", votes: 50, top1: 7, score: 70, businessNote: "3,5", originalScore: 75 },
+        { id: "mep-9", title: "Bonnes pratiques et formation", category: "Modeles Exploitation (MeP)", subCategory: "🎓 Accompagnement", description: "Support d'accompagnement et modules e-learning pour les préparateurs Drive.", gains: "Bénéfice client : qualité de service homogène.\nBénéfice magasin : montée en compétences accélérée.", votes: 40, top1: 6, score: 61, businessNote: "1,0", originalScore: 50 },
+        { id: "mep-3", title: "Spécialisation des équipes F&L", category: "Modeles Exploitation (MeP)", subCategory: "🍓 Qualité", description: "Parcours de formation dédié au choix et à la fraîcheur des Fruits & Légumes.", gains: "Bénéfice client : produits frais sélectionnés avec soin.\nBénéfice magasin : réduction de la casse.", votes: 30, top1: 5, score: 51, businessNote: "2,0", originalScore: 50 },
+        { id: "mep-35", title: "Process de préparation", category: "Modeles Exploitation (MeP)", subCategory: "📈 Productivité", description: "Optimisation du chemin de ramasse en magasin pour réduire les distances à pied.", gains: "Bénéfice client : respect des horaires de préparation.\nBénéfice magasin : gain de temps par ramasse.", votes: 50, top1: 5, score: 50, businessNote: "3,0", originalScore: 100 },
+        { id: "mep-20", title: "Bonnes pratiques et formation", category: "Modeles Exploitation (MeP)", subCategory: "🎓 Accompagnement", description: "Partage des meilleures astuces d'organisation inter-magasins.", gains: "Bénéfice client : service réactif.\nBénéfice magasin : émulation inter-points de vente.", votes: 30, top1: 4, score: 48, businessNote: "1,0", originalScore: 25 },
+        { id: "mep-16", title: "Verticalisation du stockage", category: "Modeles Exploitation (MeP)", subCategory: "🏬 Reserve", description: "Aménagement et optimisation de l'espace de stockage vertical en réserve Drive.", gains: "Bénéfice client : capacité d'accueil de commandes élargie.\nBénéfice magasin : gain de mètres carrés au sol.", votes: 31, top1: 4, score: 46, businessNote: "2,0", originalScore: 50 },
+        { id: "mep-34", title: "Accélération de la bascule vers le modèle de réserve dédiée", category: "Modeles Exploitation (MeP)", subCategory: "🏬 Reserve", description: "Accompagnement des magasins pour la transition vers une réserve 100% dédiée au Drive.", gains: "Bénéfice client : disponibilité maximale des Tops de vente.\nBénéfice magasin : productivité accrue.", votes: 30, top1: 4, score: 43, businessNote: "3,0", originalScore: 75 },
+        { id: "mep-37", title: "Lacher caddie", category: "Modeles Exploitation (MeP)", subCategory: "🛒 Drive", description: "Procédure accélérée de dépôt des caddies de préparation en zone de transfert.", gains: "Bénéfice client : commandes prêtes plus tôt.\nBénéfice magasin : fluidification du circuit interne.", votes: 40, top1: 4, score: 42, businessNote: "1,5", originalScore: 50 },
+        { id: "mep-17", title: "Collecte", category: "Modeles Exploitation (MeP)", subCategory: "📈 Productivité", description: "Amélioration du scan des codes-barres en zone de ramasse encombrée.", gains: "Bénéfice client : préparation sans oublis.\nBénéfice magasin : fiabilité de la lecture PDA.", votes: 20, top1: 3, score: 31, businessNote: "2,0", originalScore: 50 },
+        { id: "mep-12", title: "Pilotage de la productivité", category: "Modeles Exploitation (MeP)", subCategory: "📊 KPIs", description: "Tableau de bord de suivi du nombre d'articles préparés par heure et par préparateur.", gains: "Bénéfice client : cadence de préparation maîtrisée.\nBénéfice magasin : pilotage fin du coût de préparation.", votes: 20, top1: 2, score: 29, businessNote: "2,5", originalScore: 50 },
+        { id: "mep-21", title: "Expérience-utilisateur", category: "Modeles Exploitation (MeP)", subCategory: "📱 Outils Magasin", description: "Réduction des clics requis pour valider une substitution de produit.", gains: "Bénéfice client : propositions de remplacement claires.\nBénéfice magasin : gain de temps par article substitué.", votes: 20, top1: 2, score: 28, businessNote: "1,5", originalScore: 25 },
+        { id: "mep-13", title: "Pilotage de la productivité", category: "Modeles Exploitation (MeP)", subCategory: "📊 KPIs", description: "Analyse des temps morts entre deux vagues de préparation.", gains: "Bénéfice client : régularité dans la mise à disposition.\nBénéfice magasin : optimisation du planning agent.", votes: 20, top1: 2, score: 25, businessNote: "2,0", originalScore: 50 },
+        { id: "mep-5", title: "Qualité des F&L", category: "Modeles Exploitation (MeP)", subCategory: "🍓 Qualité", description: "Contrôle qualité systématique avant la mise en sac des produits frais.", gains: "Bénéfice client : zéro déception sur la fraîcheur.\nBénéfice magasin : fidélisation sur le rayon frais.", votes: 20, top1: 2, score: 24, businessNote: "2,5", originalScore: 50 },
+        { id: "mep-30", title: "Formation des équipes Courses UC", category: "Modeles Exploitation (MeP)", subCategory: "🎓 Accompagnement", description: "Formation renforcée sur la gestion de la relation client au moment du retrait.", gains: "Bénéfice client : accueil souriant et professionnel.\nBénéfice magasin : image de marque valorisée.", votes: 20, top1: 2, score: 20, businessNote: "1,0", originalScore: 25 },
+        { id: "mep-33", title: "Optimisation du stock en réserve dédiée", category: "Modeles Exploitation (MeP)", subCategory: "🏬 Reserve", description: "Algorithme d'emplacement préférentiel des Tops de vente en réserve.", gains: "Bénéfice client : rapidité de constitution du bac.\nBénéfice magasin : diminution de la fatigue préparateur.", votes: 10, top1: 1, score: 18, businessNote: "2,0", originalScore: 50 },
+        { id: "mep-4", title: "Homogénéisation des conditions de stockage", category: "Modeles Exploitation (MeP)", subCategory: "❄️ Chaîne du froid", description: "Contrôle rigoureux des températures des bacs de stockage froid/gel.", gains: "Bénéfice client : sécurité alimentaire irréprochable.\nBénéfice magasin : conformité réglementaire.", votes: 10, top1: 1, score: 16, businessNote: "2,0", originalScore: 50 },
+        { id: "mep-2", title: "Qualité des F&L", category: "Modeles Exploitation (MeP)", subCategory: "🍓 Qualité", description: "Guide visuel sur PDA pour évaluer la maturité des fruits.", gains: "Bénéfice client : mûrissement adapté à la consommation.\nBénéfice magasin : qualification précise de la casse.", votes: 10, top1: 1, score: 16, businessNote: "1,5", originalScore: 25 },
+        { id: "mep-25", title: "Déploiement des solutions", category: "Modeles Exploitation (MeP)", subCategory: "🚀 IT", description: "Déploiement accéléré des mises à jour applicatives sur terminaux préparateurs.", gains: "Bénéfice client : disponibilité continue du service.\nBénéfice magasin : matériels à jour sans interruption.", votes: 10, top1: 1, score: 15, businessNote: "1,0", originalScore: 25 },
+        { id: "mep-36", title: "Livraison express : livraison en moins d'une heure.", category: "Modeles Exploitation (MeP)", subCategory: "🚀 Express", description: "Organisation du picking prioritaire pour les commandes express.", gains: "Bénéfice client : réception ultra-rapide des urgences.\nBénéfice magasin : captation des achats d'impulsion.", votes: 20, top1: 1, score: 14, businessNote: "3,0", originalScore: 75 },
+        { id: "mep-27", title: "Activation du service LAD dans les 10% du parc restant", category: "Modeles Exploitation (MeP)", subCategory: "🚚 Livraison", description: "Accompagnement au lancement de la LAD pour les derniers magasins non équipés.", gains: "Bénéfice client : couverture territoriale complète.\nBénéfice magasin : ouverture d'un nouveau canal de vente.", votes: 10, top1: 1, score: 13, businessNote: "2,5", originalScore: 50 },
+        { id: "mep-38", title: "Ciblage segments spécifiques", category: "Modeles Exploitation (MeP)", subCategory: "🚚 Livraison", description: "Options de livraison adaptées pour les personnes à mobilité réduite.", gains: "Bénéfice client : inclusivité et confort de livraison.\nBénéfice magasin : ancrage sociétal fort.", votes: 10, top1: 1, score: 12, businessNote: "1,5", originalScore: 25 },
+        { id: "mep-19", title: "Pilotage de la productivité", category: "Modeles Exploitation (MeP)", subCategory: "📊 KPIs", description: "Suivi des temps de chargement dans le coffre client.", gains: "Bénéfice client : délivrance éclair sur la piste Drive.\nBénéfice magasin : fluidification de la file d'attente.", votes: 10, top1: 1, score: 12, businessNote: "1,0", originalScore: 25 },
+        { id: "mep-31", title: "Livraison gratuite à partir d'un seuil", category: "Modeles Exploitation (MeP)", subCategory: "🚚 Livraison", description: "Généralisation du seuil de gratuité de livraison sur 50% du parc.", gains: "Bénéfice client : livraison abordable pour les gros achats.\nBénéfice magasin : incitation à l'augmentation du panier.", votes: 10, top1: 1, score: 12, businessNote: "2,0", originalScore: 50 },
+        { id: "mep-28", title: "Qualité de service", category: "Modeles Exploitation (MeP)", subCategory: "⭐ Satisfaction", description: "Enquête de satisfaction à chaud envoyée après chaque remise de commande.", gains: "Bénéfice client : écoute active du besoin.\nBénéfice magasin : identification rapide des dysfonctionnements.", votes: 10, top1: 0, score: 9, businessNote: "1,0", originalScore: 25 },
+        { id: "mep-29", title: "Elargissement de l'offre de livraison", category: "Modeles Exploitation (MeP)", subCategory: "🚚 Livraison", description: "Extension des rayons de livraison à domicile en zone rurale.", gains: "Bénéfice client : accès au service U pour les foyers isolés.\nBénéfice magasin : expansion de la zone de chalandise.", votes: 10, top1: 0, score: 8, businessNote: "1,5", originalScore: 25 }
       ]
     };
-
-    // DEFINITION DU PLAFOND MAX THEORIQUE DE VOTES (Ex: 12 votants * 21 pts max)
-    const PLAFOND_MAX = 252;
 
     let activePerimeter = "MagasinsU";
 
@@ -230,7 +209,6 @@
       document.getElementById("count-MagasinsU").textContent = itemsData.MagasinsU.length;
       document.getElementById("count-CoursesU").textContent = itemsData.CoursesU.length;
       document.getElementById("count-MeP").textContent = itemsData.MeP.length;
-      document.getElementById("ceiling-display").textContent = "Plafond : " + PLAFOND_MAX + " pts";
 
       container.innerHTML = items.map((item, idx) => {
         const title = item.title;
@@ -239,9 +217,6 @@
         const description = item.description || "";
         const gains = item.gains || "";
         const businessNoteClean = cleanNote(item.businessNote);
-
-        // Pourcentage par rapport au PLAFOND MAX ABSOLU
-        const percentToMax = Math.min(100, Math.round((item.score / PLAFOND_MAX) * 100));
 
         let rankBadgeClass = "bg-slate-200 text-slate-700 font-bold";
         if (idx === 0) rankBadgeClass = "bg-amber-500 text-white font-black";
@@ -276,31 +251,19 @@
               </div>
             </div>
 
-            <!-- JAUGE ET SCORE REPRÉSENTÉS PAR RAPPORT AU PLAFOND MAX -->
-            <div class="flex flex-col items-end gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100 w-full md:w-56">
-              <div class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl">
-                <div class="flex items-center justify-between text-xs font-bold text-slate-900 mb-1">
-                  <span>Score : ${item.score} pts</span>
-                  <span class="text-[10px] text-amber-600 font-semibold">${percentToMax}% du plafond</span>
-                </div>
-                <!-- BARRE D'AVANCEMENT SUR LE PLAFOND MAX -->
-                <div class="relative w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
-                  <div class="bg-indigo-600 h-full rounded-full transition-all duration-500" style="width: ${percentToMax}%;"></div>
-                  <!-- MARQUEUR VISUEL DU PLAFOND (EXTRÉMITÉ DROITE) -->
-                  <div class="absolute right-0 top-0 bottom-0 w-1 bg-amber-500" title="Plafond maximal indépassable"></div>
-                </div>
-              </div>
-
-              <div class="flex items-center justify-between w-full px-1">
-                <span class="px-2 py-0.5 text-[11px] font-semibold bg-emerald-50 text-emerald-700 rounded-md">
-                  ${item.votes} votes ${item.top1 > 0 ? `(${item.top1}x #1)` : ''}
+            <!-- BLOC SCORE ET INFOS CLIENT/MÉTIER -->
+            <div class="flex flex-wrap md:flex-col items-end justify-between md:justify-start gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100">
+              <span class="px-3 py-1 text-xs font-black bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-lg shadow-2xs">
+                Score : ${item.score} pts
+              </span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-emerald-50 text-emerald-700 rounded-md">
+                ${item.votes} votes ${item.top1 > 0 ? `(${item.top1}x #1)` : ''}
+              </span>
+              ${businessNoteClean ? `
+                <span class="text-[11px] text-slate-400 font-medium">
+                  Val. Bus : ${escapeHtml(businessNoteClean)}${item.originalScore ? '| Poids : ' + item.originalScore + ' pts' : ''}
                 </span>
-                ${businessNoteClean ? `
-                  <span class="text-[11px] text-slate-400 font-medium">
-                    Val. Bus : ${escapeHtml(businessNoteClean)}
-                  </span>
-                ` : ''}
-              </div>
+              ` : ''}
             </div>
           </div>
         `;
