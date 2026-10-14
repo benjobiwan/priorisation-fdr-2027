@@ -1,1 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-slate-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restitution de la Priorisation — FdR 2027</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="h-full text-slate-800 antialiased flex flex-col font-sans">
 
+  <!-- EN-TÊTE PRINCIPAL (max-w-6xl) -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <a href="index.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-800 mb-1">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Retour à l'accueil
+          </a>
+          <h1 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+            🏆 Restitution des sujets priorisés
+          </h1>
+        </div>
+        <div class="text-xs text-slate-500 font-medium">
+          Résultats de la consultation FdR 2027
+        </div>
+      </div>
+
+      <!-- ONGLETS DE SÉLECTION -->
+      <div class="flex items-center gap-2 mt-6 border-b border-slate-200 pb-2 overflow-x-auto">
+        <button id="cta-MagasinsU" onclick="switchPerimeter('MagasinsU')" class="tab-btn px-4 py-2 text-sm font-bold rounded-xl border transition-all flex items-center gap-2 whitespace-nowrap bg-indigo-600 text-white border-indigo-600 shadow-xs">
+          <i data-lucide="store" class="w-4 h-4"></i>
+          Magasins U <span id="count-MagasinsU" class="px-2 py-0.5 text-xs rounded-full bg-white/20 text-white">0</span>
+        </button>
+        <button id="cta-CoursesU" onclick="switchPerimeter('CoursesU')" class="tab-btn px-4 py-2 text-sm font-bold rounded-xl border transition-all flex items-center gap-2 whitespace-nowrap bg-white text-slate-600 border-slate-200 hover:bg-slate-100">
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          Courses U <span id="count-CoursesU" class="px-2 py-0.5 text-xs rounded-full bg-slate-100 text-slate-600">0</span>
+        </button>
+        <button id="cta-MeP" onclick="switchPerimeter('MeP')" class="tab-btn px-4 py-2 text-sm font-bold rounded-xl border transition-all flex items-center gap-2 whitespace-nowrap bg-white text-slate-600 border-slate-200 hover:bg-slate-100">
+          <i data-lucide="settings" class="w-4 h-4"></i>
+          MeP (Exploitation & Productivité) <span id="count-MeP" class="px-2 py-0.5 text-xs rounded-full bg-slate-100 text-slate-600">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENU PRINCIPAL (max-w-6xl) -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <!-- RÉSULTATS DES SUJETS VOTÉS -->
+    <div id="cards-list" class="space-y-4"></div>
+
+    <!-- BLOC SUJETS NON VOTÉS (ISOLÉS ET GRISÉS) -->
+    <div id="unvoted-section" class="hidden pt-6 border-t border-slate-200">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+        <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wider">Sujets n'ayant reçu aucun vote (<span id="count-unvoted">0</span>)</h2>
+      </div>
+      <div id="unvoted-cards-list" class="space-y-3 opacity-60 hover:opacity-100 transition-opacity"></div>
+    </div>
+  </main>
+
+  <script>
+    const pollResults = {
+      MagasinsU: [
+        { id: "mag-8", votes: 12, score: 211 },
+        { id: "mag-5", votes: 11, score: 186 },
+        { id: "mag-15", votes: 10, score: 170 },
+        { id: "mag-13", votes: 9, score: 162 },
+        { id: "mag-4", votes: 9, score: 154 },
+        { id: "mag-10", votes: 8, score: 137 },
+        { id: "mag-11", votes: 7, score: 121 },
+        { id: "mag-12", votes: 6, score: 103 },
+        { id: "mag-1", votes: 5, score: 89 },
+        { id: "mag-21", votes: 5, score: 87 },
+        { id: "mag-17", votes: 5, score: 84 },
+        { id: "mag-20", votes: 4, score: 79 },
+        { id: "mag-14", votes: 4, score: 68 },
+        { id: "mag-2", votes: 4, score: 63 },
+        { id: "mag-19", votes: 4, score: 62 },
+        { id: "mag-3", votes: 3, score: 56 },
+        { id: "mag-9", votes: 3, score: 53 },
+        { id: "mag-16", votes: 3, score: 48 },
+        { id: "mag-7", votes: 3, score: 46 },
+        { id: "mag-18", votes: 1, score: 14 }
+      ],
+      CoursesU: [
+        { id: "cou-1", votes: 11, score: 192 },
+        { id: "cou-19", votes: 9, score: 155 },
+        { id: "cou-10", votes: 7, score: 123 },
+        { id: "cou-36", votes: 7, score: 120 },
+        { id: "cou-16", votes: 6, score: 113 },
+        { id: "cou-29", votes: 6, score: 97 },
+        { id: "cou-12", votes: 5, score: 86 },
+        { id: "cou-9", votes: 6, score: 86 },
+        { id: "cou-14", votes: 5, score: 77 },
+        { id: "cou-18", votes: 4, score: 73 },
+        { id: "cou-27", votes: 4, score: 63 },
+        { id: "cou-24", votes: 4, score: 61 },
+        { id: "cou-38", votes: 4, score: 58 },
+        { id: "cou-40", votes: 3, score: 42 },
+        { id: "cou-23", votes: 3, score: 41 },
+        { id: "cou-20", votes: 2, score: 37 },
+        { id: "cou-3", votes: 2, score: 37 },
+        { id: "cou-33", votes: 2, score: 36 },
+        { id: "cou-5", votes: 2, score: 33 },
+        { id: "cou-45", votes: 2, score: 32 },
+        { id: "cou-28", votes: 2, score: 31 },
+        { id: "cou-31", votes: 2, score: 31 },
+        { id: "cou-2", votes: 2, score: 30 },
+        { id: "cou-17", votes: 2, score: 30 },
+        { id: "cou-39", votes: 2, score: 26 },
+        { id: "cou-32", votes: 2, score: 25 },
+        { id: "cou-6", votes: 1, score: 21 },
+        { id: "cou-15", votes: 1, score: 20 },
+        { id: "cou-41", votes: 1, score: 18 },
+        { id: "cou-30", votes: 1, score: 17 },
+        { id: "cou-13", votes: 1, score: 17 },
+        { id: "cou-44", votes: 1, score: 17 },
+        { id: "cou-11", votes: 1, score: 15 },
+        { id: "cou-35", votes: 1, score: 14 },
+        { id: "cou-46", votes: 1, score: 14 },
+        { id: "cou-37", votes: 1, score: 13 },
+        { id: "cou-21", votes: 1, score: 13 },
+        { id: "cou-34", votes: 1, score: 11 },
+        { id: "cou-43", votes: 1, score: 9 }
+      ],
+      MeP: [
+        { id: "mep-1", votes: 13, score: 231 },
+        { id: "mep-6", votes: 9, score: 167 },
+        { id: "mep-22", votes: 7, score: 122 },
+        { id: "mep-7", votes: 6, score: 106 },
+        { id: "mep-15", votes: 6, score: 100 },
+        { id: "mep-11", votes: 5, score: 95 },
+        { id: "mep-18", votes: 6, score: 94 },
+        { id: "mep-8", votes: 6, score: 91 },
+        { id: "mep-23", votes: 5, score: 77 },
+        { id: "mep-39", votes: 5, score: 77 },
+        { id: "mep-10", votes: 5, score: 72 },
+        { id: "mep-24", votes: 5, score: 70 },
+        { id: "mep-9", votes: 4, score: 61 },
+        { id: "mep-3", votes: 3, score: 51 },
+        { id: "mep-35", votes: 5, score: 50 },
+        { id: "mep-20", votes: 3, score: 48 },
+        { id: "mep-16", votes: 3, score: 46 },
+        { id: "mep-34", votes: 3, score: 43 },
+        { id: "mep-37", votes: 4, score: 42 },
+        { id: "mep-17", votes: 2, score: 31 },
+        { id: "mep-12", votes: 2, score: 29 },
+        { id: "mep-21", votes: 2, score: 28 },
+        { id: "mep-13", votes: 2, score: 25 },
+        { id: "mep-5", votes: 2, score: 24 },
+        { id: "mep-30", votes: 2, score: 20 },
+        { id: "mep-33", votes: 1, score: 18 },
+        { id: "mep-4", votes: 1, score: 16 },
+        { id: "mep-2", votes: 1, score: 16 },
+        { id: "mep-25", votes: 1, score: 15 },
+        { id: "mep-36", votes: 2, score: 14 },
+        { id: "mep-27", votes: 1, score: 13 },
+        { id: "mep-38", votes: 1, score: 12 },
+        { id: "mep-19", votes: 1, score: 12 },
+        { id: "mep-31", votes: 1, score: 12 },
+        { id: "mep-28", votes: 1, score: 9 },
+        { id: "mep-29", votes: 1, score: 8 }
+      ]
+    };
+
+    let catalogData = {};
+    let activePerimeter = "MagasinsU";
+
+    function escapeHtml(t) { 
+      return String(t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); 
+    }
+
+    // Nettoyage complet : supprime tous les caractères de contrôle invisibles (\x00-\x1F) et le motif vert{}
+    function cleanNote(note) {
+      if (!note) return "";
+      return String(note)
+        .replace(/[\x00-\x1F\x7F-\x9F]/g, "")
+        .replace(/vert\{\}/gi, "")
+        .trim();
+    }
+
+    function getBadgeStyle(text, offset) {
+      if (!text) return 'background-color: #f1f5f9; color: #334155; border: 1px solid #e2e8f0;';
+      const colorPalette = [
+        { bg: '#e0f2fe', text: '#0369a1', border: '#bae6fd' },
+        { bg: '#fef3c7', text: '#b45309', border: '#fde68a' },
+        { bg: '#dcfce7', text: '#15803d', border: '#bbf7d0' },
+        { bg: '#f3e8ff', text: '#6b21a8', border: '#e9d5ff' },
+        { bg: '#ffe4e6', text: '#be123c', border: '#fecdd3' },
+        { bg: '#ccfbf1', text: '#0f766e', border: '#99f6e4' },
+        { bg: '#ffedd5', text: '#c2410c', border: '#fed7aa' },
+        { bg: '#f1f5f9', text: '#334155', border: '#e2e8f0' }
+      ];
+      let hash = 0;
+      for (let i = 0; i < text.length; i++) hash = text.charCodeAt(i) + ((hash << 5) - hash);
+      const color = colorPalette[Math.abs(hash + (offset || 0)) % colorPalette.length];
+      return 'background-color: ' + color.bg + '; color: ' + color.text + '; border: 1px solid ' + color.border + ';';
+    }
+
+    function switchPerimeter(perimeter) {
+      activePerimeter = perimeter;
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.className = "tab-btn px-4 py-2 text-sm font-bold rounded-xl border transition-all flex items-center gap-2 whitespace-nowrap bg-white text-slate-600 border-slate-200 hover:bg-slate-100";
+        const badge = btn.querySelector("span");
+        if (badge) badge.className = "px-2 py-0.5 text-xs rounded-full bg-slate-100 text-slate-600";
+      });
+
+      const activeBtn = document.getElementById("cta-" + perimeter);
+      if (activeBtn) {
+        activeBtn.className = "tab-btn px-4 py-2 text-sm font-bold rounded-xl border transition-all flex items-center gap-2 whitespace-nowrap bg-indigo-600 text-white border-indigo-600 shadow-xs";
+        const badge = activeBtn.querySelector("span");
+        if (badge) badge.className = "px-2 py-0.5 text-xs rounded-full bg-white/20 text-white";
+      }
+      renderList();
+    }
+
+    function renderList() {
+      const container = document.getElementById("cards-list");
+      const unvotedContainer = document.getElementById("unvoted-cards-list");
+      const unvotedSection = document.getElementById("unvoted-section");
+      if (!container || !unvotedContainer) return;
+
+      const votesList = pollResults[activePerimeter] || [];
+      const catalogList = catalogData[activePerimeter] || [];
+
+      document.getElementById("count-MagasinsU").textContent = pollResults.MagasinsU.length;
+      document.getElementById("count-CoursesU").textContent = pollResults.CoursesU.length;
+      document.getElementById("count-MeP").textContent = pollResults.MeP.length;
+
+      // 1. SUJETS VOTÉS
+      container.innerHTML = votesList.map((voteItem, idx) => {
+        const catalogItem = catalogList.find(c => c && c.id && c.id.trim() === voteItem.id.trim()) || {};
+
+        const title = catalogItem.title || voteItem.id;
+        const category = catalogItem.category || activePerimeter;
+        const subCategory = catalogItem.subCategory || catalogItem.device || "";
+        const description = catalogItem.description || "";
+        const gains = catalogItem.gains || "";
+        const businessNoteClean = cleanNote(catalogItem.businessNote);
+        const originalScore = catalogItem.score || null;
+
+        let rankBadgeClass = "bg-slate-200 text-slate-700 font-bold";
+        if (idx === 0) rankBadgeClass = "bg-amber-500 text-white font-black";
+        else if (idx === 1) rankBadgeClass = "bg-slate-400 text-white font-bold";
+        else if (idx === 2) rankBadgeClass = "bg-amber-700 text-white font-bold";
+
+        const catStyle = getBadgeStyle(category, 0);
+        let badgesHtml = '<span style="' + catStyle + '" class="px-2.5 py-0.5 rounded-md font-semibold text-xs">' + escapeHtml(category) + '</span>';
+
+        if (subCategory && subCategory.trim() !== "") {
+          const subStyle = getBadgeStyle(subCategory, 3);
+          badgesHtml += '<span style="' + subStyle + '" class="px-2.5 py-0.5 rounded-md font-semibold text-xs">' + escapeHtml(subCategory) + '</span>';
+        }
+
+        let detailsHtml = "";
+        if (gains && gains.trim() !== "") {
+          detailsHtml = '<div class="mt-2 pt-2 border-t border-slate-100 text-xs text-emerald-700 whitespace-pre-line"><strong>Gains / Bénéfices :</strong>\n' + escapeHtml(gains) + '</div>';
+        }
+
+        const votesText = voteItem.votes > 1 ? `${voteItem.votes} votes` : `${voteItem.votes} vote`;
+
+        return `
+          <div class="p-5 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row md:items-start justify-between gap-4 shadow-xs hover:shadow-md transition-all">
+            <div class="flex items-start gap-3.5 min-w-0 flex-1">
+              <span class="w-7 h-7 rounded-lg ${rankBadgeClass} text-xs flex items-center justify-center shrink-0 shadow-xs">#${idx + 1}</span>
+              <div class="space-y-1.5 min-w-0 flex-1">
+                <div class="flex gap-2 flex-wrap items-center">
+                  ${badgesHtml}
+                  <span class="text-[11px] font-mono text-slate-400">ID: ${voteItem.id}</span>
+                </div>
+                <h3 class="font-bold text-slate-900 text-base leading-snug">${escapeHtml(title)}</h3>
+                ${description ? `<p class="text-xs text-slate-600 whitespace-pre-line leading-relaxed mt-1">${escapeHtml(description)}</p>` : ''}
+                ${detailsHtml}
+              </div>
+            </div>
+
+            <div class="flex flex-wrap md:flex-col items-end justify-between md:justify-start gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100">
+              <span class="px-3 py-1 text-xs font-black bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-lg shadow-2xs">
+                Score : ${voteItem.score} pts
+              </span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-emerald-50 text-emerald-700 rounded-md">
+                ${votesText}
+              </span>
+              ${businessNoteClean ? `
+                <span class="text-[11px] text-slate-400 font-medium">
+                  Valeur Business : ${escapeHtml(businessNoteClean)}${originalScore ? ' | Poids : ' + originalScore : ''}
+                </span>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 2. SUJETS NON VOTÉS (0 VOTE)
+      const votedIds = new Set(votesList.map(v => v.id.trim()));
+      const unvotedItems = catalogList.filter(c => c && c.id && !votedIds.has(c.id.trim()));
+
+      if (unvotedItems.length > 0) {
+        unvotedSection.classList.remove("hidden");
+        document.getElementById("count-unvoted").textContent = unvotedItems.length;
+
+        unvotedContainer.innerHTML = unvotedItems.map(item => {
+          const category = item.category || activePerimeter;
+          const subCategory = item.subCategory || item.device || "";
+          const businessNoteClean = cleanNote(item.businessNote);
+          const originalScore = item.score || null;
+
+          const catStyle = getBadgeStyle(category, 0);
+          let badgesHtml = '<span style="' + catStyle + '" class="px-2.5 py-0.5 rounded-md font-semibold text-xs">' + escapeHtml(category) + '</span>';
+
+          if (subCategory && subCategory.trim() !== "") {
+            const subStyle = getBadgeStyle(subCategory, 3);
+            badgesHtml += '<span style="' + subStyle + '" class="px-2.5 py-0.5 rounded-md font-semibold text-xs">' + escapeHtml(subCategory) + '</span>';
+          }
+
+          return `
+            <div class="p-4 bg-slate-100/70 border border-slate-200/80 rounded-xl flex flex-col md:flex-row md:items-start justify-between gap-4">
+              <div class="space-y-1 min-w-0 flex-1">
+                <div class="flex gap-2 flex-wrap items-center">
+                  ${badgesHtml}
+                  <span class="text-[11px] font-mono text-slate-400">ID: ${item.id}</span>
+                </div>
+                <h3 class="font-semibold text-slate-700 text-sm leading-snug">${escapeHtml(item.title)}</h3>
+                ${item.description ? `<p class="text-xs text-slate-500 line-clamp-2 mt-0.5">${escapeHtml(item.description)}</p>` : ''}
+              </div>
+
+              <div class="flex flex-wrap md:flex-col items-end justify-between md:justify-start gap-1.5 shrink-0">
+                <span class="px-2.5 py-1 text-xs font-semibold bg-slate-200 text-slate-600 rounded-md">
+                  0 vote
+                </span>
+                ${(businessNoteClean || originalScore) ? `
+                  <span class="text-[11px] text-slate-400 font-medium">
+    ${businessNoteClean ? 'Valeur Business : ' + escapeHtml(businessNoteClean) : ''}
+    ${(businessNoteClean && originalScore) ? ' | ' : ''}
+    ${originalScore ? 'Poids : ' + originalScore : ''}
+  </span>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+      } else {
+        unvotedSection.classList.add("hidden");
+      }
+
+      if (window.lucide && typeof lucide.createIcons === 'function') {
+        lucide.createIcons();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderList();
+
+      fetch(`data.json?v=${Date.now()}`)
+        .then(res => res.json())
+        .then(data => {
+          catalogData = data;
+          renderList();
+        })
+        .catch(err => {
+          console.warn("data.json non accessible :", err);
+        });
+    });
+  </script>
+</body>
+</html>
