@@ -45,112 +45,122 @@
   </header>
 
   <!-- CONTENU PRINCIPAL (max-w-6xl) -->
-  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <!-- RÉSULTATS DES SUJETS VOTÉS -->
     <div id="cards-list" class="space-y-4"></div>
+
+    <!-- BLOC SUJETS NON VOTÉS (ISOLÉS ET GRISÉS) -->
+    <div id="unvoted-section" class="hidden pt-6 border-t border-slate-200">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+        <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wider">Sujets n'having reçu aucun vote (<span id="count-unvoted">0</span>)</h2>
+      </div>
+      <div id="unvoted-cards-list" class="space-y-3 opacity-60 hover:opacity-100 transition-opacity"></div>
+    </div>
   </main>
 
   <script>
     const pollResults = {
       MagasinsU: [
-        { id: "mag-8", votes: 120, top1: 21, score: 211 },
-        { id: "mag-5", votes: 110, top1: 18, score: 186 },
-        { id: "mag-15", votes: 94, top1: 17, score: 170 },
-        { id: "mag-13", votes: 83, top1: 16, score: 162 },
-        { id: "mag-4", votes: 90, top1: 15, score: 154 },
-        { id: "mag-10", votes: 80, top1: 13, score: 137 },
-        { id: "mag-11", votes: 73, top1: 12, score: 121 },
-        { id: "mag-12", votes: 60, top1: 10, score: 103 },
-        { id: "mag-1", votes: 51, top1: 8, score: 89 },
-        { id: "mag-21", votes: 50, top1: 8, score: 87 },
-        { id: "mag-17", votes: 50, top1: 8, score: 84 },
-        { id: "mag-20", votes: 42, top1: 7, score: 79 },
-        { id: "mag-14", votes: 40, top1: 6, score: 68 },
-        { id: "mag-2", votes: 40, top1: 6, score: 63 },
-        { id: "mag-19", votes: 40, top1: 6, score: 62 },
-        { id: "mag-3", votes: 31, top1: 5, score: 56 },
-        { id: "mag-9", votes: 31, top1: 5, score: 53 },
-        { id: "mag-16", votes: 30, top1: 4, score: 48 },
-        { id: "mag-7", votes: 30, top1: 4, score: 46 },
-        { id: "mag-18", votes: 10, top1: 1, score: 14 }
+        { id: "mag-8", top1: 21, score: 211 },
+        { id: "mag-5", top1: 18, score: 186 },
+        { id: "mag-15", top1: 17, score: 170 },
+        { id: "mag-13", top1: 16, score: 162 },
+        { id: "mag-4", top1: 15, score: 154 },
+        { id: "mag-10", top1: 13, score: 137 },
+        { id: "mag-11", top1: 12, score: 121 },
+        { id: "mag-12", top1: 10, score: 103 },
+        { id: "mag-1", top1: 8, score: 89 },
+        { id: "mag-21", top1: 8, score: 87 },
+        { id: "mag-17", top1: 8, score: 84 },
+        { id: "mag-20", top1: 7, score: 79 },
+        { id: "mag-14", top1: 6, score: 68 },
+        { id: "mag-2", top1: 6, score: 63 },
+        { id: "mag-19", top1: 6, score: 62 },
+        { id: "mag-3", top1: 5, score: 56 },
+        { id: "mag-9", top1: 5, score: 53 },
+        { id: "mag-16", top1: 4, score: 48 },
+        { id: "mag-7", top1: 4, score: 46 },
+        { id: "mag-18", top1: 1, score: 14 }
       ],
       CoursesU: [
-        { id: "cou-1", votes: 103, top1: 19, score: 192 },
-        { id: "cou-19", votes: 93, top1: 15, score: 155 },
-        { id: "cou-10", votes: 71, top1: 12, score: 123 },
-        { id: "cou-36", votes: 71, top1: 12, score: 120 },
-        { id: "cou-16", votes: 62, top1: 11, score: 113 },
-        { id: "cou-29", votes: 60, top1: 9, score: 97 },
-        { id: "cou-12", votes: 50, top1: 8, score: 86 },
-        { id: "cou-9", votes: 60, top1: 8, score: 86 },
-        { id: "cou-14", votes: 50, top1: 7, score: 77 },
-        { id: "cou-18", votes: 40, top1: 7, score: 73 },
-        { id: "cou-27", votes: 40, top1: 6, score: 63 },
-        { id: "cou-24", votes: 40, top1: 6, score: 61 },
-        { id: "cou-38", votes: 40, top1: 5, score: 58 },
-        { id: "cou-40", votes: 30, top1: 4, score: 42 },
-        { id: "cou-23", votes: 30, top1: 4, score: 41 },
-        { id: "cou-20", votes: 20, top1: 3, score: 37 },
-        { id: "cou-3", votes: 20, top1: 3, score: 37 },
-        { id: "cou-33", votes: 21, top1: 3, score: 36 },
-        { id: "cou-5", votes: 20, top1: 3, score: 33 },
-        { id: "cou-45", votes: 20, top1: 3, score: 32 },
-        { id: "cou-28", votes: 20, top1: 3, score: 31 },
-        { id: "cou-31", votes: 20, top1: 3, score: 31 },
-        { id: "cou-2", votes: 20, top1: 3, score: 30 },
-        { id: "cou-17", votes: 20, top1: 3, score: 30 },
-        { id: "cou-39", votes: 20, top1: 2, score: 26 },
-        { id: "cou-32", votes: 20, top1: 2, score: 25 },
-        { id: "cou-6", votes: 11, top1: 2, score: 21 },
-        { id: "cou-15", votes: 10, top1: 2, score: 20 },
-        { id: "cou-41", votes: 10, top1: 1, score: 18 },
-        { id: "cou-30", votes: 10, top1: 1, score: 17 },
-        { id: "cou-13", votes: 10, top1: 1, score: 17 },
-        { id: "cou-44", votes: 10, top1: 1, score: 17 },
-        { id: "cou-11", votes: 10, top1: 1, score: 15 },
-        { id: "cou-35", votes: 10, top1: 1, score: 14 },
-        { id: "cou-46", votes: 10, top1: 1, score: 14 },
-        { id: "cou-37", votes: 10, top1: 1, score: 13 },
-        { id: "cou-21", votes: 10, top1: 1, score: 13 },
-        { id: "cou-34", votes: 10, top1: 1, score: 11 },
-        { id: "cou-43", votes: 10, top1: 0, score: 9 }
+        { id: "cou-1", top1: 19, score: 192 },
+        { id: "cou-19", top1: 15, score: 155 },
+        { id: "cou-10", top1: 12, score: 123 },
+        { id: "cou-36", top1: 12, score: 120 },
+        { id: "cou-16", top1: 11, score: 113 },
+        { id: "cou-29", top1: 9, score: 97 },
+        { id: "cou-12", top1: 8, score: 86 },
+        { id: "cou-9", top1: 8, score: 86 },
+        { id: "cou-14", top1: 7, score: 77 },
+        { id: "cou-18", top1: 7, score: 73 },
+        { id: "cou-27", top1: 6, score: 63 },
+        { id: "cou-24", top1: 6, score: 61 },
+        { id: "cou-38", top1: 5, score: 58 },
+        { id: "cou-40", top1: 4, score: 42 },
+        { id: "cou-23", top1: 4, score: 41 },
+        { id: "cou-20", top1: 3, score: 37 },
+        { id: "cou-3", top1: 3, score: 37 },
+        { id: "cou-33", top1: 3, score: 36 },
+        { id: "cou-5", top1: 3, score: 33 },
+        { id: "cou-45", top1: 3, score: 32 },
+        { id: "cou-28", top1: 3, score: 31 },
+        { id: "cou-31", top1: 3, score: 31 },
+        { id: "cou-2", top1: 3, score: 30 },
+        { id: "cou-17", top1: 3, score: 30 },
+        { id: "cou-39", top1: 2, score: 26 },
+        { id: "cou-32", top1: 2, score: 25 },
+        { id: "cou-6", top1: 2, score: 21 },
+        { id: "cou-15", top1: 2, score: 20 },
+        { id: "cou-41", top1: 1, score: 18 },
+        { id: "cou-30", top1: 1, score: 17 },
+        { id: "cou-13", top1: 1, score: 17 },
+        { id: "cou-44", top1: 1, score: 17 },
+        { id: "cou-11", top1: 1, score: 15 },
+        { id: "cou-35", top1: 1, score: 14 },
+        { id: "cou-46", top1: 1, score: 14 },
+        { id: "cou-37", top1: 1, score: 13 },
+        { id: "cou-21", top1: 1, score: 13 },
+        { id: "cou-34", top1: 1, score: 11 },
+        { id: "cou-43", top1: 0, score: 9 }
       ],
       MeP: [
-        { id: "mep-1", votes: 125, top1: 23, score: 231 },
-        { id: "mep-6", votes: 92, top1: 16, score: 167 },
-        { id: "mep-22", votes: 71, top1: 12, score: 122 },
-        { id: "mep-7", votes: 60, top1: 10, score: 106 },
-        { id: "mep-15", votes: 62, top1: 10, score: 100 },
-        { id: "mep-11", votes: 51, top1: 9, score: 95 },
-        { id: "mep-18", votes: 60, top1: 9, score: 94 },
-        { id: "mep-8", votes: 60, top1: 9, score: 91 },
-        { id: "mep-23", votes: 50, top1: 7, score: 77 },
-        { id: "mep-39", votes: 50, top1: 7, score: 77 },
-        { id: "mep-10", votes: 50, top1: 7, score: 72 },
-        { id: "mep-24", votes: 50, top1: 7, score: 70 },
-        { id: "mep-9", votes: 40, top1: 6, score: 61 },
-        { id: "mep-3", votes: 30, top1: 5, score: 51 },
-        { id: "mep-35", votes: 50, top1: 5, score: 50 },
-        { id: "mep-20", votes: 30, top1: 4, score: 48 },
-        { id: "mep-16", votes: 31, top1: 4, score: 46 },
-        { id: "mep-34", votes: 30, top1: 4, score: 43 },
-        { id: "mep-37", votes: 40, top1: 4, score: 42 },
-        { id: "mep-17", votes: 20, top1: 3, score: 31 },
-        { id: "mep-12", votes: 20, top1: 2, score: 29 },
-        { id: "mep-21", votes: 20, top1: 2, score: 28 },
-        { id: "mep-13", votes: 20, top1: 2, score: 25 },
-        { id: "mep-5", votes: 20, top1: 2, score: 24 },
-        { id: "mep-30", votes: 20, top1: 2, score: 20 },
-        { id: "mep-33", votes: 10, top1: 1, score: 18 },
-        { id: "mep-4", votes: 10, top1: 1, score: 16 },
-        { id: "mep-2", votes: 10, top1: 1, score: 16 },
-        { id: "mep-25", votes: 10, top1: 1, score: 15 },
-        { id: "mep-36", votes: 20, top1: 1, score: 14 },
-        { id: "mep-27", votes: 10, top1: 1, score: 13 },
-        { id: "mep-38", votes: 10, top1: 1, score: 12 },
-        { id: "mep-19", votes: 10, top1: 1, score: 12 },
-        { id: "mep-31", votes: 10, top1: 1, score: 12 },
-        { id: "mep-28", votes: 10, top1: 0, score: 9 },
-        { id: "mep-29", votes: 10, top1: 0, score: 8 }
+        { id: "mep-1", top1: 23, score: 231 },
+        { id: "mep-6", top1: 16, score: 167 },
+        { id: "mep-22", top1: 12, score: 122 },
+        { id: "mep-7", top1: 10, score: 106 },
+        { id: "mep-15", top1: 10, score: 100 },
+        { id: "mep-11", top1: 9, score: 95 },
+        { id: "mep-18", top1: 9, score: 94 },
+        { id: "mep-8", top1: 9, score: 91 },
+        { id: "mep-23", top1: 7, score: 77 },
+        { id: "mep-39", top1: 7, score: 77 },
+        { id: "mep-10", top1: 7, score: 72 },
+        { id: "mep-24", top1: 7, score: 70 },
+        { id: "mep-9", top1: 6, score: 61 },
+        { id: "mep-3", top1: 5, score: 51 },
+        { id: "mep-35", top1: 5, score: 50 },
+        { id: "mep-20", top1: 4, score: 48 },
+        { id: "mep-16", top1: 4, score: 46 },
+        { id: "mep-34", top1: 4, score: 43 },
+        { id: "mep-37", top1: 4, score: 42 },
+        { id: "mep-17", top1: 3, score: 31 },
+        { id: "mep-12", top1: 2, score: 29 },
+        { id: "mep-21", top1: 2, score: 28 },
+        { id: "mep-13", top1: 2, score: 25 },
+        { id: "mep-5", top1: 2, score: 24 },
+        { id: "mep-30", top1: 2, score: 20 },
+        { id: "mep-33", top1: 1, score: 18 },
+        { id: "mep-4", top1: 1, score: 16 },
+        { id: "mep-2", top1: 1, score: 16 },
+        { id: "mep-25", top1: 1, score: 15 },
+        { id: "mep-36", top1: 1, score: 14 },
+        { id: "mep-27", top1: 1, score: 13 },
+        { id: "mep-38", top1: 1, score: 12 },
+        { id: "mep-19", top1: 1, score: 12 },
+        { id: "mep-31", top1: 1, score: 12 },
+        { id: "mep-28", top1: 0, score: 9 },
+        { id: "mep-29", top1: 0, score: 8 }
       ]
     };
 
@@ -203,7 +213,9 @@
 
     function renderList() {
       const container = document.getElementById("cards-list");
-      if (!container) return;
+      const unvotedContainer = document.getElementById("unvoted-cards-list");
+      const unvotedSection = document.getElementById("unvoted-section");
+      if (!container || !unvotedContainer) return;
 
       const votesList = pollResults[activePerimeter] || [];
       const catalogList = catalogData[activePerimeter] || [];
@@ -212,6 +224,7 @@
       document.getElementById("count-CoursesU").textContent = pollResults.CoursesU.length;
       document.getElementById("count-MeP").textContent = pollResults.MeP.length;
 
+      // 1. SUJETS VOTÉS
       container.innerHTML = votesList.map((voteItem, idx) => {
         const catalogItem = catalogList.find(c => c && c.id && c.id.trim() === voteItem.id.trim()) || {};
 
@@ -241,6 +254,8 @@
           detailsHtml = '<div class="mt-2 pt-2 border-t border-slate-100 text-xs text-emerald-700 whitespace-pre-line"><strong>Gains / Bénéfices :</strong>\n' + escapeHtml(gains) + '</div>';
         }
 
+        const top1Text = voteItem.top1 > 0 ? `${voteItem.top1}x classé #1` : `Sélectionné dans le Top`;
+
         return `
           <div class="p-5 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row md:items-start justify-between gap-4 shadow-xs hover:shadow-md transition-all">
             <div class="flex items-start gap-3.5 min-w-0 flex-1">
@@ -261,17 +276,68 @@
                 Score : ${voteItem.score} pts
               </span>
               <span class="px-2.5 py-1 text-[11px] font-semibold bg-emerald-50 text-emerald-700 rounded-md">
-                ${voteItem.votes} votes ${voteItem.top1 > 0 ? `(${voteItem.top1}x #1)` : ''}
+                ${top1Text}
               </span>
               ${businessNoteClean ? `
                 <span class="text-[11px] text-slate-400 font-medium">
-                  Val. Bus : ${escapeHtml(businessNoteClean)}${originalScore ? '| Poids : ' + originalScore + ' pts' : ''}
+                  Val. Bus : ${escapeHtml(businessNoteClean)}${originalScore ? '| Poids : ' + originalScore : ''}
                 </span>
               ` : ''}
             </div>
           </div>
         `;
       }).join('');
+
+      // 2. SUJETS NON VOTÉS (0 VOTE)
+      const votedIds = new Set(votesList.map(v => v.id.trim()));
+      const unvotedItems = catalogList.filter(c => c && c.id && !votedIds.has(c.id.trim()));
+
+      if (unvotedItems.length > 0) {
+        unvotedSection.classList.remove("hidden");
+        document.getElementById("count-unvoted").textContent = unvotedItems.length;
+
+        unvotedContainer.innerHTML = unvotedItems.map(item => {
+          const category = item.category || activePerimeter;
+          const subCategory = item.subCategory || item.device || "";
+          const businessNoteClean = cleanNote(item.businessNote);
+          const originalScore = item.score || null;
+
+          const catStyle = getBadgeStyle(category, 0);
+          let badgesHtml = '<span style="' + catStyle + '" class="px-2.5 py-0.5 rounded-md font-semibold text-xs">' + escapeHtml(category) + '</span>';
+
+          if (subCategory && subCategory.trim() !== "") {
+            const subStyle = getBadgeStyle(subCategory, 3);
+            badgesHtml += '<span style="' + subStyle + '" class="px-2.5 py-0.5 rounded-md font-semibold text-xs">' + escapeHtml(subCategory) + '</span>';
+          }
+
+          return `
+            <div class="p-4 bg-slate-100/70 border border-slate-200/80 rounded-xl flex flex-col md:flex-row md:items-start justify-between gap-4">
+              <div class="space-y-1 min-w-0 flex-1">
+                <div class="flex gap-2 flex-wrap items-center">
+                  ${badgesHtml}
+                  <span class="text-[11px] font-mono text-slate-400">ID: ${item.id}</span>
+                </div>
+                <h3 class="font-semibold text-slate-700 text-sm leading-snug">${escapeHtml(item.title)}</h3>
+                ${item.description ? `<p class="text-xs text-slate-500 line-clamp-2 mt-0.5">${escapeHtml(item.description)}</p>` : ''}
+              </div>
+
+              <div class="flex flex-wrap md:flex-col items-end justify-between md:justify-start gap-1.5 shrink-0">
+                <span class="px-2.5 py-1 text-xs font-semibold bg-slate-200 text-slate-600 rounded-md">
+                  0 vote
+                </span>
+                ${(businessNoteClean || originalScore) ? `
+                  <span class="text-[11px] text-slate-400 font-medium">
+                    ${businessNoteClean ? 'Val. Bus : ' + escapeHtml(businessNoteClean) : ''}
+                    ${(businessNoteClean && originalScore) ? ' \vert{} ' : ''}${originalScore ? 'Poids : ' + originalScore : ''}
+                  </span>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+      } else {
+        unvotedSection.classList.add("hidden");
+      }
 
       if (window.lucide && typeof lucide.createIcons === 'function') {
         lucide.createIcons();
@@ -288,7 +354,7 @@
           renderList();
         })
         .catch(err => {
-          console.warn("data.json non accessible localement :", err);
+          console.warn("data.json non accessible :", err);
         });
     });
   </script>
