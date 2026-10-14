@@ -252,11 +252,11 @@
               <span class="px-2.5 py-1 text-[11px] font-semibold bg-emerald-50 text-emerald-700 rounded-md">
                 ${item.votes} votes ${item.top1 > 0 ? `(${item.top1}x #1)` : ''}
               </span>
-              ${item.businessNote ? `
-                <span class="text-[11px] text-slate-400 font-medium">
-                  Val. Bus : ${escapeHtml(item.businessNote)} \vert{} Poids :${item.originalScore} pts
-                </span>
-              ` : ''}
+          ${item.businessNote ? `
+  <span class="text-[11px] text-slate-400 font-medium">
+    Val. Bus : ${escapeHtml(item.businessNote).replace(/vert\{\}/gi, '').trim()} | Poids : ${item.originalScore} pts
+  </span>
+` : ''}
             </div>
           </div>
         `;
